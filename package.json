@@ -1,14 +1,17 @@
 {
-  "name": "vue3-plots",
+  "name": "@putianyi888/vue3-plots",
   "version": "0.0.1",
   "description": "Composable Vue 3 SVG plot layers for building charts from small, focused components.",
   "type": "module",
   "license": "MIT",
   "author": "Tianyi Pu",
   "homepage": "https://github.com/putianyi889/vue3-plots#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/putianyi889/vue3-plots.git"
+    "url": "https://github.com/putianyi889/vue3-plots.git"
   },
   "bugs": {
     "url": "https://github.com/putianyi889/vue3-plots/issues"

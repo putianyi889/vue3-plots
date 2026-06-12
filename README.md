@@ -40,15 +40,6 @@ npm run build
 
 The package build is emitted to `dist/`.
 
-## Publishing
-
-Publishing runs from GitHub Actions when a GitHub Release is published, or when
-the `Publish` workflow is started manually. Configure the repository secret
-`NPM_TOKEN` with an npm automation token before running it.
-
-The publish workflow runs linting, typechecking, tests, and build before
-publishing the package to npm.
-
 ## Usage
 
 ```vue
@@ -138,13 +129,3 @@ Utilities and types:
 - `PlotArea`
 
 More docs are available in [docs/components.md](docs/components.md), [docs/utils.md](docs/utils.md), and [docs/geometry.md](docs/geometry.md).
-
-## Adding Components
-
-Create Vue components under `src/components/`, then export them from `src/index.ts`.
-
-Consumers can import library CSS with:
-
-```ts
-import 'vue3-plots/style.css'
-```
