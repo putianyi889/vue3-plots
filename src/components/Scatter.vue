@@ -1,0 +1,81 @@
+<template>
+    <svg
+        class="plot-scatter plot-layer plot-layer--passive"
+        :height="size.height"
+        :width="size.width"
+        :viewBox="`0 0 ${size.width} ${size.height}`"
+        preserveAspectRatio="none"
+    >
+        <circle
+            v-for="(point, index) in renderedPoints"
+            :key="index"
+            class="plot-scatter__point"
+            :cx="point.x"
+            :cy="point.y"
+            :r="getMaybeArray(radius, point.index)"
+            :fill="getMaybeArray(fillColor, point.index)"
+            :fill-opacity="getMaybeArray(fillOpacity, point.index)"
+            :stroke="getMaybeArray(strokeColor, point.index)"
+            :stroke-opacity="getMaybeArray(strokeOpacity, point.index)"
+            :stroke-width="getMaybeArray(strokeWidth, point.index)"
+            vector-effect="non-scaling-stroke"
+            @click="emit('point-click', points[point.index])"
+            @mouseenter="emit('point-enter', points[point.index])"
+            @mouseleave="emit('point-leave', points[point.index])"
+        />
+    </svg>
+</template>
+
+<script setup lang="ts" generic="T = unknown">
+import { computed } from 'vue'
+import type { PropType } from 'vue'
+
+import { createLinearScale, defaultPlotPadding, getMaybeArray, getPlotArea, pointToSvg } from './utils'
+import type { MaybeArray, PlotDomain, PlotPadding, PlotPoint, PlotSize } from './utils'
+
+const props = defineProps({
+  points: { type: Array as PropType<PlotPoint<T>[]>, required: true },
+  domain: { type: Object as PropType<PlotDomain>, required: true },
+  size: { type: Object as PropType<PlotSize>, default: () => ({ width: 320, height: 200 }) },
+  padding: { type: Object as PropType<PlotPadding>, default: () => defaultPlotPadding },
+  radius: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 0 },
+  fillColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'black' },
+  fillOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+  strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
+  strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+  strokeWidth: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+})
+
+const emit = defineEmits<{
+  (e: 'point-click', point: PlotPoint<T>): void
+  (e: 'point-enter', point: PlotPoint<T>): void
+  (e: 'point-leave', point: PlotPoint<T>): void
+}>()
+
+const renderedPoints = computed(() => {
+  const area = getPlotArea(props.size, props.padding)
+  const scaleX = createLinearScale(props.domain.xMin, props.domain.xMax, area.x, area.x + area.width)
+  const scaleY = createLinearScale(props.domain.yMin, props.domain.yMax, area.y + area.height, area.y)
+  const result = []
+
+  for (let i = 0; i < props.points.length; i++) {
+    const point = props.points[i]
+    if (!point) continue
+    if (Number.isFinite(point.x) && Number.isFinite(point.y)) {
+      result.push({
+        ...pointToSvg(point, scaleX, scaleY),
+        index: i,
+      })
+    }
+  }
+
+  return result
+})
+</script>
+
+<style scoped>
+.plot-scatter__point {
+    cursor: pointer;
+    pointer-events: auto;
+}
+</style>

@@ -1,0 +1,94 @@
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+
+import Scatter from '../../src/components/Scatter.vue'
+import { domain, padding, size } from './helpers'
+
+describe('Scatter', () => {
+  it('renders points and emits point click events', async () => {
+    const points = [{ x: 0, y: 0, data: 'a' }, { x: 10, y: 10, data: 'b' }]
+    const wrapper = mount(Scatter, {
+      props: {
+        points,
+        domain,
+        size,
+        padding,
+        radius: [3, 6],
+        fillColor: ['red', 'blue'],
+      },
+    })
+
+    const circles = wrapper.findAll('circle')
+    expect(circles).toHaveLength(2)
+    expect(circles[0].attributes()).toMatchObject({ cx: '40', cy: '50', r: '3', fill: 'red' })
+    expect(circles[1].attributes()).toMatchObject({ r: '6', fill: 'blue' })
+
+    await circles[1].trigger('click')
+    expect(wrapper.emitted('point-click')).toEqual([[points[1]]])
+  })
+
+  it('uses SVG presentation defaults', () => {
+    const wrapper = mount(Scatter, {
+      props: {
+        points: [{ x: 0, y: 0 }],
+        domain,
+        size,
+        padding,
+      },
+    })
+
+    expect(wrapper.find('circle').attributes()).toMatchObject({
+      r: '0',
+      fill: 'black',
+      'fill-opacity': '1',
+      stroke: 'none',
+      'stroke-opacity': '1',
+      'stroke-width': '1',
+    })
+  })
+
+  it('applies array styles by original point index', () => {
+    const points = [
+      { x: 0, y: 0, data: 'first' },
+      { x: Number.NaN, y: 5, data: 'skipped' },
+      { x: 10, y: 10, data: 'last' },
+    ]
+    const wrapper = mount(Scatter, {
+      props: {
+        points,
+        domain,
+        size,
+        padding,
+        fillColor: ['red', 'gray', 'blue'],
+        fillOpacity: [0.2, 0.5, 0.8],
+        strokeColor: ['black', 'gray', 'white'],
+        strokeOpacity: [0.4, 0.6, 0.9],
+        strokeWidth: [1, 2, 3],
+      },
+    })
+
+    const circles = wrapper.findAll('circle')
+    expect(circles).toHaveLength(2)
+    expect(circles[1].attributes()).toMatchObject({
+      fill: 'blue',
+      'fill-opacity': '0.8',
+      stroke: 'white',
+      'stroke-opacity': '0.9',
+      'stroke-width': '3',
+    })
+  })
+
+  it('emits point hover events', async () => {
+    const points = [{ x: 10, y: 10, data: 'last' }]
+    const wrapper = mount(Scatter, {
+      props: { points, domain, size, padding },
+    })
+    const circle = wrapper.find('circle')
+
+    await circle.trigger('mouseenter')
+    await circle.trigger('mouseleave')
+
+    expect(wrapper.emitted('point-enter')).toEqual([[points[0]]])
+    expect(wrapper.emitted('point-leave')).toEqual([[points[0]]])
+  })
+})

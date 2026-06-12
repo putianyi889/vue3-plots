@@ -1,0 +1,73 @@
+{
+  "name": "vue3-plots",
+  "version": "0.0.1",
+  "description": "Composable Vue 3 SVG plot layers for building charts from small, focused components.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Tianyi Pu",
+  "homepage": "https://github.com/putianyi889/vue3-plots#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/putianyi889/vue3-plots.git"
+  },
+  "bugs": {
+    "url": "https://github.com/putianyi889/vue3-plots/issues"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "component-library",
+    "plots",
+    "charts",
+    "svg",
+    "data-visualization"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue3-plots.umd.cjs",
+  "module": "./dist/vue3-plots.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vue3-plots.js",
+      "require": "./dist/vue3-plots.umd.cjs"
+    },
+    "./style.css": "./dist/vue3-plots.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "typecheck": "vue-tsc --noEmit",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test:run && npm run build"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "@vue/test-utils": "^2.4.0",
+    "eslint": "^10.4.1",
+    "eslint-plugin-vue": "^10.9.2",
+    "globals": "^17.6.0",
+    "jsdom": "^29.1.1",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.61.0",
+    "vite": "^8.0.16",
+    "vite-plugin-dts": "^5.0.2",
+    "vitest": "^4.1.8",
+    "vue": "^3.5.0",
+    "vue-tsc": "^3.3.4"
+  }
+}

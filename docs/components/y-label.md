@@ -1,0 +1,29 @@
+# YLabel
+
+`YLabel` renders a rotated y-axis title as an absolutely positioned SVG layer. Place it inside the same relatively positioned plot container as the other layers.
+
+## Import
+
+```ts
+import { YLabel } from 'vue3-plots'
+```
+
+## Example
+
+```vue
+<YLabel :size="{ width: 640, height: 360 }">
+  Value
+</YLabel>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `size` | `PlotSize` | Required | Outer SVG size in pixels. |
+
+## Slots
+
+| Slot | Props | Description |
+| --- | --- | --- |
+| `default` | None | Label content. |
