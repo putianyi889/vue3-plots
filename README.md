@@ -2,50 +2,22 @@
 
 Composable Vue 3 SVG plot layers for building charts from small, focused components.
 
-## Setup
+Use `vue3-plots` when you want chart primitives instead of a full charting framework. Each component renders one layer, so you can stack grids, axes, lines, points, labels, and interaction layers in the same plot container.
+
+## Install
 
 ```sh
-npm install
+npm install @putianyi888/vue3-plots
 ```
 
-## Development
+Vue is a peer dependency and should already be installed in your Vue 3 app.
 
-```sh
-npm run dev
-```
-
-This starts the Vite playground server. Open the local URL printed in the
-terminal, usually:
-
-```txt
-http://localhost:5173/
-```
-
-The playground entry point is `index.html`, and the demo code lives in
-`src/playground/`.
-
-If port `5173` is already in use, Vite will print the alternate port it chose.
-
-## Testing
-
-```sh
-npm run test:run
-```
-
-## Build
-
-```sh
-npm run build
-```
-
-The package build is emitted to `dist/`.
-
-## Usage
+## Quick Start
 
 ```vue
 <script setup lang="ts">
-import { Axes, Grid, Line, Scatter, XLabel, YLabel, getDataDomain, getNiceTicks } from 'vue3-plots'
-import 'vue3-plots/style.css'
+import { Axes, Grid, Line, Scatter, XLabel, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import '@putianyi888/vue3-plots/style.css'
 
 const points = [
   { x: 0, y: 2 },
@@ -61,71 +33,65 @@ const size = { width: 640, height: 360 }
 
 <template>
   <div style="position: relative; width: 640px; height: 360px;">
-    <Grid
-      :domain="domain"
-      :size="size"
-      :x-ticks="xTicks"
-      :y-ticks="yTicks"
-      stroke-color="#e2e8f0"
-    />
-    <Line
-      :points="points"
-      :domain="domain"
-      :size="size"
-      stroke-color="#2563eb"
-      :stroke-width="2"
-    />
-    <Scatter
-      :points="points"
-      :domain="domain"
-      :size="size"
-      :radius="4"
-      fill-color="#0f172a"
-    />
-    <Axes
-      :domain="domain"
-      :size="size"
-      :x-ticks="xTicks"
-      :y-ticks="yTicks"
-      stroke-color="#334155"
-    />
+    <Grid :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
+    <Line :points="points" :domain="domain" :size="size" stroke-color="#2563eb" :stroke-width="2" />
+    <Scatter :points="points" :domain="domain" :size="size" :radius="4" fill-color="#0f172a" />
+    <Axes :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#334155" />
     <XLabel :size="size">X value</XLabel>
     <YLabel :size="size">Y value</YLabel>
   </div>
 </template>
 ```
 
-## Exports
+## Components
 
-Components:
+- `Grid`: background grid lines aligned to x and y ticks.
+- `Line`: connected SVG path for ordered points.
+- `Scatter`: SVG circles with point click and hover events.
+- `Axes`: axis lines, tick marks, and tick labels.
+- `XLabel` and `YLabel`: standalone axis title layers.
+- `MouseDraw`: click-based rectangle, ellipse, and polygon drawing.
 
-- `Axes`
-- `Grid`
-- `Line`
-- `Scatter`
-- `MouseDraw`
-- `XLabel`
-- `YLabel`
+Layer components are absolutely positioned SVGs. Put them inside a relatively positioned container and pass the same `size`, `domain`, and `padding` values to layers that need to align.
 
-Utilities and types:
+## Styling
 
-- `getPlotArea`
+Import the package stylesheet once:
+
+```ts
+import '@putianyi888/vue3-plots/style.css'
+```
+
+The stylesheet only contains plot layer positioning and scoped component styles. Visual SVG attributes such as `strokeColor`, `fillColor`, `radius`, `strokeWidth`, and opacity props are passed directly to components.
+
+## Utilities
+
+The package also exports small helpers for common plot setup:
+
+- `getDataDomain`
+- `getNiceTicks`
 - `createLinearScale`
 - `pointToSvg`
 - `pointsToSvg`
-- `getDataDomain`
-- `getNiceTicks`
 - `formatTick`
 - `getMaybeArray`
-- `Rect`
-- `Ellipse`
-- `Polygon`
-- `MaybeArray`
-- `Scale`
-- `PlotPoint`
-- `PlotDomain`
-- `PlotPadding`
-- `PlotSize`
-- `PlotArea`
 
-More docs are available in [docs/components.md](docs/components.md), [docs/utils.md](docs/utils.md), and [docs/geometry.md](docs/geometry.md).
+Type exports include `PlotPoint`, `PlotDomain`, `PlotPadding`, `PlotSize`, `PlotArea`, `MaybeArray`, and geometry types such as `Rect`, `Ellipse`, and `Polygon`.
+
+## Documentation
+
+Detailed documentation is available at <https://putianyi889.github.io/vue3-plots/>.
+
+The source Markdown lives in [docs](docs/).
+
+## Repository Development
+
+For contributors working in this repository:
+
+```sh
+npm install
+npm run dev
+npm run docs:build
+npm run test:run
+npm run build
+```

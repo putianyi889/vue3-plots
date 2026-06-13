@@ -6,7 +6,7 @@ import vue from 'eslint-plugin-vue'
 
 export default tseslint.config(
   {
-    ignores: ['dist/**', 'node_modules/**'],
+    ignores: ['dist/**', 'docs/.vitepress/dist/**', 'docs/.vitepress/.temp/**', 'node_modules/**'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

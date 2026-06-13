@@ -5,7 +5,7 @@
 ## Import
 
 ```ts
-import { Scatter } from 'vue3-plots'
+import { Scatter } from '@putianyi888/vue3-plots'
 ```
 
 ## Example

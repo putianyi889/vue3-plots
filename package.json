@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "author": "Tianyi Pu",
-  "homepage": "https://github.com/putianyi889/vue3-plots#readme",
+  "homepage": "https://putianyi889.github.io/vue3-plots/",
   "publishConfig": {
     "access": "public"
   },
@@ -51,6 +51,9 @@
     "test:run": "vitest run",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
     "prepublishOnly": "npm run lint && npm run typecheck && npm run test:run && npm run build"
   },
   "peerDependencies": {
@@ -69,6 +72,7 @@
     "typescript-eslint": "^8.61.0",
     "vite": "^8.0.16",
     "vite-plugin-dts": "^5.0.2",
+    "vitepress": "^1.6.4",
     "vitest": "^4.1.8",
     "vue": "^3.5.0",
     "vue-tsc": "^3.3.4"

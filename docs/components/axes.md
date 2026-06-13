@@ -5,7 +5,7 @@
 ## Import
 
 ```ts
-import { Axes } from 'vue3-plots'
+import { Axes } from '@putianyi888/vue3-plots'
 ```
 
 ## Example

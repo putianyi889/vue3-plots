@@ -5,7 +5,7 @@
 ## Import
 
 ```ts
-import { Grid } from 'vue3-plots'
+import { Grid } from '@putianyi888/vue3-plots'
 ```
 
 ## Example

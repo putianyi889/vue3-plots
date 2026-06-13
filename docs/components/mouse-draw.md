@@ -5,7 +5,7 @@
 ## Import
 
 ```ts
-import { MouseDraw } from 'vue3-plots'
+import { MouseDraw } from '@putianyi888/vue3-plots'
 ```
 
 ## Example

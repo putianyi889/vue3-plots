@@ -5,7 +5,7 @@
 ## Import
 
 ```ts
-import { XLabel } from 'vue3-plots'
+import { XLabel } from '@putianyi888/vue3-plots'
 ```
 
 ## Example

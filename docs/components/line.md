@@ -5,7 +5,7 @@
 ## Import
 
 ```ts
-import { Line } from 'vue3-plots'
+import { Line } from '@putianyi888/vue3-plots'
 ```
 
 ## Example
