@@ -40,9 +40,9 @@ import { Scatter } from '@putianyi888/vue3-plots'
 
 | Event | Payload | Description |
 | --- | --- | --- |
-| `point-click` | `PlotPoint<T>` | Emitted when a rendered point is clicked. |
-| `point-enter` | `PlotPoint<T>` | Emitted when the pointer enters a rendered point. |
-| `point-leave` | `PlotPoint<T>` | Emitted when the pointer leaves a rendered point. |
+| `pointClick` | `PlotPoint<T>` | Emitted when a rendered point is clicked. |
+| `pointEnter` | `PlotPoint<T>` | Emitted when the pointer enters a rendered point. |
+| `pointLeave` | `PlotPoint<T>` | Emitted when the pointer leaves a rendered point. |
 
 ## Notes
 

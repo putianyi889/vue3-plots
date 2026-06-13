@@ -24,7 +24,7 @@ describe('Scatter', () => {
     expect(circles[1].attributes()).toMatchObject({ r: '6', fill: 'blue' })
 
     await circles[1].trigger('click')
-    expect(wrapper.emitted('point-click')).toEqual([[points[1]]])
+    expect(wrapper.emitted('pointClick')).toEqual([[points[1]]])
   })
 
   it('uses SVG presentation defaults', () => {
@@ -88,7 +88,7 @@ describe('Scatter', () => {
     await circle.trigger('mouseenter')
     await circle.trigger('mouseleave')
 
-    expect(wrapper.emitted('point-enter')).toEqual([[points[0]]])
-    expect(wrapper.emitted('point-leave')).toEqual([[points[0]]])
+    expect(wrapper.emitted('pointEnter')).toEqual([[points[0]]])
+    expect(wrapper.emitted('pointLeave')).toEqual([[points[0]]])
   })
 })
