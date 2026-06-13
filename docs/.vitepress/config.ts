@@ -11,7 +11,7 @@ export default defineConfig({
   cleanUrls: true,
   themeConfig: {
     search: {
-      provider: 'local'
+      provider: 'local',
     },
     nav: [
       { text: 'Guide', link: '/' },
