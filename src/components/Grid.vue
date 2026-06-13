@@ -39,13 +39,14 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 
-import { createLinearScale, defaultPlotPadding, getMaybeArray, getPlotArea } from './utils'
+import { usePlotContext } from './context'
+import { createLinearScale, getMaybeArray, getPlotArea } from './utils'
 import type { MaybeArray, PlotDomain, PlotPadding, PlotSize } from './utils'
 
 const props = defineProps({
-  domain: { type: Object as PropType<PlotDomain>, required: true },
-  size: { type: Object as PropType<PlotSize>, default: () => ({ width: 320, height: 200 }) },
-  padding: { type: Object as PropType<PlotPadding>, default: () => defaultPlotPadding },
+  domain: { type: Object as PropType<PlotDomain>, default: undefined },
+  size: { type: Object as PropType<PlotSize>, default: undefined },
+  padding: { type: Object as PropType<PlotPadding>, default: undefined },
   xTicks: { type: Array as PropType<number[]>, default: () => [] },
   yTicks: { type: Array as PropType<number[]>, default: () => [] },
   strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
@@ -54,7 +55,8 @@ const props = defineProps({
   dashArray: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
 })
 
-const area = computed(() => getPlotArea(props.size, props.padding))
-const xScale = computed(() => createLinearScale(props.domain.xMin, props.domain.xMax, area.value.x, area.value.x + area.value.width))
-const yScale = computed(() => createLinearScale(props.domain.yMin, props.domain.yMax, area.value.y + area.value.height, area.value.y))
+const { domain, padding, size } = usePlotContext(props)
+const area = computed(() => getPlotArea(size.value, padding.value))
+const xScale = computed(() => createLinearScale(domain.value.xMin, domain.value.xMax, area.value.x, area.value.x + area.value.width))
+const yScale = computed(() => createLinearScale(domain.value.yMin, domain.value.yMax, area.value.y + area.value.height, area.value.y))
 </script>

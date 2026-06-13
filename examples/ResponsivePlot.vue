@@ -1,18 +1,20 @@
 <template>
     <div ref="container" class="resize-frame">
         <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
-            <Grid :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
-            <Line :domain="domain" :points="points" :size="size" stroke-color="#16a34a" :stroke-width="2" />
-            <Scatter :domain="domain" fill-color="#14532d" :points="points" :radius="4" :size="size" />
-            <XAxis :domain="domain" :size="size" stroke-color="#334155" :ticks="xTicks" />
-            <YAxis :domain="domain" :size="size" stroke-color="#334155" :ticks="yTicks" />
+            <TransformGroup :domain="domain" :size="size">
+                <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
+                <Line :points="points" stroke-color="#16a34a" :stroke-width="2" />
+                <Scatter fill-color="#14532d" :points="points" :radius="4" />
+                <XAxis stroke-color="#334155" :ticks="xTicks" />
+                <YAxis stroke-color="#334155" :ticks="yTicks" />
+            </TransformGroup>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { Grid, Line, Scatter, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Grid, Line, Scatter, TransformGroup, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
 const container = ref<HTMLElement>()

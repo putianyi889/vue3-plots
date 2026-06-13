@@ -10,6 +10,9 @@ export default defineConfig({
   base: '/vue3-plots/',
   cleanUrls: true,
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
     nav: [
       { text: 'Guide', link: '/' },
       { text: 'Examples', link: '/examples' },
@@ -22,6 +25,7 @@ export default defineConfig({
         text: 'Guide',
         items: [
           { text: 'Introduction', link: '/' },
+          { text: 'Tutorial', link: '/tutorial' },
           { text: 'Examples', link: '/examples' },
           { text: 'Components', link: '/components' },
         ],
@@ -31,6 +35,7 @@ export default defineConfig({
         items: [
           { text: 'XAxis', link: '/components/x-axis' },
           { text: 'YAxis', link: '/components/y-axis' },
+          { text: 'TransformGroup', link: '/components/transform-group' },
           { text: 'Grid', link: '/components/grid' },
           { text: 'Line', link: '/components/line' },
           { text: 'Scatter', link: '/components/scatter' },

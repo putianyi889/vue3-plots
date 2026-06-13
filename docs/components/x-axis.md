@@ -23,9 +23,9 @@ import { XAxis } from '@putianyi888/vue3-plots'
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `domain` | `PlotDomain` | Required | Data-space bounds used to map tick values onto the plot area. |
-| `size` | `PlotSize` | `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
-| `padding` | `PlotPadding` | `defaultPlotPadding` | Insets shared with other plot layers. |
+| `domain` | `PlotDomain` | From `TransformGroup` | Data-space bounds used to map tick values onto the plot area. Required when no `TransformGroup` provides it. |
+| `size` | `PlotSize` | From `TransformGroup`, then `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
+| `padding` | `PlotPadding` | From `TransformGroup`, then `defaultPlotPadding` | Insets shared with other plot layers. |
 | `ticks` | `number[]` | `[]` | X-axis tick values in data-space coordinates. |
 | `y` | `number` | Plot area bottom | Axis line y position in data-space coordinates. When omitted, the axis is drawn at the bottom of the plot area. |
 | `offset` | `number` | `24` | Tick label center y offset from the axis line in SVG-space pixels. Positive values move labels downward. |

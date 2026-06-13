@@ -19,9 +19,12 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 
+import { usePlotSize } from './context'
 import type { PlotSize } from './utils'
 
-defineProps({
-  size: { type: Object as PropType<PlotSize>, required: true },
+const props = defineProps({
+  size: { type: Object as PropType<PlotSize>, default: undefined },
 })
+
+const size = usePlotSize(props)
 </script>

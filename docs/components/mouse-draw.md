@@ -23,7 +23,7 @@ import { MouseDraw } from '@putianyi888/vue3-plots'
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `mode` | `'' \| 'rect' \| 'ellipse' \| 'polygon'` | `'rect'` | Draw mode. Use `''` to disable pointer capture and clear the active draft shape. |
-| `size` | `PlotSize` | `{ width: 320, height: 200 }` | SVG coordinate size used to convert pointer positions into plot-space coordinates. |
+| `size` | `PlotSize` | From `TransformGroup`, then `{ width: 320, height: 200 }` | SVG coordinate size used to convert pointer positions into plot-space coordinates. |
 | `fillOpacity` | `number` | `1` | Draft shape fill opacity. |
 | `strokeOpacity` | `number` | `1` | Draft shape outline opacity. |
 

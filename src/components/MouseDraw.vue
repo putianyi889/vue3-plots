@@ -50,6 +50,7 @@ import { computed, ref, watch } from 'vue'
 import type { PropType } from 'vue'
 
 import { Ellipse, Polygon, Rect } from './geometry'
+import { usePlotSize } from './context'
 import type { AnyShape, Point } from './geometry'
 import type { PlotSize } from './utils'
 
@@ -57,7 +58,7 @@ type MouseDrawMode = '' | 'rect' | 'ellipse' | 'polygon'
 
 const props = defineProps({
   mode: { type: String as PropType<MouseDrawMode>, default: 'rect' },
-  size: { type: Object as PropType<PlotSize>, default: () => ({ width: 320, height: 200 }) },
+  size: { type: Object as PropType<PlotSize>, default: undefined },
   fillOpacity: { type: Number, default: 1 },
   strokeOpacity: { type: Number, default: 1 },
 })
@@ -67,6 +68,7 @@ const emit = defineEmits<{
 }>()
 
 const isEnabled = computed(() => props.mode !== '')
+const size = usePlotSize(props)
 const startPoint = ref<Point>()
 const polygonPoints = ref<Point[]>([])
 const previewPoint = ref<Point>()
@@ -182,8 +184,8 @@ function isSamePoint(first: Point, second: Point) {
 
 function getSvgPoint(event: MouseEvent): Point {
   const rect = (event.currentTarget as SVGSVGElement).getBoundingClientRect()
-  const scaleX = rect.width === 0 ? 1 : props.size.width / rect.width
-  const scaleY = rect.height === 0 ? 1 : props.size.height / rect.height
+  const scaleX = rect.width === 0 ? 1 : size.value.width / rect.width
+  const scaleY = rect.height === 0 ? 1 : size.value.height / rect.height
 
   return {
     x: (event.clientX - rect.left) * scaleX,

@@ -26,9 +26,9 @@ import { Scatter } from '@putianyi888/vue3-plots'
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `points` | `PlotPoint<T>[]` | Required | Data points to render. Non-finite points are skipped. |
-| `domain` | `PlotDomain` | Required | Data-space bounds used to map points onto the plot area. |
-| `size` | `PlotSize` | `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
-| `padding` | `PlotPadding` | `defaultPlotPadding` | Insets shared with other plot layers. |
+| `domain` | `PlotDomain` | From `TransformGroup` | Data-space bounds used to map points onto the plot area. Required when no `TransformGroup` provides it. |
+| `size` | `PlotSize` | From `TransformGroup`, then `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
+| `padding` | `PlotPadding` | From `TransformGroup`, then `defaultPlotPadding` | Insets shared with other plot layers. |
 | `radius` | `number \| number[]` | `0` | Circle radius in pixels. Arrays are indexed by original point index. |
 | `fillColor` | `string \| string[]` | `'black'` | Circle fill color. Arrays are indexed by original point index. |
 | `fillOpacity` | `number \| number[]` | `1` | Circle fill opacity. Arrays are indexed by original point index. |

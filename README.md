@@ -16,7 +16,7 @@ Vue is a peer dependency and should already be installed in your Vue 3 app.
 
 ```vue
 <script setup lang="ts">
-import { Grid, Line, Scatter, XAxis, XLabel, YAxis, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Grid, Line, Scatter, TransformGroup, XAxis, XLabel, YAxis, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import '@putianyi888/vue3-plots/style.css'
 
 const points = [
@@ -33,13 +33,15 @@ const size = { width: 640, height: 360 }
 
 <template>
   <div style="position: relative; width: 640px; height: 360px;">
-    <Grid :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
-    <Line :points="points" :domain="domain" :size="size" stroke-color="#2563eb" :stroke-width="2" />
-    <Scatter :points="points" :domain="domain" :size="size" :radius="4" fill-color="#0f172a" />
-    <XAxis :domain="domain" :size="size" :ticks="xTicks" stroke-color="#334155" />
-    <YAxis :domain="domain" :size="size" :ticks="yTicks" stroke-color="#334155" />
-    <XLabel :size="size">X value</XLabel>
-    <YLabel :size="size">Y value</YLabel>
+    <TransformGroup :domain="domain" :size="size">
+      <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
+      <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
+      <Scatter :points="points" :radius="4" fill-color="#0f172a" />
+      <XAxis :ticks="xTicks" stroke-color="#334155" />
+      <YAxis :ticks="yTicks" stroke-color="#334155" />
+      <XLabel>X value</XLabel>
+      <YLabel>Y value</YLabel>
+    </TransformGroup>
   </div>
 </template>
 ```
@@ -49,11 +51,12 @@ const size = { width: 640, height: 360 }
 - `Grid`: background grid lines aligned to x and y ticks.
 - `Line`: connected SVG path for ordered points.
 - `Scatter`: SVG circles with point click and hover events.
+- `TransformGroup`: shared `domain`, `size`, and `padding` context for layers.
 - `XAxis` and `YAxis`: axis lines, tick marks, and tick labels.
 - `XLabel` and `YLabel`: standalone axis title layers.
 - `MouseDraw`: click-based rectangle, ellipse, and polygon drawing.
 
-Layer components are absolutely positioned SVGs. Put them inside a relatively positioned container and pass the same `size`, `domain`, and `padding` values to layers that need to align.
+Layer components are absolutely positioned SVGs. Put them inside a relatively positioned container. Use `TransformGroup` when several layers should share the same `size`, `domain`, and `padding`.
 
 ## Styling
 

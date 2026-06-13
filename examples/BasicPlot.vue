@@ -1,23 +1,25 @@
 <template>
     <div class="example-frame">
         <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
-            <Grid :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
-            <Line :domain="domain" :points="points" :size="size" stroke-color="#2563eb" :stroke-width="2" />
-            <Scatter :domain="domain" fill-color="#0f172a" :points="points" :radius="4" :size="size" />
-            <XAxis :domain="domain" :size="size" stroke-color="#334155" :ticks="xTicks" />
-            <YAxis :domain="domain" :size="size" stroke-color="#334155" :ticks="yTicks" />
-            <XLabel :size="size">
-                X value
-            </XLabel>
-            <YLabel :size="size">
-                Y value
-            </YLabel>
+            <TransformGroup :domain="domain" :size="size">
+                <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
+                <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
+                <Scatter fill-color="#0f172a" :points="points" :radius="4" />
+                <XAxis stroke-color="#334155" :ticks="xTicks" />
+                <YAxis stroke-color="#334155" :ticks="yTicks" />
+                <XLabel>
+                    X value
+                </XLabel>
+                <YLabel>
+                    Y value
+                </YLabel>
+            </TransformGroup>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { Grid, Line, Scatter, XAxis, XLabel, YAxis, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Grid, Line, Scatter, TransformGroup, XAxis, XLabel, YAxis, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
 const points: PlotPoint[] = [
