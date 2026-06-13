@@ -47,6 +47,7 @@ const size = { width: 640, height: 360 }
 
 ## Next Steps
 
+- Try the [examples](examples.md).
 - Read the [component guide](components.md).
 - Check the [utility API](utils.md).
 - Review the [geometry API](geometry.md).

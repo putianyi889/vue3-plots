@@ -83,7 +83,7 @@ Type exports include `PlotPoint`, `PlotDomain`, `PlotPadding`, `PlotSize`, `Plot
 
 Detailed documentation is available at <https://putianyi889.github.io/vue3-plots/>.
 
-The source Markdown lives in [docs](docs/).
+The source Markdown lives in [docs](docs/), and rendered example components live in [examples](examples/).
 
 ## Repository Development
 

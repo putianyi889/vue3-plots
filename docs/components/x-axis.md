@@ -27,8 +27,8 @@ import { XAxis } from '@putianyi888/vue3-plots'
 | `size` | `PlotSize` | `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
 | `padding` | `PlotPadding` | `defaultPlotPadding` | Insets shared with other plot layers. |
 | `ticks` | `number[]` | `[]` | X-axis tick values in data-space coordinates. |
-| `y` | `number` | Plot area bottom | Axis line y position in SVG-space coordinates. |
-| `offset` | `number` | `16` | Tick label y offset from the axis line in SVG-space pixels. Positive values move labels downward. |
+| `y` | `number` | Plot area bottom | Axis line y position in data-space coordinates. When omitted, the axis is drawn at the bottom of the plot area. |
+| `offset` | `number` | `24` | Tick label center y offset from the axis line in SVG-space pixels. Positive values move labels downward. |
 | `textAnchor` | `'start' \| 'middle' \| 'end'` | `'middle'` | SVG `text-anchor` value for tick labels. See the [official SVG text-anchor specification](https://www.w3.org/TR/SVG2/text.html#TextAnchorProperty). |
 | `tickSize` | `number \| number[]` | `4` | Tick mark length in pixels. Arrays are indexed by tick index. Negative values draw ticks in the opposite direction. |
 | `strokeColor` | `string \| string[]` | `'none'` | Axis line and tick mark color. Arrays are indexed by tick index. |

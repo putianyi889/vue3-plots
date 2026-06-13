@@ -1,4 +1,8 @@
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
+
+const configDir = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   title: 'vue3-plots',
@@ -8,6 +12,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Guide', link: '/' },
+      { text: 'Examples', link: '/examples' },
       { text: 'Components', link: '/components' },
       { text: 'Utilities', link: '/utils' },
       { text: 'Geometry', link: '/geometry' },
@@ -17,6 +22,7 @@ export default defineConfig({
         text: 'Guide',
         items: [
           { text: 'Introduction', link: '/' },
+          { text: 'Examples', link: '/examples' },
           { text: 'Components', link: '/components' },
         ],
       },
@@ -44,5 +50,19 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/putianyi889/vue3-plots' },
     ],
+  },
+  vite: {
+    resolve: {
+      alias: [
+        {
+          find: '@putianyi888/vue3-plots/style.css',
+          replacement: resolve(configDir, '../../src/style.css'),
+        },
+        {
+          find: '@putianyi888/vue3-plots',
+          replacement: resolve(configDir, '../../src/index.ts'),
+        },
+      ],
+    },
   },
 })

@@ -1,0 +1,68 @@
+<template>
+    <div ref="container" class="resize-frame">
+        <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
+            <Grid :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
+            <Line :domain="domain" :points="points" :size="size" stroke-color="#16a34a" :stroke-width="2" />
+            <Scatter :domain="domain" fill-color="#14532d" :points="points" :radius="4" :size="size" />
+            <XAxis :domain="domain" :size="size" stroke-color="#334155" :ticks="xTicks" />
+            <YAxis :domain="domain" :size="size" stroke-color="#334155" :ticks="yTicks" />
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { Grid, Line, Scatter, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
+
+const container = ref<HTMLElement>()
+const size = ref<PlotSize>({ width: 640, height: 320 })
+const points: PlotPoint[] = [
+  { x: 0, y: 8 },
+  { x: 1, y: 12 },
+  { x: 2, y: 7 },
+  { x: 3, y: 16 },
+  { x: 4, y: 13 },
+  { x: 5, y: 20 },
+]
+const domain = getDataDomain(points, 0.1)
+const xTicks = computed(() => getNiceTicks(domain.xMin, domain.xMax))
+const yTicks = computed(() => getNiceTicks(domain.yMin, domain.yMax))
+
+let observer: ResizeObserver | undefined
+
+onMounted(() => {
+  if (!container.value || typeof ResizeObserver === 'undefined') return
+
+  observer = new ResizeObserver(([entry]) => {
+    if (!entry) return
+
+    size.value = {
+      width: Math.max(260, Math.round(entry.contentRect.width)),
+      height: Math.max(220, Math.round(entry.contentRect.height)),
+    }
+  })
+  observer.observe(container.value)
+})
+
+onBeforeUnmount(() => {
+  observer?.disconnect()
+})
+</script>
+
+<style scoped>
+.resize-frame {
+  overflow: auto;
+  min-width: 320px;
+  max-width: 100%;
+  min-height: 260px;
+  height: 320px;
+  resize: both;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+.plot {
+  position: relative;
+}
+</style>
