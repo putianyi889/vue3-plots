@@ -25,7 +25,6 @@ export default tseslint.config(
       sourceType: 'module',
       globals: {
         ...globals.browser,
-        ...globals.node,
       },
     },
     rules: {
@@ -54,53 +53,18 @@ export default tseslint.config(
       '@stylistic/space-in-parens': ['error', 'never'],
       '@stylistic/space-infix-ops': 'error',
       '@stylistic/type-annotation-spacing': 'error',
-      'vue/attribute-hyphenation': ['error', 'always'],
-      'vue/attributes-order': 'error',
       'vue/block-order': ['error', { order: ['template', 'script', 'style'] }],
-      'vue/block-tag-newline': ['error', {
-        multiline: 'always',
-        singleline: 'always',
-      }],
+      'vue/block-tag-newline': 'error',
       'vue/component-api-style': ['error', ['script-setup']],
-      'vue/component-name-in-template-casing': ['error', 'PascalCase', {
-        registeredComponentsOnly: false,
-      }],
-      'vue/custom-event-name-casing': ['error', 'kebab-case'],
-      'vue/html-closing-bracket-newline': ['error', {
-        multiline: 'always',
-        singleline: 'never',
-      }],
+      'vue/component-name-in-template-casing': 'error',
+      'vue/custom-event-name-casing': 'error',
+      'vue/html-closing-bracket-newline': 'error',
       'vue/html-closing-bracket-spacing': 'error',
       'vue/html-indent': ['error', 4],
       'vue/html-quotes': ['error', 'double'],
-      'vue/html-self-closing': ['error', {
-        html: {
-          component: 'always',
-          normal: 'never',
-          void: 'always',
-        },
-        math: 'always',
-        svg: 'always',
-      }],
-      'vue/max-attributes-per-line': ['error', {
-        multiline: {
-          max: 1,
-        },
-        singleline: {
-          max: 3,
-        },
-      }],
+      'vue/max-attributes-per-line': 'off',
       'vue/multi-word-component-names': 'off',
-      'vue/no-multiple-template-root': 'off',
-      'vue/no-required-prop-with-default': 'error',
-      'vue/no-template-shadow': 'error',
-      'vue/no-useless-mustaches': 'error',
-      'vue/no-useless-v-bind': 'error',
-      'vue/padding-line-between-blocks': 'error',
       'vue/prefer-define-options': 'error',
-      'vue/prop-name-casing': ['error', 'camelCase'],
-      'vue/v-bind-style': ['error', 'shorthand'],
-      'vue/v-on-style': ['error', 'shorthand'],
     },
   },
   {

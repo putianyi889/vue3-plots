@@ -19,9 +19,9 @@
             :stroke-opacity="getMaybeArray(strokeOpacity, point.index)"
             :stroke-width="getMaybeArray(strokeWidth, point.index)"
             vector-effect="non-scaling-stroke"
-            @click="emit('point-click', points[point.index])"
-            @mouseenter="emit('point-enter', points[point.index])"
-            @mouseleave="emit('point-leave', points[point.index])"
+            @click="emit('pointClick', points[point.index])"
+            @mouseenter="emit('pointEnter', points[point.index])"
+            @mouseleave="emit('pointLeave', points[point.index])"
         />
     </svg>
 </template>
@@ -47,9 +47,9 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'point-click', point: PlotPoint<T>): void
-  (e: 'point-enter', point: PlotPoint<T>): void
-  (e: 'point-leave', point: PlotPoint<T>): void
+  (e: 'pointClick', point: PlotPoint<T>): void
+  (e: 'pointEnter', point: PlotPoint<T>): void
+  (e: 'pointLeave', point: PlotPoint<T>): void
 }>()
 
 const renderedPoints = computed(() => {

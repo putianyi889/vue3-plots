@@ -32,7 +32,7 @@
                 :text-anchor="textAnchor"
                 :x="xScale(tick)"
                 :y="axisY + offset"
-                dominant-baseline="hanging"
+                dominant-baseline="middle"
             >
                 <slot
                     name="tick"
@@ -66,7 +66,7 @@ const props = defineProps({
   padding: { type: Object as PropType<PlotPadding>, default: () => defaultPlotPadding },
   ticks: { type: Array as PropType<number[]>, default: () => [] },
   y: { type: Number, default: undefined },
-  offset: { type: Number, default: 16 },
+  offset: { type: Number, default: 24 },
   textAnchor: { type: String as PropType<TextAnchor>, default: 'middle' },
   tickSize: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 4 },
   strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
@@ -75,6 +75,7 @@ const props = defineProps({
 })
 
 const area = computed(() => getPlotArea(props.size, props.padding))
-const axisY = computed(() => props.y ?? area.value.y + area.value.height)
 const xScale = computed(() => createLinearScale(props.domain.xMin, props.domain.xMax, area.value.x, area.value.x + area.value.width))
+const yScale = computed(() => createLinearScale(props.domain.yMin, props.domain.yMax, area.value.y + area.value.height, area.value.y))
+const axisY = computed(() => props.y === undefined ? area.value.y + area.value.height : yScale.value(props.y))
 </script>

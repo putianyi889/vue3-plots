@@ -66,8 +66,8 @@ const props = defineProps({
   padding: { type: Object as PropType<PlotPadding>, default: () => defaultPlotPadding },
   ticks: { type: Array as PropType<number[]>, default: () => [] },
   x: { type: Number, default: undefined },
-  offset: { type: Number, default: -16 },
-  textAnchor: { type: String as PropType<TextAnchor>, default: 'end' },
+  offset: { type: Number, default: -24 },
+  textAnchor: { type: String as PropType<TextAnchor>, default: 'middle' },
   tickSize: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 4 },
   strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
   strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
@@ -75,6 +75,7 @@ const props = defineProps({
 })
 
 const area = computed(() => getPlotArea(props.size, props.padding))
-const axisX = computed(() => props.x ?? area.value.x)
+const xScale = computed(() => createLinearScale(props.domain.xMin, props.domain.xMax, area.value.x, area.value.x + area.value.width))
 const yScale = computed(() => createLinearScale(props.domain.yMin, props.domain.yMax, area.value.y + area.value.height, area.value.y))
+const axisX = computed(() => props.x === undefined ? area.value.x : xScale.value(props.x))
 </script>
