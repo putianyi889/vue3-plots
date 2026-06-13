@@ -23,7 +23,8 @@ export default defineConfig({
       {
         text: 'Components',
         items: [
-          { text: 'Axes', link: '/components/axes' },
+          { text: 'XAxis', link: '/components/x-axis' },
+          { text: 'YAxis', link: '/components/y-axis' },
           { text: 'Grid', link: '/components/grid' },
           { text: 'Line', link: '/components/line' },
           { text: 'Scatter', link: '/components/scatter' },

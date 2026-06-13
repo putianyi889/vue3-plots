@@ -16,7 +16,7 @@ Vue is a peer dependency and should already be installed in your Vue 3 app.
 
 ```vue
 <script setup lang="ts">
-import { Axes, Grid, Line, Scatter, XLabel, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Grid, Line, Scatter, XAxis, XLabel, YAxis, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import '@putianyi888/vue3-plots/style.css'
 
 const points = [
@@ -36,7 +36,8 @@ const size = { width: 640, height: 360 }
     <Grid :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
     <Line :points="points" :domain="domain" :size="size" stroke-color="#2563eb" :stroke-width="2" />
     <Scatter :points="points" :domain="domain" :size="size" :radius="4" fill-color="#0f172a" />
-    <Axes :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#334155" />
+    <XAxis :domain="domain" :size="size" :ticks="xTicks" stroke-color="#334155" />
+    <YAxis :domain="domain" :size="size" :ticks="yTicks" stroke-color="#334155" />
     <XLabel :size="size">X value</XLabel>
     <YLabel :size="size">Y value</YLabel>
   </div>
@@ -48,7 +49,7 @@ const size = { width: 640, height: 360 }
 - `Grid`: background grid lines aligned to x and y ticks.
 - `Line`: connected SVG path for ordered points.
 - `Scatter`: SVG circles with point click and hover events.
-- `Axes`: axis lines, tick marks, and tick labels.
+- `XAxis` and `YAxis`: axis lines, tick marks, and tick labels.
 - `XLabel` and `YLabel`: standalone axis title layers.
 - `MouseDraw`: click-based rectangle, ellipse, and polygon drawing.
 

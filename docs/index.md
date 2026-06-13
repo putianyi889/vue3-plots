@@ -20,7 +20,7 @@ import '@putianyi888/vue3-plots/style.css'
 
 ```vue
 <script setup lang="ts">
-import { Axes, Grid, Line, Scatter, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Grid, Line, Scatter, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import '@putianyi888/vue3-plots/style.css'
 
 const points = [
@@ -39,7 +39,8 @@ const size = { width: 640, height: 360 }
     <Grid :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
     <Line :points="points" :domain="domain" :size="size" stroke-color="#2563eb" :stroke-width="2" />
     <Scatter :points="points" :domain="domain" :size="size" :radius="4" fill-color="#0f172a" />
-    <Axes :domain="domain" :size="size" :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#334155" />
+    <XAxis :domain="domain" :size="size" :ticks="xTicks" stroke-color="#334155" />
+    <YAxis :domain="domain" :size="size" :ticks="yTicks" stroke-color="#334155" />
   </div>
 </template>
 ```

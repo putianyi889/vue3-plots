@@ -1,9 +1,10 @@
-export { default as Axes } from './Axes.vue'
 export { default as Grid } from './Grid.vue'
 export { default as Line } from './Line.vue'
 export { default as MouseDraw } from './MouseDraw.vue'
 export { default as Scatter } from './Scatter.vue'
+export { default as XAxis } from './XAxis.vue'
 export { default as XLabel } from './XLabel.vue'
+export { default as YAxis } from './YAxis.vue'
 export { default as YLabel } from './YLabel.vue'
 
 export * from './geometry'
