@@ -51,7 +51,8 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 
-import { createLinearScale, defaultPlotPadding, formatTick, getMaybeArray, getPlotArea } from './utils'
+import { usePlotContext } from './context'
+import { createLinearScale, formatTick, getMaybeArray, getPlotArea } from './utils'
 import type { MaybeArray, PlotDomain, PlotPadding, PlotSize } from './utils'
 
 type TextAnchor = 'start' | 'middle' | 'end'
@@ -61,9 +62,9 @@ defineSlots<{
 }>()
 
 const props = defineProps({
-  domain: { type: Object as PropType<PlotDomain>, required: true },
-  size: { type: Object as PropType<PlotSize>, default: () => ({ width: 320, height: 200 }) },
-  padding: { type: Object as PropType<PlotPadding>, default: () => defaultPlotPadding },
+  domain: { type: Object as PropType<PlotDomain>, default: undefined },
+  size: { type: Object as PropType<PlotSize>, default: undefined },
+  padding: { type: Object as PropType<PlotPadding>, default: undefined },
   ticks: { type: Array as PropType<number[]>, default: () => [] },
   y: { type: Number, default: undefined },
   offset: { type: Number, default: 24 },
@@ -74,8 +75,9 @@ const props = defineProps({
   strokeWidth: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
 })
 
-const area = computed(() => getPlotArea(props.size, props.padding))
-const xScale = computed(() => createLinearScale(props.domain.xMin, props.domain.xMax, area.value.x, area.value.x + area.value.width))
-const yScale = computed(() => createLinearScale(props.domain.yMin, props.domain.yMax, area.value.y + area.value.height, area.value.y))
+const { domain, padding, size } = usePlotContext(props)
+const area = computed(() => getPlotArea(size.value, padding.value))
+const xScale = computed(() => createLinearScale(domain.value.xMin, domain.value.xMax, area.value.x, area.value.x + area.value.width))
+const yScale = computed(() => createLinearScale(domain.value.yMin, domain.value.yMax, area.value.y + area.value.height, area.value.y))
 const axisY = computed(() => props.y === undefined ? area.value.y + area.value.height : yScale.value(props.y))
 </script>

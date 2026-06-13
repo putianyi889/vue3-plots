@@ -30,14 +30,15 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 
-import { createLinearScale, defaultPlotPadding, getMaybeArray, getPlotArea, pointToSvg } from './utils'
+import { usePlotContext } from './context'
+import { createLinearScale, getMaybeArray, getPlotArea, pointToSvg } from './utils'
 import type { MaybeArray, PlotDomain, PlotPadding, PlotPoint, PlotSize } from './utils'
 
 const props = defineProps({
   points: { type: Array as PropType<PlotPoint<T>[]>, required: true },
-  domain: { type: Object as PropType<PlotDomain>, required: true },
-  size: { type: Object as PropType<PlotSize>, default: () => ({ width: 320, height: 200 }) },
-  padding: { type: Object as PropType<PlotPadding>, default: () => defaultPlotPadding },
+  domain: { type: Object as PropType<PlotDomain>, default: undefined },
+  size: { type: Object as PropType<PlotSize>, default: undefined },
+  padding: { type: Object as PropType<PlotPadding>, default: undefined },
   radius: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 0 },
   fillColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'black' },
   fillOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
@@ -52,10 +53,12 @@ const emit = defineEmits<{
   (e: 'pointLeave', point: PlotPoint<T>): void
 }>()
 
+const { domain, padding, size } = usePlotContext(props)
+
 const renderedPoints = computed(() => {
-  const area = getPlotArea(props.size, props.padding)
-  const scaleX = createLinearScale(props.domain.xMin, props.domain.xMax, area.x, area.x + area.width)
-  const scaleY = createLinearScale(props.domain.yMin, props.domain.yMax, area.y + area.height, area.y)
+  const area = getPlotArea(size.value, padding.value)
+  const scaleX = createLinearScale(domain.value.xMin, domain.value.xMax, area.x, area.x + area.width)
+  const scaleY = createLinearScale(domain.value.yMin, domain.value.yMax, area.y + area.height, area.y)
   const result = []
 
   for (let i = 0; i < props.points.length; i++) {

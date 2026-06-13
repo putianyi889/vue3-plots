@@ -20,7 +20,7 @@ import { XLabel } from '@putianyi888/vue3-plots'
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `size` | `PlotSize` | Required | Outer SVG size in pixels. |
+| `size` | `PlotSize` | From `TransformGroup`, then `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
 
 ## Slots
 
