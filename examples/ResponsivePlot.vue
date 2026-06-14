@@ -13,7 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useResizeObserver } from '@vueuse/core'
+import { computed, ref } from 'vue'
 import { Grid, Line, Scatter, TransformGroup, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
@@ -31,24 +32,13 @@ const domain = getDataDomain(points, 0.1)
 const xTicks = computed(() => getNiceTicks(domain.xMin, domain.xMax))
 const yTicks = computed(() => getNiceTicks(domain.yMin, domain.yMax))
 
-let observer: ResizeObserver | undefined
+useResizeObserver(container, ([entry]) => {
+  if (!entry) return
 
-onMounted(() => {
-  if (!container.value || typeof ResizeObserver === 'undefined') return
-
-  observer = new ResizeObserver(([entry]) => {
-    if (!entry) return
-
-    size.value = {
-      width: Math.max(260, Math.round(entry.contentRect.width)),
-      height: Math.max(220, Math.round(entry.contentRect.height)),
-    }
-  })
-  observer.observe(container.value)
-})
-
-onBeforeUnmount(() => {
-  observer?.disconnect()
+  size.value = {
+    width: Math.max(260, Math.round(entry.contentRect.width)),
+    height: Math.max(220, Math.round(entry.contentRect.height)),
+  }
 })
 </script>
 
