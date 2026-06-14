@@ -1,5 +1,5 @@
 <script setup>
-import ScatterLine from '../../examples/ScatterLine.vue'
+import ScatterSlot from '../../examples/ScatterSlot.vue'
 </script>
 
 # Scatter
@@ -52,13 +52,13 @@ import { Scatter } from '@putianyi888/vue3-plots'
 
 | Slot | Props | Description |
 | --- | --- | --- |
-| `point` | `{ point: { index: number; x: number; y: number; source: PlotPoint<T> } }` | Custom renderer for a data point marker. `x` and `y` are SVG coordinates, `index` is the original input index, and `source` is the original data point. |
+| `point` | `{ index: number; x: number; y: number; point: PlotPoint<T> }` | Custom renderer for a data point marker. `x` and `y` are SVG coordinates, `index` is the original input index, and `point` is the original data point. |
 
-The below example uses the slot to draw each line segment from the current point to the previous point.
+This slot is useful for customizing marker shapes, but it can also render more complex SVG. The example below uses it to draw line segments and bars.
 
-<ScatterLine />
+<ScatterSlot />
 
-<<< ../../examples/ScatterLine.vue
+<<< ../../examples/ScatterSlot.vue
 
 ## Notes
 

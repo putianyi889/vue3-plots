@@ -15,7 +15,7 @@
             @mouseenter="emit('pointEnter', point.source)"
             @mouseleave="emit('pointLeave', point.source)"
         >
-            <slot name="point" :point="point">
+            <slot name="point" :index="point.index" :x="point.x" :y="point.y" :point="point.source">
                 <circle
                     cx="0"
                     cy="0"
@@ -59,15 +59,8 @@ const emit = defineEmits<{
   (e: 'pointLeave', point: PlotPoint<T>): void
 }>()
 
-type SlottedPoint<T> = {
-  index: number
-  x: number
-  y: number
-  source: PlotPoint<T>
-}
-
 defineSlots<{
-  point: (props: { point: SlottedPoint<T> }) => unknown
+  point: (props: { index: number, x: number, y: number, point: PlotPoint<T> }) => unknown
 }>()
 
 const { domain, padding, size } = usePlotContext(props)
