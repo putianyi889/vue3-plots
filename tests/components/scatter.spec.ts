@@ -18,12 +18,14 @@ describe('Scatter', () => {
       },
     })
 
+    const groups = wrapper.findAll('.plot-scatter__point')
     const circles = wrapper.findAll('circle')
+    expect(groups[0].attributes()).toMatchObject({ transform: 'translate(40, 50)' })
     expect(circles).toHaveLength(2)
-    expect(circles[0].attributes()).toMatchObject({ cx: '40', cy: '50', r: '3', fill: 'red' })
+    expect(circles[0].attributes()).toMatchObject({ cx: '0', cy: '0', r: '3', fill: 'red' })
     expect(circles[1].attributes()).toMatchObject({ r: '6', fill: 'blue' })
 
-    await circles[1].trigger('click')
+    await groups[1].trigger('click')
     expect(wrapper.emitted('pointClick')).toEqual([[points[1]]])
   })
 
@@ -83,12 +85,26 @@ describe('Scatter', () => {
     const wrapper = mount(Scatter, {
       props: { points, domain, size, padding },
     })
-    const circle = wrapper.find('circle')
+    const point = wrapper.find('.plot-scatter__point')
 
-    await circle.trigger('mouseenter')
-    await circle.trigger('mouseleave')
+    await point.trigger('mouseenter')
+    await point.trigger('mouseleave')
 
     expect(wrapper.emitted('pointEnter')).toEqual([[points[0]]])
     expect(wrapper.emitted('pointLeave')).toEqual([[points[0]]])
+  })
+
+  it('renders a custom point slot with svg coordinates, source point, and original index', () => {
+    const points = [{ x: 10, y: 10, data: 'custom' }]
+    const wrapper = mount(Scatter, {
+      props: { points, domain, size, padding, radius: 4 },
+      slots: {
+        point: '<rect class="custom-point" x="-3" y="-3" width="6" height="6">{{ point.index }}:{{ point.x }},{{ point.y }}:{{ point.source.data }}</rect>',
+      },
+    })
+
+    expect(wrapper.find('.plot-scatter__point').attributes()).toMatchObject({ transform: 'translate(80, 10)' })
+    expect(wrapper.find('circle').exists()).toBe(false)
+    expect(wrapper.find('.custom-point').text()).toBe('0:80,10:custom')
   })
 })
