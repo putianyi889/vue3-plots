@@ -1,3 +1,7 @@
+<script setup>
+import ScatterLine from '../../examples/ScatterLine.vue'
+</script>
+
 # Scatter
 
 `Scatter` renders finite data points as SVG circles and emits point-level pointer events. Fill, opacity, and outline props can be scalar values or arrays aligned with the input point list.
@@ -43,6 +47,18 @@ import { Scatter } from '@putianyi888/vue3-plots'
 | `pointClick` | `PlotPoint<T>` | Emitted when a rendered point is clicked. |
 | `pointEnter` | `PlotPoint<T>` | Emitted when the pointer enters a rendered point. |
 | `pointLeave` | `PlotPoint<T>` | Emitted when the pointer leaves a rendered point. |
+
+## Slots
+
+| Slot | Props | Description |
+| --- | --- | --- |
+| `point` | `{ point: { index: number; x: number; y: number; source: PlotPoint<T> } }` | Custom renderer for a data point marker. `x` and `y` are SVG coordinates, `index` is the original input index, and `source` is the original data point. |
+
+The below example uses the slot to draw each line segment from the current point to the previous point.
+
+<ScatterLine />
+
+<<< ../../examples/ScatterLine.vue
 
 ## Notes
 

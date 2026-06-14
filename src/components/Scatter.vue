@@ -6,23 +6,29 @@
         :viewBox="`0 0 ${size.width} ${size.height}`"
         preserveAspectRatio="none"
     >
-        <circle
+        <g
             v-for="(point, index) in renderedPoints"
             :key="index"
             class="plot-scatter__point"
-            :cx="point.x"
-            :cy="point.y"
-            :r="getMaybeArray(radius, point.index)"
-            :fill="getMaybeArray(fillColor, point.index)"
-            :fill-opacity="getMaybeArray(fillOpacity, point.index)"
-            :stroke="getMaybeArray(strokeColor, point.index)"
-            :stroke-opacity="getMaybeArray(strokeOpacity, point.index)"
-            :stroke-width="getMaybeArray(strokeWidth, point.index)"
-            vector-effect="non-scaling-stroke"
-            @click="emit('pointClick', points[point.index])"
-            @mouseenter="emit('pointEnter', points[point.index])"
-            @mouseleave="emit('pointLeave', points[point.index])"
-        />
+            :transform="`translate(${point.x}, ${point.y})`"
+            @click="emit('pointClick', point.source)"
+            @mouseenter="emit('pointEnter', point.source)"
+            @mouseleave="emit('pointLeave', point.source)"
+        >
+            <slot name="point" :point="point">
+                <circle
+                    cx="0"
+                    cy="0"
+                    :r="getMaybeArray(radius, point.index)"
+                    :fill="getMaybeArray(fillColor, point.index)"
+                    :fill-opacity="getMaybeArray(fillOpacity, point.index)"
+                    :stroke="getMaybeArray(strokeColor, point.index)"
+                    :stroke-opacity="getMaybeArray(strokeOpacity, point.index)"
+                    :stroke-width="getMaybeArray(strokeWidth, point.index)"
+                    vector-effect="non-scaling-stroke"
+                />
+            </slot>
+        </g>
     </svg>
 </template>
 
@@ -53,6 +59,17 @@ const emit = defineEmits<{
   (e: 'pointLeave', point: PlotPoint<T>): void
 }>()
 
+type SlottedPoint<T> = {
+  index: number
+  x: number
+  y: number
+  source: PlotPoint<T>
+}
+
+defineSlots<{
+  point: (props: { point: SlottedPoint<T> }) => unknown
+}>()
+
 const { domain, padding, size } = usePlotContext(props)
 
 const renderedPoints = computed(() => {
@@ -68,6 +85,7 @@ const renderedPoints = computed(() => {
       result.push({
         ...pointToSvg(point, scaleX, scaleY),
         index: i,
+        source: point,
       })
     }
   }
