@@ -99,7 +99,7 @@ describe('Scatter', () => {
     const wrapper = mount(Scatter, {
       props: { points, domain, size, padding, radius: 4 },
       slots: {
-        point: '<rect class="custom-point" x="-3" y="-3" width="6" height="6">{{ point.index }}:{{ point.x }},{{ point.y }}:{{ point.source.data }}</rect>',
+        point: '<rect class="custom-point" x="-3" y="-3" width="6" height="6">{{ index }}:{{ x }},{{ y }}:{{ point.data }}</rect>',
       },
     })
 
