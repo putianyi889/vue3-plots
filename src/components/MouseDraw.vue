@@ -1,6 +1,6 @@
 <template>
     <svg
-        class="plot-mouse-draw plot-layer plot-layer--interactive"
+        class="plot-layer plot-layer--interactive plot-mouse-draw"
         :class="{ 'plot-mouse-draw--disabled': !isEnabled }"
         :height="size.height"
         :width="size.width"
