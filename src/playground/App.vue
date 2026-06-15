@@ -105,40 +105,40 @@
 import { computed, ref } from 'vue'
 
 import {
-  Grid,
-  Line,
-  MouseDraw,
-  Scatter,
-  XAxis,
-  XLabel,
-  YAxis,
-  YLabel,
-  getDataDomain,
-  getNiceTicks,
+    Grid,
+    Line,
+    MouseDraw,
+    Scatter,
+    XAxis,
+    XLabel,
+    YAxis,
+    YLabel,
+    getDataDomain,
+    getNiceTicks,
 } from '../index'
 import type { AnyShape, PlotPadding, PlotPoint, PlotSize } from '../index'
 
 type DrawMode = '' | 'rect' | 'ellipse' | 'polygon'
 
 const points: PlotPoint[] = [
-  { x: 0, y: 12 },
-  { x: 1, y: 18 },
-  { x: 2, y: 14 },
-  { x: 3, y: 28 },
-  { x: 4, y: 24 },
-  { x: 5, y: 36 },
-  { x: 6, y: 32 },
-  { x: 7, y: 44 },
-  { x: 8, y: 38 },
-  { x: 9, y: 52 },
+    { x: 0, y: 12 },
+    { x: 1, y: 18 },
+    { x: 2, y: 14 },
+    { x: 3, y: 28 },
+    { x: 4, y: 24 },
+    { x: 5, y: 36 },
+    { x: 6, y: 32 },
+    { x: 7, y: 44 },
+    { x: 8, y: 38 },
+    { x: 9, y: 52 },
 ]
 const size: PlotSize = { width: 760, height: 420 }
 const padding: PlotPadding = { top: 24, right: 28, bottom: 48, left: 56 }
 const drawModes: { label: string, value: DrawMode }[] = [
-  { label: 'Off', value: '' },
-  { label: 'Rect', value: 'rect' },
-  { label: 'Ellipse', value: 'ellipse' },
-  { label: 'Polygon', value: 'polygon' },
+    { label: 'Off', value: '' },
+    { label: 'Rect', value: 'rect' },
+    { label: 'Ellipse', value: 'ellipse' },
+    { label: 'Polygon', value: 'polygon' },
 ]
 
 const mode = ref<DrawMode>('rect')
@@ -149,15 +149,15 @@ const domain = computed(() => getDataDomain(points, 0.08))
 const xTicks = computed(() => getNiceTicks(domain.value.xMin, domain.value.xMax, 6))
 const yTicks = computed(() => getNiceTicks(domain.value.yMin, domain.value.yMax, 6))
 const shapeSummary = computed(() => {
-  if (lastShape.value === undefined) return 'none'
-  if (lastShape.value.type === 'rect') {
-    return `rect ${lastShape.value.width}x${lastShape.value.height} at (${lastShape.value.x}, ${lastShape.value.y})`
-  }
-  if (lastShape.value.type === 'ellipse') {
-    return `ellipse center (${lastShape.value.cx}, ${lastShape.value.cy})`
-  }
+    if (lastShape.value === undefined) return 'none'
+    if (lastShape.value.type === 'rect') {
+        return `rect ${lastShape.value.width}x${lastShape.value.height} at (${lastShape.value.x}, ${lastShape.value.y})`
+    }
+    if (lastShape.value.type === 'ellipse') {
+        return `ellipse center (${lastShape.value.cx}, ${lastShape.value.cy})`
+    }
 
-  return `polygon ${lastShape.value.points.length} points`
+    return `polygon ${lastShape.value.points.length} points`
 })
 </script>
 

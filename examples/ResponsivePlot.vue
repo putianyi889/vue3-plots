@@ -14,31 +14,31 @@
 
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import { computed, ref, useTemplateRef } from 'vue'
 import { Grid, Line, Scatter, TransformGroup, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
-const container = ref<HTMLElement>()
+const container = useTemplateRef<HTMLElement>('container')
 const size = ref<PlotSize>({ width: 640, height: 320 })
 const points: PlotPoint[] = [
-  { x: 0, y: 8 },
-  { x: 1, y: 12 },
-  { x: 2, y: 7 },
-  { x: 3, y: 16 },
-  { x: 4, y: 13 },
-  { x: 5, y: 20 },
+    { x: 0, y: 8 },
+    { x: 1, y: 12 },
+    { x: 2, y: 7 },
+    { x: 3, y: 16 },
+    { x: 4, y: 13 },
+    { x: 5, y: 20 },
 ]
 const domain = getDataDomain(points, 0.1)
 const xTicks = computed(() => getNiceTicks(domain.xMin, domain.xMax))
 const yTicks = computed(() => getNiceTicks(domain.yMin, domain.yMax))
 
 useResizeObserver(container, ([entry]) => {
-  if (!entry) return
+    if (!entry) return
 
-  size.value = {
-    width: Math.max(260, Math.round(entry.contentRect.width)),
-    height: Math.max(220, Math.round(entry.contentRect.height)),
-  }
+    size.value = {
+        width: Math.max(260, Math.round(entry.contentRect.width)),
+        height: Math.max(220, Math.round(entry.contentRect.height)),
+    }
 })
 </script>
 

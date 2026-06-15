@@ -23,11 +23,11 @@ import { Grid, Line, Scatter, TransformGroup, XAxis, XLabel, YAxis, YLabel, getD
 import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
 const points: PlotPoint[] = [
-  { x: 0, y: 2 },
-  { x: 1, y: 4 },
-  { x: 2, y: 3 },
-  { x: 3, y: 6 },
-  { x: 4, y: 5 },
+    { x: 0, y: 2 },
+    { x: 1, y: 4 },
+    { x: 2, y: 3 },
+    { x: 3, y: 6 },
+    { x: 4, y: 5 },
 ]
 const size: PlotSize = { width: 640, height: 360 }
 const domain = getDataDomain(points, 0.1)
