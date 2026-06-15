@@ -1,6 +1,6 @@
 <template>
     <svg
-        class="plot-y-label plot-layer plot-layer--passive"
+        class="plot-layer plot-layer--passive plot-y-label"
         :height="size.height"
         :width="size.width"
         :viewBox="`0 0 ${size.width} ${size.height}`"

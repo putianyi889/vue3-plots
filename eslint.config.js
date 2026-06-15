@@ -143,6 +143,12 @@ export default tseslint.config(
             'vue/require-typed-ref': 'error',
             'vue/restricted-component-names': 'off',
             // 'vue/script-indent': ['error', 4],
+            'vue/slot-name-casing': 'error',
+            'vue/sort-keys': 'off',
+            'vue/static-class-names-order': 'error',
+            'vue/v-for-delimiter-style': 'error',
+            'vue/v-if-else-key': 'error',
+            'vue/v-on-handler-style': 'off',
         },
     },
     {
