@@ -57,23 +57,34 @@ import type { MaybeArray, PlotDomain, PlotPadding, PlotSize } from './utils'
 
 type TextAnchor = 'start' | 'middle' | 'end'
 
-defineSlots<{
-  tick: (props: { tick: number, x: number, y: number }) => unknown
-}>()
-
 const props = defineProps({
-  domain: { type: Object as PropType<PlotDomain>, default: undefined },
-  size: { type: Object as PropType<PlotSize>, default: undefined },
-  padding: { type: Object as PropType<PlotPadding>, default: undefined },
-  ticks: { type: Array as PropType<number[]>, default: () => [] },
-  x: { type: Number, default: undefined },
-  offset: { type: Number, default: -24 },
-  textAnchor: { type: String as PropType<TextAnchor>, default: 'middle' },
-  tickSize: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 4 },
-  strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
-  strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
-  strokeWidth: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+    /** Data-space bounds used to map tick values onto the plot area. */
+    domain: { type: Object as PropType<PlotDomain>, default: undefined },
+    /** Outer SVG size in pixels. */
+    size: { type: Object as PropType<PlotSize>, default: undefined },
+    /** Insets shared with other plot layers. */
+    padding: { type: Object as PropType<PlotPadding>, default: undefined },
+    /** Y-axis tick values in data-space coordinates. */
+    ticks: { type: Array as PropType<number[]>, default: () => [] },
+    /** Axis line x position in data-space coordinates. */
+    x: { type: Number, default: undefined },
+    /** Tick label center x offset from the axis line in pixels. */
+    offset: { type: Number, default: -24 },
+    /** SVG text-anchor value for tick labels. */
+    textAnchor: { type: String as PropType<TextAnchor>, default: 'middle' },
+    /** Tick mark length in pixels. */
+    tickSize: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 4 },
+    /** Axis line and tick mark color. */
+    strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
+    /** Axis line and tick mark opacity. */
+    strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+    /** Axis line and tick mark width in pixels. */
+    strokeWidth: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
 })
+
+defineSlots<{
+    tick: (props: { tick: number, x: number, y: number }) => unknown
+}>()
 
 const { domain, padding, size } = usePlotContext(props)
 const area = computed(() => getPlotArea(size.value, padding.value))

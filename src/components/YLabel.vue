@@ -22,8 +22,13 @@ import { usePlotSize } from './context'
 import type { PlotSize } from './utils'
 
 const props = defineProps({
-  size: { type: Object as PropType<PlotSize>, default: undefined },
+    /** Outer SVG size in pixels. */
+    size: { type: Object as PropType<PlotSize>, default: undefined },
 })
+
+defineSlots<{
+    default: () => unknown
+}>()
 
 const size = usePlotSize(props)
 </script>

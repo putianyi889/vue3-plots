@@ -44,15 +44,24 @@ import { createLinearScale, getMaybeArray, getPlotArea } from './utils'
 import type { MaybeArray, PlotDomain, PlotPadding, PlotSize } from './utils'
 
 const props = defineProps({
-  domain: { type: Object as PropType<PlotDomain>, default: undefined },
-  size: { type: Object as PropType<PlotSize>, default: undefined },
-  padding: { type: Object as PropType<PlotPadding>, default: undefined },
-  xTicks: { type: Array as PropType<number[]>, default: () => [] },
-  yTicks: { type: Array as PropType<number[]>, default: () => [] },
-  strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
-  strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
-  strokeWidth: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
-  dashArray: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
+    /** Data-space bounds used to place grid lines. */
+    domain: { type: Object as PropType<PlotDomain>, default: undefined },
+    /** Outer SVG size in pixels. */
+    size: { type: Object as PropType<PlotSize>, default: undefined },
+    /** Insets shared with other plot layers. */
+    padding: { type: Object as PropType<PlotPadding>, default: undefined },
+    /** X-axis grid positions in data-space coordinates. */
+    xTicks: { type: Array as PropType<number[]>, default: () => [] },
+    /** Y-axis grid positions in data-space coordinates. */
+    yTicks: { type: Array as PropType<number[]>, default: () => [] },
+    /** Grid line color. */
+    strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
+    /** Grid line opacity. */
+    strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+    /** Grid line width in pixels. */
+    strokeWidth: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+    /** SVG stroke-dasharray value for grid lines. */
+    dashArray: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
 })
 
 const { domain, padding, size } = usePlotContext(props)

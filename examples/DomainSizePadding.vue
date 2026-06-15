@@ -27,9 +27,9 @@ const size: PlotSize = { width: 520, height: 320 }
 const padding: PlotPadding = { top: 48, right: 36, bottom: 48, left: 64 }
 const domain: PlotDomain = { xMin: 0, xMax: 10, yMin: 0, yMax: 100 }
 const points: PlotPoint[] = [
-  { x: 1, y: 20 },
-  { x: 5, y: 50 },
-  { x: 9, y: 82 },
+    { x: 1, y: 20 },
+    { x: 5, y: 50 },
+    { x: 9, y: 82 },
 ]
 const xTicks = [0, 2, 4, 6, 8, 10]
 const yTicks = [0, 25, 50, 75, 100]

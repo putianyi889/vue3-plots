@@ -41,49 +41,59 @@ import { createLinearScale, getMaybeArray, getPlotArea, pointToSvg } from './uti
 import type { MaybeArray, PlotDomain, PlotPadding, PlotPoint, PlotSize } from './utils'
 
 const props = defineProps({
-  points: { type: Array as PropType<PlotPoint<T>[]>, required: true },
-  domain: { type: Object as PropType<PlotDomain>, default: undefined },
-  size: { type: Object as PropType<PlotSize>, default: undefined },
-  padding: { type: Object as PropType<PlotPadding>, default: undefined },
-  radius: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 0 },
-  fillColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'black' },
-  fillOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
-  strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
-  strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
-  strokeWidth: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+    /** Data points to render. */
+    points: { type: Array as PropType<PlotPoint<T>[]>, required: true },
+    /** Data-space bounds used to map points onto the plot area. */
+    domain: { type: Object as PropType<PlotDomain>, default: undefined },
+    /** Outer SVG size in pixels. */
+    size: { type: Object as PropType<PlotSize>, default: undefined },
+    /** Insets shared with other plot layers. */
+    padding: { type: Object as PropType<PlotPadding>, default: undefined },
+    /** Circle radius in pixels. */
+    radius: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 0 },
+    /** Circle fill color. */
+    fillColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'black' },
+    /** Circle fill opacity. */
+    fillOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+    /** Circle outline color. */
+    strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
+    /** Circle outline opacity. */
+    strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
+    /** Circle outline width in pixels. */
+    strokeWidth: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
 })
 
 const emit = defineEmits<{
-  (e: 'pointClick', point: PlotPoint<T>): void
-  (e: 'pointEnter', point: PlotPoint<T>): void
-  (e: 'pointLeave', point: PlotPoint<T>): void
+    (e: 'pointClick', point: PlotPoint<T>): void
+    (e: 'pointEnter', point: PlotPoint<T>): void
+    (e: 'pointLeave', point: PlotPoint<T>): void
 }>()
 
 defineSlots<{
-  point: (props: { index: number, x: number, y: number, point: PlotPoint<T> }) => unknown
+    point: (props: { index: number, x: number, y: number, point: PlotPoint<T> }) => unknown
 }>()
 
 const { domain, padding, size } = usePlotContext(props)
 
 const renderedPoints = computed(() => {
-  const area = getPlotArea(size.value, padding.value)
-  const scaleX = createLinearScale(domain.value.xMin, domain.value.xMax, area.x, area.x + area.width)
-  const scaleY = createLinearScale(domain.value.yMin, domain.value.yMax, area.y + area.height, area.y)
-  const result = []
+    const area = getPlotArea(size.value, padding.value)
+    const scaleX = createLinearScale(domain.value.xMin, domain.value.xMax, area.x, area.x + area.width)
+    const scaleY = createLinearScale(domain.value.yMin, domain.value.yMax, area.y + area.height, area.y)
+    const result = []
 
-  for (let i = 0; i < props.points.length; i++) {
-    const point = props.points[i]
-    if (!point) continue
-    if (Number.isFinite(point.x) && Number.isFinite(point.y)) {
-      result.push({
-        ...pointToSvg(point, scaleX, scaleY),
-        index: i,
-        source: point,
-      })
+    for (let i = 0; i < props.points.length; i++) {
+        const point = props.points[i]
+        if (!point) continue
+        if (Number.isFinite(point.x) && Number.isFinite(point.y)) {
+            result.push({
+                ...pointToSvg(point, scaleX, scaleY),
+                index: i,
+                source: point,
+            })
+        }
     }
-  }
 
-  return result
+    return result
 })
 </script>
 

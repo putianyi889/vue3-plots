@@ -57,14 +57,18 @@ import type { PlotSize } from './utils'
 type MouseDrawMode = '' | 'rect' | 'ellipse' | 'polygon'
 
 const props = defineProps({
-  mode: { type: String as PropType<MouseDrawMode>, default: 'rect' },
-  size: { type: Object as PropType<PlotSize>, default: undefined },
-  fillOpacity: { type: Number, default: 1 },
-  strokeOpacity: { type: Number, default: 1 },
+    /** Draw mode. Use an empty string to disable pointer capture. */
+    mode: { type: String as PropType<MouseDrawMode>, default: 'rect' },
+    /** SVG coordinate size used to convert pointer positions. */
+    size: { type: Object as PropType<PlotSize>, default: undefined },
+    /** Draft shape fill opacity. */
+    fillOpacity: { type: Number, default: 1 },
+    /** Draft shape outline opacity. */
+    strokeOpacity: { type: Number, default: 1 },
 })
 
 const emit = defineEmits<{
-  (e: 'draw', shape: AnyShape): void
+    (e: 'draw', shape: AnyShape): void
 }>()
 
 const isEnabled = computed(() => props.mode !== '')
@@ -75,122 +79,122 @@ const previewPoint = ref<Point>()
 const drawingShape = ref<AnyShape>()
 
 watch(() => props.mode, () => {
-  clearDraw()
+    clearDraw()
 })
 
 function handleClick(event: MouseEvent) {
-  if (!isEnabled.value) return
+    if (!isEnabled.value) return
 
-  const point = getSvgPoint(event)
+    const point = getSvgPoint(event)
 
-  if (props.mode === 'polygon') {
-    addPolygonPoint(point)
-    return
-  }
+    if (props.mode === 'polygon') {
+        addPolygonPoint(point)
+        return
+    }
 
-  if (startPoint.value === undefined) {
-    startPoint.value = point
-    drawingShape.value = createShape(point, point)
-    return
-  }
+    if (startPoint.value === undefined) {
+        startPoint.value = point
+        drawingShape.value = createShape(point, point)
+        return
+    }
 
-  emit('draw', createShape(startPoint.value, point))
-  clearDraw()
+    emit('draw', createShape(startPoint.value, point))
+    clearDraw()
 }
 
 function moveDraw(event: MouseEvent) {
-  if (!isEnabled.value) return
+    if (!isEnabled.value) return
 
-  const point = getSvgPoint(event)
+    const point = getSvgPoint(event)
 
-  if (props.mode === 'polygon') {
-    if (polygonPoints.value.length === 0) return
+    if (props.mode === 'polygon') {
+        if (polygonPoints.value.length === 0) return
 
-    previewPoint.value = point
-    updatePolygonDraft()
-    return
-  }
+        previewPoint.value = point
+        updatePolygonDraft()
+        return
+    }
 
-  if (startPoint.value === undefined) return
+    if (startPoint.value === undefined) return
 
-  drawingShape.value = createShape(startPoint.value, point)
+    drawingShape.value = createShape(startPoint.value, point)
 }
 
 function finishPolygon(event: MouseEvent) {
-  if (!isEnabled.value || props.mode !== 'polygon') return
+    if (!isEnabled.value || props.mode !== 'polygon') return
 
-  const point = getSvgPoint(event)
-  const lastPoint = polygonPoints.value[polygonPoints.value.length - 1]
+    const point = getSvgPoint(event)
+    const lastPoint = polygonPoints.value[polygonPoints.value.length - 1]
 
-  if (lastPoint === undefined || !isSamePoint(lastPoint, point)) {
-    polygonPoints.value.push(point)
-  }
+    if (lastPoint === undefined || !isSamePoint(lastPoint, point)) {
+        polygonPoints.value.push(point)
+    }
 
-  if (polygonPoints.value.length >= 3) {
-    emit('draw', new Polygon([...polygonPoints.value]))
-  }
+    if (polygonPoints.value.length >= 3) {
+        emit('draw', new Polygon([...polygonPoints.value]))
+    }
 
-  clearDraw()
+    clearDraw()
 }
 
 function clearDraw() {
-  startPoint.value = undefined
-  polygonPoints.value = []
-  previewPoint.value = undefined
-  drawingShape.value = undefined
+    startPoint.value = undefined
+    polygonPoints.value = []
+    previewPoint.value = undefined
+    drawingShape.value = undefined
 }
 
 function addPolygonPoint(point: Point) {
-  polygonPoints.value.push(point)
-  previewPoint.value = undefined
-  updatePolygonDraft()
+    polygonPoints.value.push(point)
+    previewPoint.value = undefined
+    updatePolygonDraft()
 }
 
 function updatePolygonDraft() {
-  const points = previewPoint.value === undefined
-    ? polygonPoints.value
-    : [...polygonPoints.value, previewPoint.value]
+    const points = previewPoint.value === undefined
+        ? polygonPoints.value
+        : [...polygonPoints.value, previewPoint.value]
 
-  drawingShape.value = points.length >= 2 ? new Polygon([...points]) : undefined
+    drawingShape.value = points.length >= 2 ? new Polygon([...points]) : undefined
 }
 
 function createShape(start: Point, end: Point): AnyShape {
-  if (props.mode === 'ellipse') return createEllipse(start, end)
-  if (props.mode === 'rect') return createRect(start, end)
+    if (props.mode === 'ellipse') return createEllipse(start, end)
+    if (props.mode === 'rect') return createRect(start, end)
 
-  throw new Error('MouseDraw is disabled.')
+    throw new Error('MouseDraw is disabled.')
 }
 
 function createRect(start: Point, end: Point): Rect {
-  const x = Math.min(start.x, end.x)
-  const y = Math.min(start.y, end.y)
+    const x = Math.min(start.x, end.x)
+    const y = Math.min(start.y, end.y)
 
-  return new Rect(x, y, Math.abs(end.x - start.x), Math.abs(end.y - start.y))
+    return new Rect(x, y, Math.abs(end.x - start.x), Math.abs(end.y - start.y))
 }
 
 function createEllipse(start: Point, end: Point): Ellipse {
-  const rect = createRect(start, end)
+    const rect = createRect(start, end)
 
-  return new Ellipse(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width / 2, rect.height / 2)
+    return new Ellipse(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.width / 2, rect.height / 2)
 }
 
 function formatPolygonPoints(points: Point[]) {
-  return points.map((point) => `${point.x},${point.y}`).join(' ')
+    return points.map((point) => `${point.x},${point.y}`).join(' ')
 }
 
 function isSamePoint(first: Point, second: Point) {
-  return first.x === second.x && first.y === second.y
+    return first.x === second.x && first.y === second.y
 }
 
 function getSvgPoint(event: MouseEvent): Point {
-  const rect = (event.currentTarget as SVGSVGElement).getBoundingClientRect()
-  const scaleX = rect.width === 0 ? 1 : size.value.width / rect.width
-  const scaleY = rect.height === 0 ? 1 : size.value.height / rect.height
+    const rect = (event.currentTarget as SVGSVGElement).getBoundingClientRect()
+    const scaleX = rect.width === 0 ? 1 : size.value.width / rect.width
+    const scaleY = rect.height === 0 ? 1 : size.value.height / rect.height
 
-  return {
-    x: (event.clientX - rect.left) * scaleX,
-    y: (event.clientY - rect.top) * scaleY,
-  }
+    return {
+        x: (event.clientX - rect.left) * scaleX,
+        y: (event.clientY - rect.top) * scaleY,
+    }
 }
 </script>
 

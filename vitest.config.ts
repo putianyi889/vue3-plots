@@ -3,14 +3,14 @@ import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
+    resolve: {
+        alias: {
+            '@': resolve(__dirname, 'src'),
+        },
     },
-  },
-  plugins: [vue()],
-  test: {
-    environment: 'jsdom',
-    globals: true,
-  },
+    plugins: [vue()],
+    test: {
+        environment: 'jsdom',
+        globals: true,
+    },
 })
