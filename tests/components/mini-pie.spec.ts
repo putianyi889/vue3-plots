@@ -25,8 +25,25 @@ describe('MiniPie', () => {
         expect(paths[0].attributes()).toMatchObject({
             d: 'M 0 0 L 10 0 A 10 10 0 0 1 0 10 Z',
             fill: 'red',
+            stroke: 'none',
+            'stroke-width': '1',
         })
         expect(paths[1].attributes('fill')).toBe('blue')
+    })
+
+    it('applies stroke styling to pie slices', () => {
+        const wrapper = mount(MiniPie, {
+            props: {
+                data: [{ value: 1, color: 'red' }],
+                strokeColor: 'white',
+                strokeWidth: 2,
+            },
+        })
+
+        expect(wrapper.find('path').attributes()).toMatchObject({
+            stroke: 'white',
+            'stroke-width': '2',
+        })
     })
 
     it('uses total and startAngle to control slice proportions and rotation', () => {

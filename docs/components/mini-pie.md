@@ -18,6 +18,8 @@ import { MiniPie } from '@putianyi888/vue3-plots'
     { value: 1, color: '#dc2626' },
   ]"
   :radius="8"
+  stroke-color="#ffffff"
+  :stroke-width="1"
   style="width: 1rem; vertical-align: middle;"
 />
 ```
@@ -30,6 +32,8 @@ import { MiniPie } from '@putianyi888/vue3-plots'
 | `radius` | `number` | `8` | Circle radius in SVG units. Also controls the intrinsic SVG width and height. |
 | `total` | `number` | Sum of positive finite values | Total value used to normalize segment angles. |
 | `startAngle` | `number` | `0` | Start angle in degrees. Zero degrees points right, and positive values rotate clockwise in SVG coordinates. |
+| `strokeColor` | `string` | `'none'` | Slice outline color. |
+| `strokeWidth` | `number` | `1` | Slice outline width in SVG units. |
 
 ## Notes
 
