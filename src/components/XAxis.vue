@@ -83,6 +83,7 @@ const props = defineProps({
 })
 
 defineSlots<{
+    /** Custom renderer for a tick label. */
     tick: (props: { tick: number, x: number, y: number }) => unknown
 }>()
 

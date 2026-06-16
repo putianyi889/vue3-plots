@@ -21,10 +21,7 @@ import { Grid } from '@putianyi888/vue3-plots'
 />
 ```
 
-## Props
-
-
-<!-- @include-props grid -->
+<!-- @include-api grid -->
 
 ## Notes
 

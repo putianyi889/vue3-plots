@@ -16,13 +16,4 @@ import { XLabel } from '@putianyi888/vue3-plots'
 </XLabel>
 ```
 
-## Props
-
-
-<!-- @include-props x-label -->
-
-## Slots
-
-| Slot | Props | Description |
-| --- | --- | --- |
-| `default` | None | Label content. |
+<!-- @include-api x-label -->

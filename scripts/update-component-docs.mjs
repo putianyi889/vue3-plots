@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { createChecker } from 'vue-component-meta'
 
 const root = process.cwd()
-const outputDir = resolve(root, 'docs/.generated/props')
+const outputDir = resolve(root, 'docs/.generated/api')
 const checker = createChecker(resolve(root, 'tsconfig.json'), {
   schema: true,
 })
@@ -27,13 +27,33 @@ for (const [componentPath, name] of pages) {
   const component = resolve(root, componentPath)
   const output = resolve(outputDir, `${name}.md`)
   const meta = checker.getComponentMeta(component)
-  const table = createPropsTable(meta.props.filter(prop => !prop.global))
+  const table = createComponentApi(meta)
   const current = readOptionalFile(output)
 
   if (table !== current) {
     writeFileSync(output, table)
-    console.log(`updated docs/.generated/props/${name}.md`)
+    console.log(`updated docs/.generated/api/${name}.md`)
   }
+}
+
+function createComponentApi(meta) {
+  return [
+    createPropsSection(meta.props.filter(prop => !prop.global)),
+    createEventsSection(meta.events || meta.emits || []),
+    createSlotsSection(meta.slots || []),
+  ].filter(Boolean).join('\n\n')
+}
+
+function createPropsSection(props) {
+  if (props.length === 0) {
+    return ''
+  }
+
+  return [
+    '## Props',
+    '',
+    createPropsTable(props),
+  ].join('\n')
 }
 
 function createPropsTable(props) {
@@ -54,11 +74,97 @@ function createPropsTable(props) {
   return rows.join('\n')
 }
 
+function createEventsSection(events) {
+  if (events.length === 0) {
+    return ''
+  }
+
+  return [
+    '## Events',
+    '',
+    createEventsTable(events),
+  ].join('\n')
+}
+
+function createEventsTable(events) {
+  const rows = [
+    '| Event | Payload | Description |',
+    '| --- | --- | --- |',
+  ]
+
+  for (const event of events) {
+    rows.push([
+      code(event.name),
+      code(formatEventPayload(event.type || event.signature || '')),
+      escapeTableCell(event.description || ''),
+    ].join(' | ').replace(/^/, '| ').replace(/$/, ' |'))
+  }
+
+  return rows.join('\n')
+}
+
+function createSlotsSection(slots) {
+  if (slots.length === 0) {
+    return ''
+  }
+
+  return [
+    '## Slots',
+    '',
+    createSlotsTable(slots),
+  ].join('\n')
+}
+
+function createSlotsTable(slots) {
+  const rows = [
+    '| Slot | Props | Description |',
+    '| --- | --- | --- |',
+  ]
+
+  for (const slot of slots) {
+    rows.push([
+      code(slot.name),
+      formatSlotProps(slot.type || ''),
+      escapeTableCell(slot.description || ''),
+    ].join(' | ').replace(/^/, '| ').replace(/$/, ' |'))
+  }
+
+  return rows.join('\n')
+}
+
 function formatType(type) {
   return type
     .replace(/\s+/g, ' ')
     .replaceAll(' | undefined', '')
     .replaceAll('undefined | ', '')
+}
+
+function formatEventPayload(type) {
+  const formattedType = formatType(type)
+
+  if (formattedType.startsWith('[') && formattedType.endsWith(']')) {
+    return formatTuplePayload(formattedType.slice(1, -1))
+  }
+
+  return formattedType
+}
+
+function formatTuplePayload(type) {
+  if (!type.includes(',') && /^[a-zA-Z_$][\w$]*\??: /.test(type)) {
+    return type.replace(/^[a-zA-Z_$][\w$]*\??: /, '')
+  }
+
+  return type
+}
+
+function formatSlotProps(type) {
+  const formattedType = formatType(type)
+
+  if (formattedType === '' || formattedType === 'any') {
+    return 'None'
+  }
+
+  return code(formattedType)
 }
 
 function formatDefault(prop) {

@@ -68,7 +68,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-    (e: 'draw', shape: AnyShape): void
+    /** Emitted when a click gesture finishes. */
+    draw: [shape: AnyShape]
 }>()
 
 const isEnabled = computed(() => props.mode !== '')

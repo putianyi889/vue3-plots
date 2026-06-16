@@ -20,10 +20,7 @@ import { Line } from '@putianyi888/vue3-plots'
 />
 ```
 
-## Props
-
-
-<!-- @include-props line -->
+<!-- @include-api line -->
 
 ## Notes
 
