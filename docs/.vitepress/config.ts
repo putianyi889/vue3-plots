@@ -39,6 +39,7 @@ export default defineConfig({
                     { text: 'Grid', link: '/components/grid' },
                     { text: 'Line', link: '/components/line' },
                     { text: 'Scatter', link: '/components/scatter' },
+                    { text: 'MiniPie', link: '/components/mini-pie' },
                     { text: 'MouseDraw', link: '/components/mouse-draw' },
                     { text: 'XLabel', link: '/components/x-label' },
                     { text: 'YLabel', link: '/components/y-label' },

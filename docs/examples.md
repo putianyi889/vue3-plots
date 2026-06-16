@@ -3,6 +3,7 @@ import BasicPlot from '../examples/BasicPlot.vue'
 import BoxAxes from '../examples/BoxAxes.vue'
 import MultipleAxes from '../examples/MultipleAxes.vue'
 import ResponsivePlot from '../examples/ResponsivePlot.vue'
+import ScatterMiniPie from '../examples/ScatterMiniPie.vue'
 </script>
 
 # Examples
@@ -18,6 +19,12 @@ import ResponsivePlot from '../examples/ResponsivePlot.vue'
 <ResponsivePlot />
 
 <<< ../examples/ResponsivePlot.vue
+
+## Mini Pie Scatter Points
+
+<ScatterMiniPie />
+
+<<< ../examples/ScatterMiniPie.vue
 
 ## Box Axes
 

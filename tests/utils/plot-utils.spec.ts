@@ -9,6 +9,7 @@ import {
     pointToSvg,
     pointsToSvg,
     getMaybeArray,
+    polarToCartesian,
 } from '../../src/components/utils'
 
 describe('plot utilities', () => {
@@ -60,5 +61,11 @@ describe('plot utilities', () => {
     it('reads scalar or indexed array values', () => {
         expect(getMaybeArray('blue', 2)).toBe('blue')
         expect(getMaybeArray(['red', 'blue'], 1)).toBe('blue')
+    })
+
+    it('converts polar coordinates to cartesian coordinates', () => {
+        expect(polarToCartesian(10, 0)).toEqual({ x: 10, y: 0 })
+        expect(polarToCartesian(10, 90).x).toBeCloseTo(0)
+        expect(polarToCartesian(10, 90).y).toBeCloseTo(10)
     })
 })

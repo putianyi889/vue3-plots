@@ -116,6 +116,15 @@ export function getMaybeArray<T>(value: MaybeArray<T>, index: number): T {
     return Array.isArray(value) ? value[index] : value
 }
 
+export function polarToCartesian(radius: number, angle: number): SvgPoint {
+    const radians = angle * Math.PI / 180
+
+    return {
+        x: radius * Math.cos(radians),
+        y: radius * Math.sin(radians),
+    }
+}
+
 function padRange(
     min: number,
     max: number,
