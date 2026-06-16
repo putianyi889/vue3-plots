@@ -12,7 +12,7 @@ export default tseslint.config(
     ...tseslint.configs.recommended,
     ...vue.configs['flat/recommended'],
     stylistic.configs.customize({
-        indent: 2,
+        indent: 4,
         quotes: 'single',
         semi: false,
         commaDangle: 'always-multiline',

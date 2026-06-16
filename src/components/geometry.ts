@@ -69,9 +69,9 @@ export class Rect extends Shape<'rect'> {
      */
     contains(point: Point): boolean {
         return point.x >= this.x
-          && point.x <= this.x + this.width
-          && point.y >= this.y
-          && point.y <= this.y + this.height
+            && point.x <= this.x + this.width
+            && point.y >= this.y
+            && point.y <= this.y + this.height
     }
 }
 
@@ -165,7 +165,7 @@ export class Polygon extends Shape<'polygon'> {
             if (isPointOnSegment(point, start, end)) return true
 
             const intersects = (start.y > point.y) !== (end.y > point.y)
-              && point.x < (end.x - start.x) * (point.y - start.y) / (end.y - start.y) + start.x
+                && point.x < (end.x - start.x) * (point.y - start.y) / (end.y - start.y) + start.x
 
             if (intersects) isInside = !isInside
         }
