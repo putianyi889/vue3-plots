@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/components/utils.ts",
+    "src/components/geometry.ts"
+  ],
+  "references": []
+}

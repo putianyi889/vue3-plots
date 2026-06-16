@@ -2,26 +2,26 @@
 
 Geometry exports model shapes emitted by `MouseDraw` and provide point containment checks for selection workflows.
 
+The detailed API pages are generated from JSDoc in `src/components/geometry.ts`. Use this page as a map to the generated reference.
+
 ## Types
 
 | Export | Description |
 | --- | --- |
-| `Point` | Coordinate pair: `{ x: number; y: number }`. |
-| `ShapeType` | Shape discriminator union: `'rect' \| 'ellipse' \| 'polygon'`. |
-| `AnyShape` | Union of `Rect \| Ellipse \| Polygon`. |
+| [`Point`](/api/geometry/interfaces/Point) | Coordinate pair: `{ x, y }`. |
+| [`ShapeType`](/api/geometry/type-aliases/ShapeType) | Shape discriminator union: `'rect' \| 'ellipse' \| 'polygon'`. |
+| [`AnyShape`](/api/geometry/type-aliases/AnyShape) | Union of `Rect \| Ellipse \| Polygon`. |
 
-## Base Shape
+## Classes
 
-### `Shape<TType>`
+| Export | Description |
+| --- | --- |
+| [`Shape<TType>`](/api/geometry/classes/Shape) | Abstract base class implemented by all geometry classes. |
+| [`Rect`](/api/geometry/classes/Rect) | Axis-aligned rectangle. |
+| [`Ellipse`](/api/geometry/classes/Ellipse) | Axis-aligned ellipse. |
+| [`Polygon`](/api/geometry/classes/Polygon) | Polygon defined by ordered vertices. |
 
-Abstract base class implemented by all geometry classes.
-
-```ts
-abstract class Shape<TType extends ShapeType> {
-  abstract readonly type: TType
-  abstract contains(point: Point): boolean
-}
-```
+## Selection Workflow
 
 Use the `type` discriminator to narrow emitted shapes.
 
@@ -33,68 +33,7 @@ function handleShape(shape: AnyShape) {
 }
 ```
 
-## Rect
-
-Axis-aligned rectangle.
-
-```ts
-const rect = new Rect(10, 20, 30, 40)
-rect.contains({ x: 25, y: 40 }) // true
-```
-
-Constructor arguments:
-
-| Argument | Description |
-| --- | --- |
-| `x` | Left coordinate. |
-| `y` | Top coordinate. |
-| `width` | Rectangle width. |
-| `height` | Rectangle height. |
-
-`contains` includes boundary points.
-
-## Ellipse
-
-Axis-aligned ellipse.
-
-```ts
-const ellipse = new Ellipse(10, 20, 6, 4)
-ellipse.contains({ x: 10, y: 20 }) // true
-```
-
-Constructor arguments:
-
-| Argument | Description |
-| --- | --- |
-| `cx` | Center x coordinate. |
-| `cy` | Center y coordinate. |
-| `rx` | Horizontal radius. |
-| `ry` | Vertical radius. |
-
-`contains` includes boundary points. If either radius is not positive, all points are rejected.
-
-## Polygon
-
-Polygon defined by ordered vertices.
-
-```ts
-const polygon = new Polygon([
-  { x: 10, y: 10 },
-  { x: 40, y: 10 },
-  { x: 40, y: 30 },
-  { x: 10, y: 30 },
-])
-
-polygon.contains({ x: 20, y: 20 }) // true
-```
-
-Constructor arguments:
-
-| Argument | Description |
-| --- | --- |
-| `points` | Ordered polygon vertices. |
-
-`contains` includes boundary points. Polygons with fewer than three vertices reject all points.
+All built-in shapes expose `contains(point)`. Boundary points are included for rectangles, ellipses, and polygons. Ellipses with non-positive radii reject all points, and polygons with fewer than three vertices reject all points.
 
 ## Recommended Companion Packages
 

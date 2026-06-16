@@ -1,0 +1,31 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/components/utils.ts",
+    "src/components/geometry.ts"
+  ],
+  "tsconfig": "tsconfig.typedoc.json",
+  "out": "docs/api",
+  "plugin": [
+    "typedoc-plugin-markdown"
+  ],
+  "readme": "none",
+  "hidePageTitle": true,
+  "hideBreadcrumbs": true,
+  "hideGroupHeadings": false,
+  "parametersFormat": "table",
+  "interfacePropertiesFormat": "table",
+  "typeAliasPropertiesFormat": "table",
+  "classPropertiesFormat": "table",
+  "propertyMembersFormat": "table",
+  "membersWithOwnFile": [
+    "Class",
+    "Enum",
+    "Function",
+    "Interface",
+    "TypeAlias",
+    "Variable"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": true
+}

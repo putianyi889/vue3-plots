@@ -2,127 +2,50 @@
 
 Utility exports cover coordinate conversion, domain calculation, tick generation, and small typing helpers used by the components.
 
+The detailed API pages are generated from JSDoc in `src/components/utils.ts`. Use this page as a map to the generated reference.
+
 ## Types
 
 | Export | Description |
 | --- | --- |
-| `PlotPoint<T = unknown>` | Data-space point with `x`, `y`, and optional `data`. When `T` is provided, `data` is required. |
-| `PlotPadding` | Plot insets: `{ top, right, bottom, left }`. |
-| `PlotDomain` | Data-space bounds: `{ xMin, xMax, yMin, yMax }`. |
-| `PlotSize` | Outer SVG size: `{ width, height }`. |
-| `PlotArea` | Drawable SVG area after padding: `{ x, y, width, height }`. |
-| `SvgPoint` | SVG-space point: `{ x, y }`. |
-| `Scale` | Function type `(value: number) => number`. |
-| `MaybeArray<T>` | Scalar-or-array helper type: `T \| T[]`. |
+| [`PlotPoint<T = unknown>`](/api/utils/type-aliases/PlotPoint) | Data-space point with `x`, `y`, and optional typed source data. |
+| [`PlotPadding`](/api/utils/interfaces/PlotPadding) | Plot insets: `{ top, right, bottom, left }`. |
+| [`PlotDomain`](/api/utils/interfaces/PlotDomain) | Data-space bounds: `{ xMin, xMax, yMin, yMax }`. |
+| [`PlotSize`](/api/utils/interfaces/PlotSize) | Outer SVG size: `{ width, height }`. |
+| [`PlotArea`](/api/utils/interfaces/PlotArea) | Drawable SVG area after padding. |
+| [`SvgPoint`](/api/utils/interfaces/SvgPoint) | SVG-space point: `{ x, y }`. |
+| [`Scale`](/api/utils/type-aliases/Scale) | One-dimensional scale function. |
+| [`MaybeArray<T>`](/api/utils/type-aliases/MaybeArray) | Scalar-or-array helper type: `T \| T[]`. |
 
 ## Constants
 
-### `defaultPlotPadding`
-
-Default padding used by plot layers when no `padding` prop is supplied.
-
-```ts
-const defaultPlotPadding = {
-  top: 12,
-  right: 16,
-  bottom: 28,
-  left: 40,
-}
-```
+| Export | Description |
+| --- | --- |
+| [`defaultPlotPadding`](/api/utils/variables/defaultPlotPadding) | Default padding used when no `padding` prop is supplied. |
 
 ## Layout And Scales
 
-### `getPlotArea(size, padding?)`
-
-Returns the drawable plot area after subtracting padding from the outer size.
-
-```ts
-const area = getPlotArea(
-  { width: 640, height: 360 },
-  { top: 12, right: 16, bottom: 28, left: 40 },
-)
-```
-
-Widths and heights are clamped to `0` when padding is larger than the outer size.
-
-### `createLinearScale(domainMin, domainMax, rangeMin, rangeMax)`
-
-Creates a linear mapping function from a data-space domain to an SVG-space range.
-
-```ts
-const scaleX = createLinearScale(0, 10, 40, 624)
-scaleX(5) // 332
-```
-
-Non-finite input values map to `rangeMin`. Degenerate or non-finite domains map values to the center of the range.
-
-### `pointToSvg(point, scaleX, scaleY)`
-
-Maps one `PlotPoint` into SVG coordinates using precomputed scale functions.
-
-```ts
-const svgPoint = pointToSvg({ x: 5, y: 10 }, scaleX, scaleY)
-```
-
-### `pointsToSvg(points, scaleX, scaleY)`
-
-Filters out points with non-finite `x` or `y`, then maps the remaining points with `pointToSvg`.
-
-```ts
-const svgPoints = pointsToSvg(points, scaleX, scaleY)
-```
-
-### `polarToCartesian(radius, angle)`
-
-Converts a polar coordinate into an SVG-space `{ x, y }` point. Angles are in degrees, with `0` pointing right and positive values rotating clockwise in SVG coordinates.
-
-```ts
-polarToCartesian(10, 90) // { x: 0, y: 10 }
-```
+| Export | Description |
+| --- | --- |
+| [`getPlotArea`](/api/utils/functions/getPlotArea) | Returns the drawable plot area after subtracting padding. |
+| [`createLinearScale`](/api/utils/functions/createLinearScale) | Creates a linear data-space to SVG-space scale. |
+| [`pointToSvg`](/api/utils/functions/pointToSvg) | Maps one data-space point into SVG coordinates. |
+| [`pointsToSvg`](/api/utils/functions/pointsToSvg) | Filters and maps finite data-space points into SVG coordinates. |
+| [`polarToCartesian`](/api/utils/functions/polarToCartesian) | Converts a polar coordinate into SVG-space cartesian coordinates. |
 
 ## Domains And Ticks
 
-### `getDataDomain(points, paddingRatio?)`
-
-Calculates a padded `PlotDomain` from finite point coordinates.
-
-```ts
-const domain = getDataDomain(points, 0.05)
-```
-
-When no finite values are available, the fallback range is `0` to `1` for each axis. When all values on an axis are equal, the range expands around that value.
-
-### `getNiceTicks(min, max, count?)`
-
-Generates readable tick values between `min` and `max`.
-
-```ts
-const ticks = getNiceTicks(domain.xMin, domain.xMax, 5)
-```
-
-Returns an empty array for non-finite inputs or non-positive `count`. Returns `[min]` when `min === max`.
-
-### `formatTick(value)`
-
-Formats a tick label for display.
-
-```ts
-formatTick(1234) // '1.23e+3'
-formatTick(12.345678) // '12.3457'
-```
-
-Non-finite values format to an empty string.
+| Export | Description |
+| --- | --- |
+| [`getDataDomain`](/api/utils/functions/getDataDomain) | Calculates a padded domain from finite point coordinates. |
+| [`getNiceTicks`](/api/utils/functions/getNiceTicks) | Generates readable tick values between two bounds. |
+| [`formatTick`](/api/utils/functions/formatTick) | Formats a tick label for display. |
 
 ## Scalar Or Array Props
 
-### `getMaybeArray(value, index)`
-
-Reads either a scalar value or an indexed array value. Components use this for props that accept `T | T[]`.
-
-```ts
-getMaybeArray('blue', 2) // 'blue'
-getMaybeArray(['red', 'blue'], 1) // 'blue'
-```
+| Export | Description |
+| --- | --- |
+| [`getMaybeArray`](/api/utils/functions/getMaybeArray) | Reads either a scalar value or an indexed array value. |
 
 ## Recommended Companion Packages
 

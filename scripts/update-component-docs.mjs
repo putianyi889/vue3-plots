@@ -2,24 +2,15 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { createChecker } from 'vue-component-meta'
 
+import { code, escapeTableCell, formatType, formatTypeCell } from './component-doc-markdown.mjs'
+
 const root = process.cwd()
 const outputDir = resolve(root, 'docs/.generated/api')
 const checker = createChecker(resolve(root, 'tsconfig.json'), {
   schema: true,
 })
-
-const pages = [
-  ['src/components/Grid.vue', 'grid'],
-  ['src/components/Line.vue', 'line'],
-  ['src/components/MiniPie.vue', 'mini-pie'],
-  ['src/components/MouseDraw.vue', 'mouse-draw'],
-  ['src/components/Scatter.vue', 'scatter'],
-  ['src/components/TransformGroup.vue', 'transform-group'],
-  ['src/components/XAxis.vue', 'x-axis'],
-  ['src/components/XLabel.vue', 'x-label'],
-  ['src/components/YAxis.vue', 'y-axis'],
-  ['src/components/YLabel.vue', 'y-label'],
-]
+const pages = readJson(resolve(root, 'scripts/component-doc-pages.json'))
+const typeLinks = readJson(resolve(root, 'scripts/component-doc-type-links.json'))
 
 mkdirSync(outputDir, { recursive: true })
 
@@ -65,7 +56,7 @@ function createPropsTable(props) {
   for (const prop of props) {
     rows.push([
       code(prop.name),
-      code(formatType(prop.type)),
+      formatTypeCell(prop.type, typeLinks),
       formatDefault(prop),
       escapeTableCell(prop.description || ''),
     ].join(' | ').replace(/^/, '| ').replace(/$/, ' |'))
@@ -95,7 +86,7 @@ function createEventsTable(events) {
   for (const event of events) {
     rows.push([
       code(event.name),
-      code(formatEventPayload(event.type || event.signature || '')),
+      formatTypeCell(formatEventPayload(event.type || event.signature || ''), typeLinks),
       escapeTableCell(event.description || ''),
     ].join(' | ').replace(/^/, '| ').replace(/$/, ' |'))
   }
@@ -132,13 +123,6 @@ function createSlotsTable(slots) {
   return rows.join('\n')
 }
 
-function formatType(type) {
-  return type
-    .replace(/\s+/g, ' ')
-    .replaceAll(' | undefined', '')
-    .replaceAll('undefined | ', '')
-}
-
 function formatEventPayload(type) {
   const formattedType = formatType(type)
 
@@ -164,7 +148,7 @@ function formatSlotProps(type) {
     return 'None'
   }
 
-  return code(formattedType)
+  return formatTypeCell(formattedType, typeLinks)
 }
 
 function formatDefault(prop) {
@@ -179,12 +163,8 @@ function formatDefault(prop) {
   return code(prop.default)
 }
 
-function code(value) {
-  return `\`${escapeTableCell(value)}\``
-}
-
-function escapeTableCell(value) {
-  return String(value).replaceAll('|', '\\|').replaceAll('\n', '<br>')
+function readJson(file) {
+  return JSON.parse(readFileSync(file, 'utf8'))
 }
 
 function readOptionalFile(file) {

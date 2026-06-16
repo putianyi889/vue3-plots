@@ -1,0 +1,12 @@
+[
+  ["src/components/Grid.vue", "grid"],
+  ["src/components/Line.vue", "line"],
+  ["src/components/MiniPie.vue", "mini-pie"],
+  ["src/components/MouseDraw.vue", "mouse-draw"],
+  ["src/components/Scatter.vue", "scatter"],
+  ["src/components/TransformGroup.vue", "transform-group"],
+  ["src/components/XAxis.vue", "x-axis"],
+  ["src/components/XLabel.vue", "x-label"],
+  ["src/components/YAxis.vue", "y-axis"],
+  ["src/components/YLabel.vue", "y-label"]
+]
