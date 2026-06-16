@@ -22,6 +22,7 @@ type AnyShape = Rect | Ellipse | Polygon
 - [Grid](components/grid.md)
 - [Line](components/line.md)
 - [Scatter](components/scatter.md)
+- [MiniPie](components/mini-pie.md)
 - [MouseDraw](components/mouse-draw.md)
 - [XLabel](components/x-label.md)
 - [YLabel](components/y-label.md)

@@ -1,5 +1,6 @@
 export { default as Grid } from './Grid.vue'
 export { default as Line } from './Line.vue'
+export { default as MiniPie } from './MiniPie.vue'
 export { default as MouseDraw } from './MouseDraw.vue'
 export { default as Scatter } from './Scatter.vue'
 export { default as TransformGroup } from './TransformGroup.vue'

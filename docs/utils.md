@@ -72,6 +72,14 @@ Filters out points with non-finite `x` or `y`, then maps the remaining points wi
 const svgPoints = pointsToSvg(points, scaleX, scaleY)
 ```
 
+### `polarToCartesian(radius, angle)`
+
+Converts a polar coordinate into an SVG-space `{ x, y }` point. Angles are in degrees, with `0` pointing right and positive values rotating clockwise in SVG coordinates.
+
+```ts
+polarToCartesian(10, 90) // { x: 0, y: 10 }
+```
+
 ## Domains And Ticks
 
 ### `getDataDomain(points, paddingRatio?)`
