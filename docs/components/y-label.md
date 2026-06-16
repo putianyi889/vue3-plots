@@ -18,9 +18,8 @@ import { YLabel } from '@putianyi888/vue3-plots'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `size` | `PlotSize` | From `TransformGroup`, then `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
+
+<!-- @include-props y-label -->
 
 ## Slots
 

@@ -3,6 +3,7 @@ dist/
 docs/.vitepress/dist/
 docs/.vitepress/cache/
 docs/.vitepress/.temp/
+docs/.generated/
 .vite/
 coverage/
 *.local

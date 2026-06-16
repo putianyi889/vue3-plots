@@ -23,17 +23,8 @@ import { Grid } from '@putianyi888/vue3-plots'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `domain` | `PlotDomain` | From `TransformGroup` | Data-space bounds used to place grid lines. Required when no `TransformGroup` provides it. |
-| `size` | `PlotSize` | From `TransformGroup`, then `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
-| `padding` | `PlotPadding` | From `TransformGroup`, then `defaultPlotPadding` | Insets shared with other plot layers. |
-| `xTicks` | `number[]` | `[]` | X-axis grid positions in data-space coordinates. |
-| `yTicks` | `number[]` | `[]` | Y-axis grid positions in data-space coordinates. |
-| `strokeColor` | `string \| string[]` | `'none'` | Grid line color. Arrays are indexed across x grid lines first, then y grid lines. |
-| `strokeOpacity` | `number \| number[]` | `1` | Grid line opacity. Arrays are indexed across x grid lines first, then y grid lines. |
-| `strokeWidth` | `number \| number[]` | `1` | Grid line width in pixels. Arrays are indexed across x grid lines first, then y grid lines. |
-| `dashArray` | `string \| string[]` | `'none'` | SVG `stroke-dasharray`, such as `"4 4"` for dashed lines. Arrays are indexed across x grid lines first, then y grid lines. |
+
+<!-- @include-props grid -->
 
 ## Notes
 
