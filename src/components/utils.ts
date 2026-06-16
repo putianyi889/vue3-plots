@@ -1,8 +1,19 @@
+/**
+ * Data-space point consumed by plot layers.
+ *
+ * `x` and `y` are numeric coordinates in the data domain. When the generic
+ * parameter is left as `unknown`, `data` is optional. When a concrete generic
+ * type is supplied, `data` is required so callers can carry typed source data
+ * alongside the plotted coordinates.
+ */
 export type PlotPoint<T = unknown> = {
     x: number
     y: number
 } & ([unknown] extends [T] ? { data?: T } : { data: T })
 
+/**
+ * Insets between the outer SVG frame and the drawable plot area.
+ */
 export interface PlotPadding {
     top: number
     right: number
@@ -10,6 +21,9 @@ export interface PlotPadding {
     left: number
 }
 
+/**
+ * Data-space bounds used to map coordinates into SVG space.
+ */
 export interface PlotDomain {
     xMin: number
     xMax: number
@@ -17,11 +31,17 @@ export interface PlotDomain {
     yMax: number
 }
 
+/**
+ * Outer SVG size in pixels.
+ */
 export interface PlotSize {
     width: number
     height: number
 }
 
+/**
+ * Drawable SVG area after padding is subtracted from the outer size.
+ */
 export interface PlotArea {
     x: number
     y: number
@@ -29,15 +49,27 @@ export interface PlotArea {
     height: number
 }
 
+/**
+ * Point in SVG coordinates.
+ */
 export interface SvgPoint {
     x: number
     y: number
 }
 
+/**
+ * One-dimensional scale function.
+ */
 export type Scale = (value: number) => number
 
+/**
+ * Helper type for props that accept either one value or an array of values.
+ */
 export type MaybeArray<T> = T | T[]
 
+/**
+ * Default padding used by plot layers when no explicit padding is supplied.
+ */
 export const defaultPlotPadding: PlotPadding = {
     top: 12,
     right: 16,
@@ -45,6 +77,24 @@ export const defaultPlotPadding: PlotPadding = {
     left: 40,
 }
 
+/**
+ * Returns the drawable plot area after subtracting padding from the outer size.
+ *
+ * Width and height are clamped to `0` when padding is larger than the outer
+ * size.
+ *
+ * @example
+ * ```ts
+ * const area = getPlotArea(
+ *   { width: 640, height: 360 },
+ *   { top: 12, right: 16, bottom: 28, left: 40 },
+ * )
+ * ```
+ *
+ * @param size Outer SVG size.
+ * @param padding Plot insets. Defaults to `defaultPlotPadding`.
+ * @returns The drawable SVG area.
+ */
 export function getPlotArea(size: PlotSize, padding: PlotPadding = defaultPlotPadding): PlotArea {
     return {
         x: padding.left,
@@ -54,6 +104,24 @@ export function getPlotArea(size: PlotSize, padding: PlotPadding = defaultPlotPa
     }
 }
 
+/**
+ * Creates a linear mapping from a data-space domain to an SVG-space range.
+ *
+ * Non-finite input values map to `rangeMin`. Degenerate or non-finite domains
+ * map all values to the center of the range.
+ *
+ * @example
+ * ```ts
+ * const scaleX = createLinearScale(0, 10, 40, 624)
+ * scaleX(5) // 332
+ * ```
+ *
+ * @param domainMin Lower data-space bound.
+ * @param domainMax Upper data-space bound.
+ * @param rangeMin Lower SVG-space bound.
+ * @param rangeMax Upper SVG-space bound.
+ * @returns A scale function.
+ */
 export function createLinearScale(domainMin: number, domainMax: number, rangeMin: number, rangeMax: number) {
     const domainSpan = domainMax - domainMin
 
@@ -64,6 +132,14 @@ export function createLinearScale(domainMin: number, domainMax: number, rangeMin
     }
 }
 
+/**
+ * Maps one data-space point into SVG coordinates with precomputed scales.
+ *
+ * @param point Data-space point.
+ * @param scaleX Scale used for the x coordinate.
+ * @param scaleY Scale used for the y coordinate.
+ * @returns The point in SVG coordinates.
+ */
 export function pointToSvg<T>(point: PlotPoint<T>, scaleX: Scale, scaleY: Scale): SvgPoint {
     return {
         x: scaleX(point.x),
@@ -71,10 +147,29 @@ export function pointToSvg<T>(point: PlotPoint<T>, scaleX: Scale, scaleY: Scale)
     }
 }
 
+/**
+ * Filters non-finite points and maps the remaining points into SVG coordinates.
+ *
+ * @param points Data-space points.
+ * @param scaleX Scale used for x coordinates.
+ * @param scaleY Scale used for y coordinates.
+ * @returns SVG-space points for finite input coordinates.
+ */
 export function pointsToSvg<T>(points: PlotPoint<T>[], scaleX: Scale, scaleY: Scale): SvgPoint[] {
     return points.filter((point) => Number.isFinite(point.x) && Number.isFinite(point.y)).map((point) => pointToSvg(point, scaleX, scaleY))
 }
 
+/**
+ * Calculates a padded domain from finite point coordinates.
+ *
+ * When no finite values are available, the fallback range is `0` to `1` for
+ * each axis. When all values on an axis are equal, the range expands around
+ * that value.
+ *
+ * @param points Data points used to calculate bounds.
+ * @param paddingRatio Fraction of each axis range to add as padding.
+ * @returns A padded plot domain.
+ */
 export function getDataDomain<T>(points: PlotPoint<T>[], paddingRatio = 0.05): PlotDomain {
     const xs = points.map((point) => point.x).filter(Number.isFinite)
     const ys = points.map((point) => point.y).filter(Number.isFinite)
@@ -89,6 +184,17 @@ export function getDataDomain<T>(points: PlotPoint<T>[], paddingRatio = 0.05): P
     }
 }
 
+/**
+ * Generates readable tick values between `min` and `max`.
+ *
+ * Returns an empty array for non-finite inputs or non-positive `count`.
+ * Returns `[min]` when `min === max`.
+ *
+ * @param min Lower data-space bound.
+ * @param max Upper data-space bound.
+ * @param count Preferred tick count.
+ * @returns Nice tick values.
+ */
 export function getNiceTicks(min: number, max: number, count = 5): number[] {
     if (!Number.isFinite(min) || !Number.isFinite(max) || count <= 0) return []
     if (min === max) return [min]
@@ -106,16 +212,56 @@ export function getNiceTicks(min: number, max: number, count = 5): number[] {
     return ticks
 }
 
+/**
+ * Formats a tick label for display.
+ *
+ * Large and very small non-zero values use exponential notation. Other finite
+ * values use up to six significant digits. Non-finite values format to an
+ * empty string.
+ *
+ * @param value Tick value.
+ * @returns A display label.
+ */
 export function formatTick(value: number): string {
     if (!Number.isFinite(value)) return ''
     if (Math.abs(value) >= 1000 || (Math.abs(value) < 0.001 && value !== 0)) return value.toExponential(2)
     return Number(value.toPrecision(6)).toString()
 }
 
+/**
+ * Reads either a scalar value or an indexed array value.
+ *
+ * Components use this for props that accept `T | T[]`.
+ *
+ * @example
+ * ```ts
+ * getMaybeArray('blue', 2) // 'blue'
+ * getMaybeArray(['red', 'blue'], 1) // 'blue'
+ * ```
+ *
+ * @param value Scalar or array value.
+ * @param index Array index to read when `value` is an array.
+ * @returns The resolved value.
+ */
 export function getMaybeArray<T>(value: MaybeArray<T>, index: number): T {
     return Array.isArray(value) ? value[index] : value
 }
 
+/**
+ * Converts a polar coordinate into an SVG-space cartesian point.
+ *
+ * Angles are in degrees. `0` points right, and positive values rotate
+ * clockwise in SVG coordinates.
+ *
+ * @example
+ * ```ts
+ * polarToCartesian(10, 90) // { x: 0, y: 10 }
+ * ```
+ *
+ * @param radius Distance from the origin.
+ * @param angle Angle in degrees.
+ * @returns The cartesian point.
+ */
 export function polarToCartesian(radius: number, angle: number): SvgPoint {
     const radians = angle * Math.PI / 180
 

@@ -1,0 +1,17 @@
+{
+  "AnyShape": "/api/geometry/type-aliases/AnyShape",
+  "Ellipse": "/api/geometry/classes/Ellipse",
+  "MaybeArray": "/api/utils/type-aliases/MaybeArray",
+  "PlotArea": "/api/utils/interfaces/PlotArea",
+  "PlotDomain": "/api/utils/interfaces/PlotDomain",
+  "PlotPadding": "/api/utils/interfaces/PlotPadding",
+  "PlotPoint": "/api/utils/type-aliases/PlotPoint",
+  "PlotSize": "/api/utils/interfaces/PlotSize",
+  "Point": "/api/geometry/interfaces/Point",
+  "Polygon": "/api/geometry/classes/Polygon",
+  "Rect": "/api/geometry/classes/Rect",
+  "Scale": "/api/utils/type-aliases/Scale",
+  "Shape": "/api/geometry/classes/Shape",
+  "ShapeType": "/api/geometry/type-aliases/ShapeType",
+  "SvgPoint": "/api/utils/interfaces/SvgPoint"
+}
