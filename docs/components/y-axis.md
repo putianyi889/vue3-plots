@@ -19,16 +19,7 @@ import { YAxis } from '@putianyi888/vue3-plots'
 />
 ```
 
-## Props
-
-
-<!-- @include-props y-axis -->
-
-## Slots
-
-| Slot | Props | Description |
-| --- | --- | --- |
-| `tick` | `{ tick: number; x: number; y: number }` | Custom renderer for a tick label. |
+<!-- @include-api y-axis -->
 
 ## Notes
 

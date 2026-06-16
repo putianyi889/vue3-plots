@@ -24,10 +24,7 @@ import { MiniPie } from '@putianyi888/vue3-plots'
 />
 ```
 
-## Props
-
-
-<!-- @include-props mini-pie -->
+<!-- @include-api mini-pie -->
 
 ## Notes
 

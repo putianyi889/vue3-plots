@@ -27,6 +27,7 @@ const props = defineProps({
 })
 
 defineSlots<{
+    /** Label content. */
     default: () => unknown
 }>()
 

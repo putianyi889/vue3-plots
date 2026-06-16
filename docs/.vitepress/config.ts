@@ -75,8 +75,8 @@ export default defineConfig({
     markdown: {
         preConfig(md) {
             md.core.ruler.before('normalize', 'include-generated-props', (state) => {
-                state.src = state.src.replace(/<!-- @include-props ([a-z0-9-]+) -->/g, (_, name: string) => {
-                    return readFileSync(resolve(configDir, `../.generated/props/${name}.md`), 'utf8')
+                state.src = state.src.replace(/<!-- @include-api ([a-z0-9-]+) -->/g, (_, name: string) => {
+                    return readFileSync(resolve(configDir, `../.generated/api/${name}.md`), 'utf8')
                 })
             })
         },

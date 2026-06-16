@@ -25,24 +25,7 @@ import { Scatter } from '@putianyi888/vue3-plots'
 />
 ```
 
-## Props
-
-
-<!-- @include-props scatter -->
-
-## Events
-
-| Event | Payload | Description |
-| --- | --- | --- |
-| `pointClick` | `PlotPoint<T>` | Emitted when a rendered point is clicked. |
-| `pointEnter` | `PlotPoint<T>` | Emitted when the pointer enters a rendered point. |
-| `pointLeave` | `PlotPoint<T>` | Emitted when the pointer leaves a rendered point. |
-
-## Slots
-
-| Slot | Props | Description |
-| --- | --- | --- |
-| `point` | `{ index: number; x: number; y: number; point: PlotPoint<T> }` | Custom renderer for a data point marker. `x` and `y` are SVG coordinates, `index` is the original input index, and `point` is the original data point. |
+<!-- @include-api scatter -->
 
 This slot is useful for customizing marker shapes, but it can also render more complex SVG. The example below uses it to draw line segments and bars.
 

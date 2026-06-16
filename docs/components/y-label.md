@@ -16,13 +16,4 @@ import { YLabel } from '@putianyi888/vue3-plots'
 </YLabel>
 ```
 
-## Props
-
-
-<!-- @include-props y-label -->
-
-## Slots
-
-| Slot | Props | Description |
-| --- | --- | --- |
-| `default` | None | Label content. |
+<!-- @include-api y-label -->

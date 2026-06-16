@@ -19,6 +19,7 @@ const props = defineProps({
 })
 
 defineSlots<{
+    /** Plot layers that share this transform context. */
     default: () => unknown
 }>()
 

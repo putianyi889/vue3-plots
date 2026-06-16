@@ -18,16 +18,7 @@ import { MouseDraw } from '@putianyi888/vue3-plots'
 />
 ```
 
-## Props
-
-
-<!-- @include-props mouse-draw -->
-
-## Events
-
-| Event | Payload | Description |
-| --- | --- | --- |
-| `draw` | `Rect \| Ellipse \| Polygon` | Emitted when a click gesture finishes. |
+<!-- @include-api mouse-draw -->
 
 ## Behavior
 

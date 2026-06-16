@@ -64,12 +64,16 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
+    /** Emitted when a rendered point is clicked. */
     (e: 'pointClick', point: PlotPoint<T>): void
+    /** Emitted when the pointer enters a rendered point. */
     (e: 'pointEnter', point: PlotPoint<T>): void
+    /** Emitted when the pointer leaves a rendered point. */
     (e: 'pointLeave', point: PlotPoint<T>): void
 }>()
 
 defineSlots<{
+    /** Custom renderer for a data point marker. */
     point: (props: { index: number, x: number, y: number, point: PlotPoint<T> }) => unknown
 }>()
 
