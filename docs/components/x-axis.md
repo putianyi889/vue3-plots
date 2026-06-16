@@ -21,19 +21,8 @@ import { XAxis } from '@putianyi888/vue3-plots'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `domain` | `PlotDomain` | From `TransformGroup` | Data-space bounds used to map tick values onto the plot area. Required when no `TransformGroup` provides it. |
-| `size` | `PlotSize` | From `TransformGroup`, then `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
-| `padding` | `PlotPadding` | From `TransformGroup`, then `defaultPlotPadding` | Insets shared with other plot layers. |
-| `ticks` | `number[]` | `[]` | X-axis tick values in data-space coordinates. |
-| `y` | `number` | Plot area bottom | Axis line y position in data-space coordinates. When omitted, the axis is drawn at the bottom of the plot area. |
-| `offset` | `number` | `24` | Tick label center y offset from the axis line in SVG-space pixels. Positive values move labels downward. |
-| `textAnchor` | `'start' \| 'middle' \| 'end'` | `'middle'` | SVG `text-anchor` value for tick labels. See the [official SVG text-anchor specification](https://www.w3.org/TR/SVG2/text.html#TextAnchorProperty). |
-| `tickSize` | `number \| number[]` | `4` | Tick mark length in pixels. Arrays are indexed by tick index. Negative values draw ticks in the opposite direction. |
-| `strokeColor` | `string \| string[]` | `'none'` | Axis line and tick mark color. Arrays are indexed by tick index. |
-| `strokeOpacity` | `number \| number[]` | `1` | Axis line and tick mark opacity. Arrays are indexed by tick index. |
-| `strokeWidth` | `number \| number[]` | `1` | Axis line and tick mark width in pixels. Arrays are indexed by tick index. |
+
+<!-- @include-props x-axis -->
 
 ## Slots
 

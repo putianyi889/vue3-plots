@@ -1,4 +1,5 @@
 import { dirname, resolve } from 'node:path'
+import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 
@@ -69,6 +70,15 @@ export default defineConfig({
                     replacement: resolve(configDir, '../../src/index.ts'),
                 },
             ],
+        },
+    },
+    markdown: {
+        preConfig(md) {
+            md.core.ruler.before('normalize', 'include-generated-props', (state) => {
+                state.src = state.src.replace(/<!-- @include-props ([a-z0-9-]+) -->/g, (_, name: string) => {
+                    return readFileSync(resolve(configDir, `../.generated/props/${name}.md`), 'utf8')
+                })
+            })
         },
     },
 })

@@ -165,4 +165,10 @@ export default tseslint.config(
             globals: globals.vitest,
         },
     },
+    {
+        files: ['scripts/**/*.{js,mjs,ts}'],
+        languageOptions: {
+            globals: globals.node,
+        },
+    },
 )

@@ -26,14 +26,8 @@ import { MiniPie } from '@putianyi888/vue3-plots'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `data` | `Array<{ value: number; color: string }>` | Required | Pie segments in drawing order. Non-positive and non-finite values are skipped. |
-| `radius` | `number` | `8` | Circle radius in SVG units. Also controls the intrinsic SVG width and height. |
-| `total` | `number` | Sum of positive finite values | Total value used to normalize segment angles. |
-| `startAngle` | `number` | `0` | Start angle in degrees. Zero degrees points right, and positive values rotate clockwise in SVG coordinates. |
-| `strokeColor` | `string` | `'none'` | Slice outline color. |
-| `strokeWidth` | `number` | `1` | Slice outline width in SVG units. |
+
+<!-- @include-props mini-pie -->
 
 ## Notes
 

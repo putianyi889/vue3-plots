@@ -22,17 +22,8 @@ import { Line } from '@putianyi888/vue3-plots'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `points` | `PlotPoint[]` | Required | Data points to connect in order. Non-finite points are skipped. |
-| `domain` | `PlotDomain` | From `TransformGroup` | Data-space bounds used to map points onto the plot area. Required when no `TransformGroup` provides it. |
-| `size` | `PlotSize` | From `TransformGroup`, then `{ width: 320, height: 200 }` | Outer SVG size in pixels. |
-| `padding` | `PlotPadding` | From `TransformGroup`, then `defaultPlotPadding` | Insets shared with other plot layers. |
-| `strokeColor` | `string` | `'none'` | Line color. |
-| `strokeOpacity` | `number` | `1` | Line opacity. |
-| `strokeWidth` | `number` | `1` | Line width in pixels. |
-| `lineCap` | `'butt' \| 'round' \| 'square'` | `'butt'` | SVG `stroke-linecap` value. |
-| `lineJoin` | `'bevel' \| 'miter' \| 'inherit' \| 'round'` | `'miter'` | SVG `stroke-linejoin` value. |
+
+<!-- @include-props line -->
 
 ## Notes
 

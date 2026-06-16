@@ -22,11 +22,8 @@ import { TransformGroup } from '@putianyi888/vue3-plots'
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `domain` | `PlotDomain` | Required | Data-space bounds provided to child plot layers. |
-| `size` | `PlotSize` | `{ width: 320, height: 200 }` | Outer SVG size provided to child plot layers. |
-| `padding` | `PlotPadding` | `defaultPlotPadding` | Insets provided to child plot layers. |
+
+<!-- @include-props transform-group -->
 
 ## Notes
 
