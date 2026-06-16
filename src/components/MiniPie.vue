@@ -11,6 +11,8 @@
             :key="index"
             :d="slice.path"
             :fill="slice.color"
+            :stroke="strokeColor"
+            :stroke-width="strokeWidth"
         />
     </svg>
 </template>
@@ -40,6 +42,10 @@ const props = defineProps({
     total: { type: Number, default: undefined },
     /** Start angle in degrees. Zero degrees points right. */
     startAngle: { type: Number, default: 0 },
+    /** Slice outline color. */
+    strokeColor: { type: String, default: 'none' },
+    /** Slice outline width in SVG units. */
+    strokeWidth: { type: Number, default: 1 },
 })
 
 const diameter = computed(() => props.radius * 2)
