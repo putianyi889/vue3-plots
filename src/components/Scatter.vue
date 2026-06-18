@@ -10,10 +10,11 @@
             v-for="(point, index) in renderedPoints"
             :key="index"
             class="plot-scatter__point"
+            :class="{ 'plot-scatter__point--interactive': interactive }"
             :transform="`translate(${point.x}, ${point.y})`"
-            @click="emit('pointClick', point.source)"
-            @mouseenter="emit('pointEnter', point.source)"
-            @mouseleave="emit('pointLeave', point.source)"
+            @click="emitPointClick(point.source)"
+            @mouseenter="emitPointEnter(point.source)"
+            @mouseleave="emitPointLeave(point.source)"
         >
             <slot name="point" :index="point.index" :x="point.x" :y="point.y" :point="point.source">
                 <circle
@@ -49,6 +50,8 @@ const props = defineProps({
     size: { type: Object as PropType<PlotSize>, default: undefined },
     /** Insets shared with other plot layers. */
     padding: { type: Object as PropType<PlotPadding>, default: undefined },
+    /** Whether points emit pointer events and use interactive pointer styling. */
+    interactive: Boolean,
     /** Circle radius in pixels. */
     radius: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 0 },
     /** Circle fill color. */
@@ -79,6 +82,18 @@ defineSlots<{
 
 const { domain, padding, size } = usePlotContext(props)
 
+function emitPointClick(point: PlotPoint<T>) {
+    if (props.interactive) emit('pointClick', point)
+}
+
+function emitPointEnter(point: PlotPoint<T>) {
+    if (props.interactive) emit('pointEnter', point)
+}
+
+function emitPointLeave(point: PlotPoint<T>) {
+    if (props.interactive) emit('pointLeave', point)
+}
+
 const renderedPoints = computed(() => {
     const area = getPlotArea(size.value, padding.value)
     const scaleX = createLinearScale(domain.value.xMin, domain.value.xMax, area.x, area.x + area.width)
@@ -103,6 +118,10 @@ const renderedPoints = computed(() => {
 
 <style scoped>
 .plot-scatter__point {
+    pointer-events: none;
+}
+
+.plot-scatter__point--interactive {
     cursor: pointer;
     pointer-events: auto;
 }

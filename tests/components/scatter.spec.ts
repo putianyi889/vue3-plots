@@ -5,7 +5,7 @@ import Scatter from '../../src/components/Scatter.vue'
 import { domain, padding, size } from './helpers'
 
 describe('Scatter', () => {
-    it('renders points and emits point click events', async () => {
+    it('renders points without interactivity by default', async () => {
         const points = [{ x: 0, y: 0, data: 'a' }, { x: 10, y: 10, data: 'b' }]
         const wrapper = mount(Scatter, {
             props: {
@@ -26,6 +26,25 @@ describe('Scatter', () => {
         expect(circles[1].attributes()).toMatchObject({ r: '6', fill: 'blue' })
 
         await groups[1].trigger('click')
+        expect(groups[1].classes()).not.toContain('plot-scatter__point--interactive')
+        expect(wrapper.emitted('pointClick')).toBeUndefined()
+    })
+
+    it('emits point click events when interactive', async () => {
+        const points = [{ x: 0, y: 0, data: 'a' }, { x: 10, y: 10, data: 'b' }]
+        const wrapper = mount(Scatter, {
+            props: {
+                points,
+                domain,
+                size,
+                padding,
+                interactive: true,
+            },
+        })
+        const groups = wrapper.findAll('.plot-scatter__point')
+
+        await groups[1].trigger('click')
+        expect(groups[1].classes()).toContain('plot-scatter__point--interactive')
         expect(wrapper.emitted('pointClick')).toEqual([[points[1]]])
     })
 
@@ -83,7 +102,7 @@ describe('Scatter', () => {
     it('emits point hover events', async () => {
         const points = [{ x: 10, y: 10, data: 'last' }]
         const wrapper = mount(Scatter, {
-            props: { points, domain, size, padding },
+            props: { points, domain, size, padding, interactive: true },
         })
         const point = wrapper.find('.plot-scatter__point')
 
