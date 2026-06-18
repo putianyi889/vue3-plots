@@ -32,6 +32,7 @@ function createComponentApi(meta) {
         createPropsSection(meta.props.filter(prop => !prop.global)),
         createEventsSection(meta.events || meta.emits || []),
         createSlotsSection(meta.slots || []),
+        createExposedSection(meta.exposed || []),
     ].filter(Boolean).join('\n\n')
 }
 
@@ -117,6 +118,35 @@ function createSlotsTable(slots) {
             code(slot.name),
             formatSlotProps(slot.type || ''),
             escapeTableCell(slot.description || ''),
+        ].join(' | ').replace(/^/, '| ').replace(/$/, ' |'))
+    }
+
+    return rows.join('\n')
+}
+
+function createExposedSection(exposed) {
+    if (exposed.length === 0) {
+        return ''
+    }
+
+    return [
+        '## Exposed',
+        '',
+        createExposedTable(exposed),
+    ].join('\n')
+}
+
+function createExposedTable(exposed) {
+    const rows = [
+        '| Exposed | Type | Description |',
+        '| --- | --- | --- |',
+    ]
+
+    for (const item of exposed) {
+        rows.push([
+            code(item.name),
+            formatTypeCell(item.type || '', typeLinks),
+            escapeTableCell(item.description || ''),
         ].join(' | ').replace(/^/, '| ').replace(/$/, ' |'))
     }
 

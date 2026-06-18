@@ -42,4 +42,13 @@ describe('TransformGroup', () => {
 
         expect(wrapper.find('line').attributes()).toMatchObject({ x1: '80', x2: '80' })
     })
+
+    it('exposes shared scales on the component instance', () => {
+        const wrapper = mount(TransformGroup, {
+            props: { domain, size, padding },
+        })
+
+        expect(wrapper.vm.scaleX(5)).toBe(60)
+        expect(wrapper.vm.scaleY(5)).toBe(30)
+    })
 })
