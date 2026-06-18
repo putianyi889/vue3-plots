@@ -1,20 +1,20 @@
 <template>
     <div class="example-frame">
         <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
-            <TransformGroup :domain="domain" :size="size" :padding="padding">
+            <TransformGroup ref="transformGroup" :domain="domain" :size="size" :padding="padding">
                 <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
                 <Scatter :points="points">
                     <template #point="{ index, x, y, point }">
                         <rect
                             :x="-barWidth / 2" :y="0"
                             :width="barWidth"
-                            :height="scaleY(domain.yMin) - scaleY(point.y)"
+                            :height="transformGroup?.scaleY(domain.yMin) - transformGroup?.scaleY(point.y)"
                             fill="#2563eb" fill-opacity="0.78"
                         />
                         <line
                             v-if="index > 0"
-                            :x1="svgPoints[index - 1].x - x"
-                            :y1="svgPoints[index - 1].y - y"
+                            :x1="transformGroup?.scaleX(points[index - 1].x) - x"
+                            :y1="transformGroup?.scaleY(points[index - 1].y) - y"
                             x2="0" y2="0" stroke="#2563eb" stroke-width="2"
                             vector-effect="non-scaling-stroke"
                         />
@@ -29,7 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { Grid, Scatter, TransformGroup, XAxis, YAxis, createLinearScale, getDataDomain, getNiceTicks, getPlotArea, pointToSvg } from '@putianyi888/vue3-plots'
+import { computed, useTemplateRef } from 'vue'
+import { Grid, Scatter, TransformGroup, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPadding, PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
 const points: PlotPoint[] = [
@@ -45,13 +46,9 @@ const padding: PlotPadding = { top: 20, right: 20, bottom: 40, left: 40 }
 const domain = getDataDomain(points, 0.1)
 const xTicks = getNiceTicks(domain.xMin, domain.xMax)
 const yTicks = getNiceTicks(domain.yMin, domain.yMax)
-const area = getPlotArea(size, padding)
+const transformGroup = useTemplateRef('transformGroup')
 
-const scaleX = createLinearScale(domain.xMin, domain.xMax, area.x, area.x + area.width)
-const scaleY = createLinearScale(domain.yMin, domain.yMax, area.y + area.height, area.y)
-
-const svgPoints = points.map((point) => pointToSvg(point, scaleX, scaleY))
-const barWidth = area.width / (domain.xMax - domain.xMin) * 0.64
+const barWidth = computed(() => Math.abs(transformGroup.value?.scaleX(domain.xMin + 0.64) - transformGroup.value?.scaleX(domain.xMin)))
 </script>
 
 <style scoped>
