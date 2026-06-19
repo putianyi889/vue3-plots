@@ -21,7 +21,7 @@
 import { computed } from 'vue'
 import type { PropType } from 'vue'
 
-import { polarToCartesian } from './utils'
+import { CircularSector } from './geometry'
 
 type MiniPieDatum = {
     value: number
@@ -70,7 +70,7 @@ const slices = computed(() => {
 
         result.push({
             color: item.color,
-            path: createSlicePath(props.radius, angle, sweep),
+            path: new CircularSector(0, 0, props.radius, angle, sweep).svgPath(),
         })
         angle += sweep
     }
@@ -80,33 +80,5 @@ const slices = computed(() => {
 
 function getDrawableValue(value: number) {
     return Number.isFinite(value) && value > 0 ? value : 0
-}
-
-function createSlicePath(radius: number, startAngle: number, sweep: number) {
-    if (sweep >= 360) {
-        return [
-            `M ${radius} 0`,
-            `A ${radius} ${radius} 0 1 1 ${-radius} 0`,
-            `A ${radius} ${radius} 0 1 1 ${radius} 0`,
-            'Z',
-        ].join(' ')
-    }
-
-    const start = polarToCartesian(radius, startAngle)
-    const end = polarToCartesian(radius, startAngle + sweep)
-    const largeArc = sweep > 180 ? 1 : 0
-
-    return [
-        'M 0 0',
-        `L ${formatCoordinate(start.x)} ${formatCoordinate(start.y)}`,
-        `A ${radius} ${radius} 0 ${largeArc} 1 ${formatCoordinate(end.x)} ${formatCoordinate(end.y)}`,
-        'Z',
-    ].join(' ')
-}
-
-function formatCoordinate(value: number) {
-    if (Object.is(value, -0)) return '0'
-
-    return Number(value.toFixed(6)).toString()
 }
 </script>

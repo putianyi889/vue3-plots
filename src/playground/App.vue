@@ -156,8 +156,11 @@ const shapeSummary = computed(() => {
     if (lastShape.value.type === 'ellipse') {
         return `ellipse center (${lastShape.value.cx}, ${lastShape.value.cy})`
     }
+    if (lastShape.value.type === 'polygon') {
+        return `polygon ${lastShape.value.points.length} points`
+    }
 
-    return `polygon ${lastShape.value.points.length} points`
+    return lastShape.value.type
 })
 </script>
 
