@@ -35,7 +35,7 @@ function handleShape(shape: AnyShape) {
 }
 ```
 
-All built-in shapes expose `contains(point)` and `svgPath()`. Boundary points are included for rectangles, ellipses, and polygons. Ellipses with non-positive radii reject all points, and polygons with fewer than three vertices reject all points.
+All built-in shapes expose `contains(point)` and `svgPath()`. Boundary points are included for rectangles, ellipses, and polygons. Ellipses with non-positive radii reject all points in `contains()`. Sector shapes assume non-negative inner radii, positive outer radii, and positive sweep angles for containment checks. `svgPath()` passes raw radius values into SVG path data, so invalid SVG radius values may not render. Polygons with fewer than three vertices reject all points.
 
 Use `svgPath()` when a shape should be rendered directly as an SVG `<path>`.
 

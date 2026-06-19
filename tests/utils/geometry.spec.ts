@@ -54,6 +54,10 @@ describe('geometry', () => {
         it('generates an SVG path string', () => {
             expect(new Ellipse(10, 20, 6, 4).svgPath()).toBe('M 16 20 A 6 4 0 1 1 4 20 A 6 4 0 1 1 16 20 Z')
         })
+
+        it('passes raw radii to SVG path strings', () => {
+            expect(new Ellipse(10, 20, -6, -4).svgPath()).toBe('M 4 20 A -6 -4 0 1 1 16 20 A -6 -4 0 1 1 4 20 Z')
+        })
     })
 
     describe('Polygon', () => {
@@ -106,6 +110,13 @@ describe('geometry', () => {
         it('generates an SVG path string', () => {
             expect(new CircularSector(10, 20, 8, -90, 90).svgPath()).toBe('M 10 20 L 10 12 A 8 8 0 0 1 18 20 Z')
         })
+
+        it('passes raw radius to SVG path strings', () => {
+            const sector = new CircularSector(10, 20, -8, 0, 90)
+
+            expect(sector.contains({ x: 2, y: 20 })).toBe(false)
+            expect(sector.svgPath()).toBe('M 10 20 L 2 20 A -8 -8 0 0 1 10 12 Z')
+        })
     })
 
     describe('AnnularSector', () => {
@@ -128,6 +139,13 @@ describe('geometry', () => {
 
         it('generates an SVG path string', () => {
             expect(new AnnularSector(10, 20, 4, 8, -90, 90).svgPath()).toBe('M 10 12 A 8 8 0 0 1 18 20 L 14 20 A 4 4 0 0 0 10 16 Z')
+        })
+
+        it('passes raw radii to SVG path strings', () => {
+            const sector = new AnnularSector(10, 20, -8, -4, 0, 90)
+
+            expect(sector.contains({ x: 4, y: 20 })).toBe(false)
+            expect(sector.svgPath()).toBe('M 6 20 A -4 -4 0 0 1 10 16 L 10 12 A -8 -8 0 0 0 2 20 Z')
         })
     })
 })

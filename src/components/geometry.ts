@@ -323,7 +323,7 @@ export class AnnularSector extends Shape<'annular-sector'> {
      * @returns SVG path data.
      */
     svgPath(): string {
-        if (this.innerRadius <= 0) {
+        if (this.innerRadius === 0) {
             return new CircularSector(this.cx, this.cy, this.outerRadius, this.startAngle, this.sweep).svgPath()
         }
 
@@ -394,7 +394,7 @@ function containsSectorPoint(
     innerRadius: number, outerRadius: number,
     startAngle: number, sweep: number,
 ) {
-    if (outerRadius <= 0 || innerRadius < 0 || innerRadius > outerRadius) return false
+    if (outerRadius <= 0 || innerRadius < 0 || innerRadius > outerRadius || sweep <= 0) return false
 
     const dx = point.x - cx
     const dy = point.y - cy
