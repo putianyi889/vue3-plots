@@ -9,8 +9,8 @@ The detailed API pages are generated from JSDoc in `src/components/geometry.ts`.
 | Export | Description |
 | --- | --- |
 | [`Point`](/api/geometry/interfaces/Point) | Coordinate pair: `{ x, y }`. |
-| [`ShapeType`](/api/geometry/type-aliases/ShapeType) | Shape discriminator union: `'rect' \| 'ellipse' \| 'polygon'`. |
-| [`AnyShape`](/api/geometry/type-aliases/AnyShape) | Union of `Rect \| Ellipse \| Polygon`. |
+| [`ShapeType`](/api/geometry/type-aliases/ShapeType) | Shape discriminator union. |
+| [`AnyShape`](/api/geometry/type-aliases/AnyShape) | Union of all built-in geometry shapes. |
 
 ## Classes
 
@@ -20,6 +20,8 @@ The detailed API pages are generated from JSDoc in `src/components/geometry.ts`.
 | [`Rect`](/api/geometry/classes/Rect) | Axis-aligned rectangle. |
 | [`Ellipse`](/api/geometry/classes/Ellipse) | Axis-aligned ellipse. |
 | [`Polygon`](/api/geometry/classes/Polygon) | Polygon defined by ordered vertices. |
+| [`CircularSector`](/api/geometry/classes/CircularSector) | Circular sector used by pie slices. |
+| [`AnnularSector`](/api/geometry/classes/AnnularSector) | Ring-shaped circular sector used by donut slices. |
 
 ## Selection Workflow
 
@@ -33,7 +35,9 @@ function handleShape(shape: AnyShape) {
 }
 ```
 
-All built-in shapes expose `contains(point)`. Boundary points are included for rectangles, ellipses, and polygons. Ellipses with non-positive radii reject all points, and polygons with fewer than three vertices reject all points.
+All built-in shapes expose `contains(point)` and `svgPath()`. Boundary points are included for rectangles, ellipses, and polygons. Ellipses with non-positive radii reject all points, and polygons with fewer than three vertices reject all points.
+
+Use `svgPath()` when a shape should be rendered directly as an SVG `<path>`.
 
 ## Recommended Companion Packages
 
