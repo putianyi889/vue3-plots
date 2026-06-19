@@ -3,12 +3,9 @@
         <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
             <Pie
                 :data="data"
-                :inner-radius="hoveredIndex === undefined ? 34 : innerRadius"
-                :outer-radius="outerRadius"
+                :inner-radius="34"
                 :size="size"
-                :stroke-width="2"
                 interactive
-                stroke-color="#ffffff"
                 @mouse-enter="hoveredIndex = $event.index"
                 @mouse-leave="hoveredIndex = undefined"
             />
@@ -32,8 +29,6 @@ const data = [
 ]
 const size: PlotSize = { width: 360, height: 260 }
 const hoveredIndex = ref<number>()
-const innerRadius = computed(() => data.map((_, index) => (index === hoveredIndex.value ? 24 : 34)))
-const outerRadius = computed(() => data.map((_, index) => (index === hoveredIndex.value ? 86 : 78)))
 const hoveredLabel = computed(() => {
     if (hoveredIndex.value === undefined) return 'Hover a slice'
 

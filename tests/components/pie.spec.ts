@@ -27,7 +27,7 @@ describe('Pie', () => {
         expect(wrapper.find('g').attributes('transform')).toBe('translate(60, 30)')
         expect(paths).toHaveLength(2)
         expect(paths[0].attributes()).toMatchObject({
-            d: 'M 0 0 L 10 0 A 10 10 0 0 1 0 10 Z',
+            d: 'M 0 0 L 20 0 A 20 20 0 0 1 0 20 Z',
             fill: 'red',
             stroke: 'none',
             'stroke-width': '1',
@@ -114,10 +114,16 @@ describe('Pie', () => {
         expect(wrapper.find('svg').classes()).toContain('plot-layer--interactive')
         expect(wrapper.find('svg').classes()).not.toContain('plot-layer--passive')
         expect(paths[1].classes()).toContain('plot-pie__piece--interactive')
+        expect(paths[1].attributes('filter')).toBeUndefined()
 
         await paths[1].trigger('click')
         await paths[1].trigger('mouseenter')
+
+        expect(paths[1].attributes('filter')).toMatch(/^url\(#plot-pie-hover-shadow-/)
+
         await paths[1].trigger('mouseleave')
+
+        expect(paths[1].attributes('filter')).toBeUndefined()
 
         expect(wrapper.emitted('click')?.[0]?.[0]).toMatchObject({ index: 1, data: data[1] })
         expect(wrapper.emitted('mouseEnter')?.[0]?.[0]).toMatchObject({ index: 1, data: data[1] })
@@ -138,8 +144,8 @@ describe('Pie', () => {
         const paths = wrapper.findAll('path')
 
         expect(paths).toHaveLength(2)
-        expect(paths[0].attributes('d')).toBe('M 0 0 L 10 0 A 10 10 0 0 1 10 0 Z')
-        expect(paths[1].attributes('d')).toBe('M 10 0 A 10 10 0 1 1 -10 0 A 10 10 0 1 1 10 0 Z')
+        expect(paths[0].attributes('d')).toBe('M 0 0 L 20 0 A 20 20 0 0 1 20 0 Z')
+        expect(paths[1].attributes('d')).toBe('M 20 0 A 20 20 0 1 1 -20 0 A 20 20 0 1 1 20 0 Z')
     })
 
     it('uses total and startAngle to control slice proportions and rotation', () => {

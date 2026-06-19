@@ -9,6 +9,7 @@ const pages = readJson(resolve(root, 'scripts/component-doc-pages.json'))
 const componentPaths = new Set(pages.map(([componentPath]) => normalizePath(componentPath)))
 const typedocEntries = new Map([
     ['src/components/geometry.ts', 'geometry'],
+    ['src/components/pie-types.ts', 'pie-types'],
     ['src/components/utils.ts', 'utils'],
 ])
 const debounceMs = 400
