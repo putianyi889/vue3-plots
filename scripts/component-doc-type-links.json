@@ -2,6 +2,8 @@
   "AnyShape": "/api/geometry/type-aliases/AnyShape",
   "Ellipse": "/api/geometry/classes/Ellipse",
   "MaybeArray": "/api/utils/type-aliases/MaybeArray",
+  "PieDatum": "/api/pie-types/type-aliases/PieDatum",
+  "PiePiece": "/api/pie-types/type-aliases/PiePiece",
   "PlotArea": "/api/utils/interfaces/PlotArea",
   "PlotDomain": "/api/utils/interfaces/PlotDomain",
   "PlotPadding": "/api/utils/interfaces/PlotPadding",

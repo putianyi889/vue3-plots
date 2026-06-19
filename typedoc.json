@@ -2,7 +2,8 @@
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": [
     "src/components/utils.ts",
-    "src/components/geometry.ts"
+    "src/components/geometry.ts",
+    "src/components/pie-types.ts"
   ],
   "tsconfig": "tsconfig.typedoc.json",
   "out": "docs/api",

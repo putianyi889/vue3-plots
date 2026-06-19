@@ -22,11 +22,7 @@ import { computed } from 'vue'
 import type { PropType } from 'vue'
 
 import { CircularSector } from './geometry'
-
-type MiniPieDatum = {
-    value: number
-    color: string
-}
+import type { PieDatum } from './pie-types'
 
 type MiniPieSlice = {
     color: string
@@ -35,7 +31,7 @@ type MiniPieSlice = {
 
 const props = defineProps({
     /** Pie segments in drawing order. */
-    data: { type: Array as PropType<MiniPieDatum[]>, required: true },
+    data: { type: Array as PropType<PieDatum[]>, required: true },
     /** Circle radius in SVG units. Pass a positive value. */
     radius: { type: Number, default: 8 },
     /** Total value used to normalize segments. Defaults to the sum of positive finite values. */

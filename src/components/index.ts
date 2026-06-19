@@ -11,4 +11,5 @@ export { default as YAxis } from './YAxis.vue'
 export { default as YLabel } from './YLabel.vue'
 
 export * from './geometry'
+export * from './pie-types'
 export * from './utils'

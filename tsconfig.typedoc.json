@@ -2,7 +2,8 @@
   "extends": "./tsconfig.json",
   "include": [
     "src/components/utils.ts",
-    "src/components/geometry.ts"
+    "src/components/geometry.ts",
+    "src/components/pie-types.ts"
   ],
   "references": []
 }
