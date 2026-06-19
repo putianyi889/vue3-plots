@@ -1,3 +1,7 @@
+<script setup>
+import PieChart from '../../examples/PieChart.vue'
+</script>
+
 # Pie
 
 `Pie` renders value-color pairs as a centered SVG plot layer. It is useful for background summaries, proportional overlays, and donut-style annotations that should share a plot container with other layers. Enable `interactive` when slices should emit pointer events.
@@ -10,20 +14,9 @@ import { Pie } from '@putianyi888/vue3-plots'
 
 ## Example
 
-```vue
-<Pie
-  :data="[
-    { value: 2, color: '#2563eb' },
-    { value: 1, color: '#dc2626' },
-  ]"
-  :inner-radius="24"
-  :outer-radius="[64, 72]"
-  stroke-color="#ffffff"
-  :stroke-width="2"
-  interactive
-  @click="handleSliceClick"
-/>
-```
+<PieChart />
+
+<<< ../../examples/PieChart.vue
 
 <!-- @include: ../.generated/api/pie.md -->
 
