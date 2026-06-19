@@ -18,7 +18,7 @@ import { MouseDraw } from '@putianyi888/vue3-plots'
 />
 ```
 
-<!-- @include-api mouse-draw -->
+<!-- @include: ../.generated/api/mouse-draw.md -->
 
 ## Behavior
 

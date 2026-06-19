@@ -20,7 +20,7 @@ import { TransformGroup } from '@putianyi888/vue3-plots'
 </TransformGroup>
 ```
 
-<!-- @include-api transform-group -->
+<!-- @include: ../.generated/api/transform-group.md -->
 
 ## Notes
 

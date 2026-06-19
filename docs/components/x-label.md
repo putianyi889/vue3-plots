@@ -16,4 +16,4 @@ import { XLabel } from '@putianyi888/vue3-plots'
 </XLabel>
 ```
 
-<!-- @include-api x-label -->
+<!-- @include: ../.generated/api/x-label.md -->

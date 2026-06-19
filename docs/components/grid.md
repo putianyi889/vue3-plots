@@ -21,7 +21,7 @@ import { Grid } from '@putianyi888/vue3-plots'
 />
 ```
 
-<!-- @include-api grid -->
+<!-- @include: ../.generated/api/grid.md -->
 
 ## Notes
 

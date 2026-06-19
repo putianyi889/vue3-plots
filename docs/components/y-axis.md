@@ -19,7 +19,7 @@ import { YAxis } from '@putianyi888/vue3-plots'
 />
 ```
 
-<!-- @include-api y-axis -->
+<!-- @include: ../.generated/api/y-axis.md -->
 
 ## Notes
 

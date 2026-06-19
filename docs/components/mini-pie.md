@@ -24,7 +24,7 @@ import { MiniPie } from '@putianyi888/vue3-plots'
 />
 ```
 
-<!-- @include-api mini-pie -->
+<!-- @include: ../.generated/api/mini-pie.md -->
 
 ## Notes
 

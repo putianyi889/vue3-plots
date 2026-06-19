@@ -57,3 +57,5 @@ npm run docs:dev
 npm run test:run
 npm run build
 ```
+
+`docs:dev` generates API tables once before starting VitePress, then watches component and TypeDoc sources for targeted API doc updates.

@@ -11,10 +11,11 @@ const checker = createChecker(resolve(root, 'tsconfig.json'), {
 })
 const pages = readJson(resolve(root, 'scripts/component-doc-pages.json'))
 const typeLinks = readJson(resolve(root, 'scripts/component-doc-type-links.json'))
+const targets = getTargets(pages, process.argv.slice(2))
 
 mkdirSync(outputDir, { recursive: true })
 
-for (const [componentPath, name] of pages) {
+for (const [componentPath, name] of targets) {
     const component = resolve(root, componentPath)
     const output = resolve(outputDir, `${name}.md`)
     const meta = checker.getComponentMeta(component)
@@ -204,4 +205,25 @@ function readOptionalFile(file) {
     catch {
         return ''
     }
+}
+
+function getTargets(pages, args) {
+    if (args.length === 0) {
+        return pages
+    }
+
+    const requested = new Set(args.map(normalizeTarget))
+    const targets = pages.filter(([componentPath, name]) => {
+        return requested.has(normalizeTarget(componentPath)) || requested.has(normalizeTarget(name))
+    })
+
+    if (targets.length === 0) {
+        throw new Error(`No component documentation targets matched: ${args.join(', ')}`)
+    }
+
+    return targets
+}
+
+function normalizeTarget(target) {
+    return target.replaceAll('\\', '/').replace(/\.vue$/, '')
 }
