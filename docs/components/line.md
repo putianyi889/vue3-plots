@@ -20,7 +20,7 @@ import { Line } from '@putianyi888/vue3-plots'
 />
 ```
 
-<!-- @include-api line -->
+<!-- @include: ../.generated/api/line.md -->
 
 ## Notes
 

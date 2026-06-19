@@ -16,4 +16,4 @@ import { YLabel } from '@putianyi888/vue3-plots'
 </YLabel>
 ```
 
-<!-- @include-api y-label -->
+<!-- @include: ../.generated/api/y-label.md -->

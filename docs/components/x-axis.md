@@ -19,7 +19,7 @@ import { XAxis } from '@putianyi888/vue3-plots'
 />
 ```
 
-<!-- @include-api x-axis -->
+<!-- @include: ../.generated/api/x-axis.md -->
 
 ## Notes
 
