@@ -36,7 +36,7 @@ type MiniPieSlice = {
 const props = defineProps({
     /** Pie segments in drawing order. */
     data: { type: Array as PropType<MiniPieDatum[]>, required: true },
-    /** Circle radius in SVG units. */
+    /** Circle radius in SVG units. Pass a positive value. */
     radius: { type: Number, default: 8 },
     /** Total value used to normalize segments. Defaults to the sum of positive finite values. */
     total: { type: Number, default: undefined },
@@ -56,7 +56,7 @@ const effectiveTotal = computed(() => {
 })
 const slices = computed(() => {
     const total = effectiveTotal.value
-    if (!Number.isFinite(total) || total <= 0 || props.radius <= 0) return []
+    if (!Number.isFinite(total) || total <= 0 || props.radius === 0) return []
 
     const result: MiniPieSlice[] = []
     let angle = props.startAngle

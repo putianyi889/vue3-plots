@@ -29,3 +29,5 @@ import { MiniPie } from '@putianyi888/vue3-plots'
 ## Notes
 
 Use CSS when you want the rendered element to occupy a different layout size than its intrinsic SVG size.
+
+`MiniPie` does not validate radius values. Pass a positive finite `radius`; invalid SVG radius values are passed through to the generated path data and may not render.
