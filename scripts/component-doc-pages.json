@@ -3,6 +3,7 @@
   ["src/components/Line.vue", "line"],
   ["src/components/MiniPie.vue", "mini-pie"],
   ["src/components/MouseDraw.vue", "mouse-draw"],
+  ["src/components/Pie.vue", "pie"],
   ["src/components/Scatter.vue", "scatter"],
   ["src/components/TransformGroup.vue", "transform-group"],
   ["src/components/XAxis.vue", "x-axis"],
