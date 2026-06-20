@@ -12,5 +12,13 @@ export default defineConfig({
     test: {
         environment: 'jsdom',
         globals: true,
+        coverage: {
+            provider: 'v8',
+            all: true,
+            reporter: ['text', 'json-summary', 'html', 'lcov'],
+            reportsDirectory: 'coverage',
+            include: ['src/index.ts', 'src/components/**/*.{ts,vue}'],
+            exclude: ['src/**/*.d.ts', 'src/components/pie-types.ts'],
+        },
     },
 })
