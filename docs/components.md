@@ -21,6 +21,7 @@ type AnyShape = Rect | Ellipse | Polygon
 - [TransformGroup](components/transform-group.md)
 - [Grid](components/grid.md)
 - [Line](components/line.md)
+- [Bar](components/bar.md)
 - [Scatter](components/scatter.md)
 - [Pie](components/pie.md)
 - [MiniPie](components/mini-pie.md)

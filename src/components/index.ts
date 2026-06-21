@@ -1,3 +1,4 @@
+export { default as Bar } from './Bar.vue'
 export { default as Grid } from './Grid.vue'
 export { default as Line } from './Line.vue'
 export { default as MiniPie } from './MiniPie.vue'

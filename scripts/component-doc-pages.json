@@ -1,4 +1,5 @@
 [
+  ["src/components/Bar.vue", "bar"],
   ["src/components/Grid.vue", "grid"],
   ["src/components/Line.vue", "line"],
   ["src/components/MiniPie.vue", "mini-pie"],
