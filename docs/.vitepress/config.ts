@@ -38,6 +38,7 @@ export default defineConfig({
                     { text: 'TransformGroup', link: '/components/transform-group' },
                     { text: 'Grid', link: '/components/grid' },
                     { text: 'Line', link: '/components/line' },
+                    { text: 'Bar', link: '/components/bar' },
                     { text: 'Scatter', link: '/components/scatter' },
                     { text: 'Pie', link: '/components/pie' },
                     { text: 'MiniPie', link: '/components/mini-pie' },
