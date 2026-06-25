@@ -14,15 +14,15 @@
                 :values="profit"
                 fill="#16a34a"
             />
-            <XAxis :ticks="barPositions" stroke-color="#334155" />
-            <YAxis :ticks="yTicks" stroke-color="#334155" />
+            <Axis direction="horizontal" :ticks="barPositions" stroke-color="#334155" />
+            <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
         </TransformGroup>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue'
-import { Bar, Grid, TransformGroup, XAxis, YAxis, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Axis, Bar, Grid, TransformGroup, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotDomain, PlotSize } from '@putianyi888/vue3-plots'
 
 const revenue = [2, 4, 3, 6, 5]

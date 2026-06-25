@@ -14,15 +14,15 @@
                         />
                     </template>
                 </Scatter>
-                <XAxis :ticks="xTicks" stroke-color="#334155" />
-                <YAxis :ticks="yTicks" stroke-color="#334155" />
+                <Axis direction="horizontal" :ticks="xTicks" stroke-color="#334155" />
+                <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
             </TransformGroup>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { Grid, MiniPie, Scatter, TransformGroup, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Axis, Grid, MiniPie, Scatter, TransformGroup, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPadding, PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
 type CategoryBreakdown = Array<{ value: number, color: string }>

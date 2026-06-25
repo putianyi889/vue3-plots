@@ -5,8 +5,8 @@
                 <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
                 <Line :points="points" stroke-color="#16a34a" :stroke-width="2" />
                 <Scatter fill-color="#14532d" :points="points" :radius="4" />
-                <XAxis stroke-color="#334155" :ticks="xTicks" />
-                <YAxis stroke-color="#334155" :ticks="yTicks" />
+                <Axis direction="horizontal" stroke-color="#334155" :ticks="xTicks" />
+                <Axis direction="vertical" stroke-color="#334155" :ticks="yTicks" />
             </TransformGroup>
         </div>
     </div>
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core'
 import { computed, ref, useTemplateRef } from 'vue'
-import { Grid, Line, Scatter, TransformGroup, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Axis, Grid, Line, Scatter, TransformGroup, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
 const container = useTemplateRef<HTMLElement>('container')

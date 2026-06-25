@@ -15,8 +15,8 @@ import { TransformGroup } from '@putianyi888/vue3-plots'
   <Grid :x-ticks="xTicks" :y-ticks="yTicks" />
   <Line :points="points" />
   <Scatter :points="points" />
-  <XAxis :ticks="xTicks" />
-  <YAxis :ticks="yTicks" />
+  <Axis direction="horizontal" :ticks="xTicks" />
+  <Axis direction="vertical" :ticks="yTicks" />
 </TransformGroup>
 ```
 

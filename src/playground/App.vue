@@ -51,14 +51,16 @@
                     :stroke-width="2"
                     @point-click="selectedPoint = $event"
                 />
-                <XAxis
+                <Axis
+                    direction="horizontal"
                     :domain="domain"
                     :size="size"
                     :padding="padding"
                     :ticks="xTicks"
                     stroke-color="#334155"
                 />
-                <YAxis
+                <Axis
+                    direction="vertical"
                     :domain="domain"
                     :size="size"
                     :padding="padding"
@@ -105,13 +107,12 @@
 import { computed, ref } from 'vue'
 
 import {
+    Axis,
     Grid,
     Line,
     MouseDraw,
     Scatter,
-    XAxis,
     XLabel,
-    YAxis,
     YLabel,
     getDataDomain,
     getNiceTicks,

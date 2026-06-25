@@ -26,7 +26,7 @@ import '@putianyi888/vue3-plots/style.css'
 
 ```vue
 <script setup lang="ts">
-import { Grid, Line, Scatter, TransformGroup, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Axis, Grid, Line, Scatter, TransformGroup, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import '@putianyi888/vue3-plots/style.css'
 
 const points = [
@@ -46,14 +46,14 @@ const size = { width: 640, height: 360 }
       <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
       <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
       <Scatter :points="points" :radius="4" fill-color="#0f172a" />
-      <XAxis :ticks="xTicks" stroke-color="#334155" />
-      <YAxis :ticks="yTicks" stroke-color="#334155" />
+      <Axis direction="horizontal" :ticks="xTicks" stroke-color="#334155" />
+      <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
     </TransformGroup>
   </div>
 </template>
 ```
 
-The example uses `TransformGroup` to share `domain`, `size`, and `padding` with every plot layer inside it. Each child component then focuses on one part of the chart: `Grid` draws reference lines, `Line` connects the points, `Scatter` renders markers, and `XAxis` / `YAxis` render tick marks and labels. Because these layers are independent, you can remove, reorder, replace, or style them separately while keeping their coordinate system aligned.
+The example uses `TransformGroup` to share `domain`, `size`, and `padding` with every plot layer inside it. Each child component then focuses on one part of the chart: `Grid` draws reference lines, `Line` connects the points, `Scatter` renders markers, and `Axis` renders tick marks and labels. Because these layers are independent, you can remove, reorder, replace, or style them separately while keeping their coordinate system aligned.
 
 ## Next Steps
 

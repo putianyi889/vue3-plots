@@ -20,7 +20,7 @@ npm install @putianyi888/vue3-plots
 
 ```vue
 <script setup lang="ts">
-import { Grid, Line, Scatter, TransformGroup, XAxis, YAxis, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Axis, Grid, Line, Scatter, TransformGroup, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import '@putianyi888/vue3-plots/style.css'
 
 const points = [
@@ -40,8 +40,8 @@ const yTicks = getNiceTicks(domain.yMin, domain.yMax)
       <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
       <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
       <Scatter :points="points" :radius="4" fill-color="#0f172a" />
-      <XAxis :ticks="xTicks" stroke-color="#334155" />
-      <YAxis :ticks="yTicks" stroke-color="#334155" />
+      <Axis direction="horizontal" :ticks="xTicks" stroke-color="#334155" />
+      <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
     </TransformGroup>
   </div>
 </template>

@@ -16,8 +16,7 @@ type AnyShape = Rect | Ellipse | Polygon
 
 ## Component Docs
 
-- [XAxis](components/x-axis.md)
-- [YAxis](components/y-axis.md)
+- [Axis](components/axis.md)
 - [TransformGroup](components/transform-group.md)
 - [Grid](components/grid.md)
 - [Line](components/line.md)
@@ -41,7 +40,7 @@ A common static chart order is:
 1. `Grid`
 2. `Line` or other data layers
 3. `Scatter`
-4. `XAxis` and `YAxis`
+4. `Axis`
 5. `XLabel` and `YLabel`
 
 `MouseDraw` is interactive and usually goes above visual layers when selection or annotation drawing is enabled.
