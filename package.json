@@ -33,10 +33,10 @@
   ],
   "main": "./dist/vue3-plots.umd.cjs",
   "module": "./dist/vue3-plots.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/vue3-plots.js",
       "require": "./dist/vue3-plots.umd.cjs"
     },
