@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import Axis from '../../src/components/Axis.vue'
 import { domain, padding, size } from './helpers'
@@ -79,5 +79,20 @@ describe('Axis', () => {
 
         expect(tickLine.attributes()).toMatchObject({ stroke: 'blue', 'stroke-opacity': '0.8', 'stroke-width': '2', x2: '32' })
         expect(tickText.attributes()).toMatchObject({ x: '16', 'text-anchor': 'middle' })
+    })
+
+    it('renders duplicate tick values without duplicate key warnings', async () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined)
+        const wrapper = mount(Axis, {
+            props: { direction: 'horizontal', domain, size, padding, ticks: [5, 5] },
+        })
+
+        await wrapper.setProps({ ticks: [5, 5, 5] })
+
+        expect(wrapper.findAll('.plot-axis__tick')).toHaveLength(3)
+        expect(wrapper.findAll('text').map((text) => text.text())).toEqual(['5', '5', '5'])
+        expect(warn).not.toHaveBeenCalledWith(expect.stringContaining('Duplicate keys found during update'))
+
+        warn.mockRestore()
     })
 })

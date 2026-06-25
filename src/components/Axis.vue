@@ -18,7 +18,7 @@
             vector-effect="non-scaling-stroke"
         />
 
-        <g v-for="(tick, index) in ticks" :key="tick" class="plot-axis__tick">
+        <g v-for="(tick, index) in ticks" :key="index" class="plot-axis__tick">
             <line
                 :stroke="getMaybeArray(strokeColor, index)"
                 :stroke-opacity="getMaybeArray(strokeOpacity, index)"
