@@ -1,6 +1,6 @@
 {
   "name": "@putianyi888/vue3-plots",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Composable Vue 3 SVG plot layers for building charts from small, focused components.",
   "type": "module",
   "license": "MIT",
@@ -33,10 +33,10 @@
   ],
   "main": "./dist/vue3-plots.umd.cjs",
   "module": "./dist/vue3-plots.js",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/vue3-plots.js",
       "require": "./dist/vue3-plots.umd.cjs"
     },
