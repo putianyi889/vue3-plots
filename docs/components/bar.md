@@ -26,6 +26,6 @@ import { Bar } from '@putianyi888/vue3-plots'
 
 The `baseline` defaults to `domain.yMin` for vertical bars and `domain.xMin` for horizontal bars. Pass `baseline` when bars should extend from another data-space value.
 
-The exposed `positions` array contains the data-space center coordinate of every bar. Pass it to `XAxis` for vertical bars or `YAxis` for horizontal bars to align ticks with the categories. `bars` exposes the rendered SVG rectangles when their exact geometry is needed.
+The exposed `positions` array contains the data-space center coordinate of every bar. Pass it to a horizontal `Axis` for vertical bars or a vertical `Axis` for horizontal bars to align ticks with the categories. `bars` exposes the rendered SVG rectangles when their exact geometry is needed.
 
 All non-prop attributes are forwarded to every rendered SVG `<rect>`. For example, use `fill`, `stroke`, `stroke-width`, `rx`, and `opacity` to style a series. Refer to [MDN's SVG attribute reference](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute) for the complete set of available attributes.

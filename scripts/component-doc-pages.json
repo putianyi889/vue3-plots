@@ -1,5 +1,6 @@
 [
   ["src/components/Bar.vue", "bar"],
+  ["src/components/Axis.vue", "axis"],
   ["src/components/Grid.vue", "grid"],
   ["src/components/Line.vue", "line"],
   ["src/components/MiniPie.vue", "mini-pie"],
@@ -7,8 +8,6 @@
   ["src/components/Pie.vue", "pie"],
   ["src/components/Scatter.vue", "scatter"],
   ["src/components/TransformGroup.vue", "transform-group"],
-  ["src/components/XAxis.vue", "x-axis"],
   ["src/components/XLabel.vue", "x-label"],
-  ["src/components/YAxis.vue", "y-axis"],
   ["src/components/YLabel.vue", "y-label"]
 ]

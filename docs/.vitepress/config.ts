@@ -33,8 +33,7 @@ export default defineConfig({
             {
                 text: 'Components',
                 items: [
-                    { text: 'XAxis', link: '/components/x-axis' },
-                    { text: 'YAxis', link: '/components/y-axis' },
+                    { text: 'Axis', link: '/components/axis' },
                     { text: 'TransformGroup', link: '/components/transform-group' },
                     { text: 'Grid', link: '/components/grid' },
                     { text: 'Line', link: '/components/line' },

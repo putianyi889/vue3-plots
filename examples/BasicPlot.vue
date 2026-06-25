@@ -5,8 +5,8 @@
                 <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
                 <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
                 <Scatter fill-color="#0f172a" :points="points" :radius="4" />
-                <XAxis stroke-color="#334155" :ticks="xTicks" />
-                <YAxis stroke-color="#334155" :ticks="yTicks" />
+                <Axis direction="horizontal" stroke-color="#334155" :ticks="xTicks" />
+                <Axis direction="vertical" stroke-color="#334155" :ticks="yTicks" />
                 <XLabel>
                     X value
                 </XLabel>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { Grid, Line, Scatter, TransformGroup, XAxis, XLabel, YAxis, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
+import { Axis, Grid, Line, Scatter, TransformGroup, XLabel, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
 
 const points: PlotPoint[] = [
