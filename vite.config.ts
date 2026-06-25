@@ -13,7 +13,7 @@ export default defineConfig({
         vue(),
         dts({
             entryRoot: 'src',
-            insertTypesEntry: true,
+            insertTypesEntry: false,
             tsconfigPath: './tsconfig.build.json',
         }),
     ],
