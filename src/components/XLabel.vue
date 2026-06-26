@@ -1,19 +1,10 @@
 <template>
-    <svg
+    <div
         class="plot-layer plot-layer--passive plot-x-label"
-        :height="size.height"
-        :width="size.width"
-        :viewBox="`0 0 ${size.width} ${size.height}`"
-        preserveAspectRatio="none"
+        :style="{ height: `${size.height}px`, width: `${size.width}px` }"
     >
-        <text
-            :x="size.width / 2"
-            :y="size.height - 2"
-            text-anchor="middle"
-        >
-            <slot />
-        </text>
-    </svg>
+        <slot />
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -34,3 +25,14 @@ defineSlots<{
 
 const size = usePlotSize(props)
 </script>
+
+<style scoped>
+.plot-x-label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-bottom: 2px;
+  text-align: center;
+}
+</style>

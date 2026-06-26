@@ -11,11 +11,10 @@ describe('XLabel', () => {
             props: { size },
             slots: { default: 'Sample' },
         })
-        const text = wrapper.find('text')
-
         expect(wrapper.classes()).toContain('plot-x-label')
+        expect(wrapper.attributes('style')).toContain('height: 80px')
+        expect(wrapper.attributes('style')).toContain('width: 100px')
         expect(wrapper.text()).toBe('Sample')
-        expect(text.attributes()).toMatchObject({ x: '50', y: '78', 'text-anchor': 'middle' })
     })
 })
 
@@ -25,10 +24,9 @@ describe('YLabel', () => {
             props: { size },
             slots: { default: 'Value' },
         })
-        const text = wrapper.find('text')
-
         expect(wrapper.classes()).toContain('plot-y-label')
+        expect(wrapper.attributes('style')).toContain('height: 80px')
+        expect(wrapper.attributes('style')).toContain('width: 100px')
         expect(wrapper.text()).toBe('Value')
-        expect(text.attributes()).toMatchObject({ transform: 'translate(16, 40) rotate(-90)', 'text-anchor': 'middle' })
     })
 })

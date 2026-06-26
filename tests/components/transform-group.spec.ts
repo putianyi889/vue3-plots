@@ -27,8 +27,9 @@ describe('TransformGroup', () => {
 
         expect(grid.attributes()).toMatchObject({ height: '80', width: '100', viewBox: '0 0 100 80' })
         expect(grid.find('line').attributes()).toMatchObject({ x1: '40', x2: '40', y1: '10', y2: '50' })
-        expect(label.attributes()).toMatchObject({ height: '80', width: '100', viewBox: '0 0 100 80' })
-        expect(label.find('text').text()).toBe('Shared size')
+        expect(label.attributes('style')).toContain('height: 80px')
+        expect(label.attributes('style')).toContain('width: 100px')
+        expect(label.text()).toBe('Shared size')
     })
 
     it('lets explicit child props override provided context', () => {
