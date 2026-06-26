@@ -8,7 +8,7 @@
         preserveAspectRatio="none"
     >
         <line
-            :stroke="getMaybeArray(strokeColor, 0)"
+            stroke="currentColor"
             :stroke-opacity="getMaybeArray(strokeOpacity, 0)"
             :stroke-width="getMaybeArray(strokeWidth, 0)"
             :x1="axisLine.x1"
@@ -20,7 +20,7 @@
 
         <g v-for="(tick, index) in ticks" :key="index" class="plot-axis__tick">
             <line
-                :stroke="getMaybeArray(strokeColor, index)"
+                stroke="currentColor"
                 :stroke-opacity="getMaybeArray(strokeOpacity, index)"
                 :stroke-width="getMaybeArray(strokeWidth, index)"
                 :x1="getTickLine(tick, index).x1"
@@ -30,6 +30,7 @@
                 vector-effect="non-scaling-stroke"
             />
             <text
+                fill="currentColor"
                 :text-anchor="textAnchor"
                 :x="getTickLabel(tick).x"
                 :y="getTickLabel(tick).y"
@@ -78,8 +79,6 @@ const props = defineProps({
     textAnchor: { type: String as PropType<TextAnchor>, default: 'middle' },
     /** Tick mark length in pixels. */
     tickSize: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 4 },
-    /** Axis line and tick mark color. */
-    strokeColor: { type: [String, Array] as PropType<MaybeArray<string>>, default: 'none' },
     /** Axis line and tick mark opacity. */
     strokeOpacity: { type: [Number, Array] as PropType<MaybeArray<number>>, default: 1 },
     /** Axis line and tick mark width in pixels. */

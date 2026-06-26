@@ -57,7 +57,7 @@
                     :size="size"
                     :padding="padding"
                     :ticks="xTicks"
-                    stroke-color="#334155"
+                    style="color: #334155"
                 />
                 <Axis
                     direction="vertical"
@@ -65,7 +65,7 @@
                     :size="size"
                     :padding="padding"
                     :ticks="yTicks"
-                    stroke-color="#334155"
+                    style="color: #334155"
                 />
                 <XLabel :size="size">
                     Sample

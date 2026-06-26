@@ -12,8 +12,8 @@ describe('Axis', () => {
 
         expect(wrapper.findAll('.plot-axis__tick')).toHaveLength(2)
         expect(wrapper.find('svg').classes()).toContain('plot-axis--horizontal')
-        expect(wrapper.find('line').attributes()).toMatchObject({ stroke: 'none', 'stroke-opacity': '1', 'stroke-width': '1', y1: '50', y2: '50' })
-        expect(wrapper.find('text').attributes()).toMatchObject({ y: '74', 'text-anchor': 'middle', 'dominant-baseline': 'middle' })
+        expect(wrapper.find('line').attributes()).toMatchObject({ stroke: 'currentColor', 'stroke-opacity': '1', 'stroke-width': '1', y1: '50', y2: '50' })
+        expect(wrapper.find('text').attributes()).toMatchObject({ fill: 'currentColor', y: '74', 'text-anchor': 'middle', 'dominant-baseline': 'middle' })
     })
 
     it('uses custom horizontal position, offset, and text anchor', () => {
@@ -45,8 +45,8 @@ describe('Axis', () => {
 
         expect(wrapper.findAll('.plot-axis__tick')).toHaveLength(2)
         expect(wrapper.find('svg').classes()).toContain('plot-axis--vertical')
-        expect(wrapper.find('line').attributes()).toMatchObject({ stroke: 'none', 'stroke-opacity': '1', 'stroke-width': '1', x1: '40', x2: '40' })
-        expect(wrapper.find('text').attributes()).toMatchObject({ x: '16', 'text-anchor': 'middle', 'dominant-baseline': 'middle' })
+        expect(wrapper.find('line').attributes()).toMatchObject({ stroke: 'currentColor', 'stroke-opacity': '1', 'stroke-width': '1', x1: '40', x2: '40' })
+        expect(wrapper.find('text').attributes()).toMatchObject({ fill: 'currentColor', x: '16', 'text-anchor': 'middle', 'dominant-baseline': 'middle' })
     })
 
     it('uses custom vertical position, offset, and text anchor', () => {
@@ -69,7 +69,6 @@ describe('Axis', () => {
                 padding,
                 ticks: [10],
                 tickSize: [8],
-                strokeColor: ['blue'],
                 strokeOpacity: [0.8],
                 strokeWidth: [2],
             },
@@ -77,8 +76,8 @@ describe('Axis', () => {
         const tickLine = wrapper.findAll('line')[1]
         const tickText = wrapper.find('text')
 
-        expect(tickLine.attributes()).toMatchObject({ stroke: 'blue', 'stroke-opacity': '0.8', 'stroke-width': '2', x2: '32' })
-        expect(tickText.attributes()).toMatchObject({ x: '16', 'text-anchor': 'middle' })
+        expect(tickLine.attributes()).toMatchObject({ stroke: 'currentColor', 'stroke-opacity': '0.8', 'stroke-width': '2', x2: '32' })
+        expect(tickText.attributes()).toMatchObject({ fill: 'currentColor', x: '16', 'text-anchor': 'middle' })
     })
 
     it('renders duplicate tick values without duplicate key warnings', async () => {

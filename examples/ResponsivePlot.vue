@@ -1,22 +1,20 @@
 <template>
     <div class="resize-frame">
-        <div class="chart">
-            <YLabel class="chart-y-label">
-                Value
-            </YLabel>
-            <div ref="plot" class="plot">
-                <TransformGroup :domain="domain" :size="size">
-                    <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
-                    <Line :points="points" stroke-color="#16a34a" :stroke-width="2" />
-                    <Scatter fill-color="#14532d" :points="points" :radius="4" />
-                    <Axis direction="horizontal" stroke-color="#334155" :ticks="xTicks" />
-                    <Axis direction="vertical" stroke-color="#334155" :ticks="yTicks" />
-                </TransformGroup>
-            </div>
-            <XLabel class="chart-x-label">
-                Sample
-            </XLabel>
+        <YLabel class="chart-y-label">
+            Value
+        </YLabel>
+        <div ref="plot" class="plot">
+            <TransformGroup :domain="domain" :size="size">
+                <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
+                <Line :points="points" stroke-color="#16a34a" :stroke-width="2" />
+                <Scatter fill-color="#14532d" :points="points" :radius="4" />
+                <Axis direction="horizontal" :ticks="xTicks" />
+                <Axis direction="vertical" :ticks="yTicks" />
+            </TransformGroup>
         </div>
+        <XLabel class="chart-x-label">
+            Sample
+        </XLabel>
     </div>
 </template>
 
@@ -59,10 +57,6 @@ useResizeObserver(plot, ([entry]) => {
   height: 320px;
   resize: both;
   border: 1px solid #e2e8f0;
-  background: #ffffff;
-}
-
-.chart {
   display: grid;
   grid-template-columns: auto minmax(220px, 1fr);
   grid-template-rows: minmax(180px, 1fr) auto;

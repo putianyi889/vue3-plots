@@ -1,5 +1,5 @@
 <template>
-    <div class="example-frame plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
+    <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <TransformGroup :domain="domain" :size="size">
             <Grid :x-ticks="barPositions" :y-ticks="yTicks" stroke-color="#e2e8f0" />
             <Bar
@@ -14,8 +14,8 @@
                 :values="profit"
                 fill="#16a34a"
             />
-            <Axis direction="horizontal" :ticks="barPositions" stroke-color="#334155" />
-            <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
+            <Axis direction="horizontal" :ticks="barPositions" />
+            <Axis direction="vertical" :ticks="yTicks" />
         </TransformGroup>
     </div>
 </template>
@@ -37,11 +37,6 @@ const barPositions = computed(() => firstSeries.value?.positions ?? [])
 <style scoped>
 .example-frame {
   overflow-x: auto;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
-}
-
-.plot {
   position: relative;
 }
 </style>

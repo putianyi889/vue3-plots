@@ -4,8 +4,8 @@
             <TransformGroup :domain="domain" :size="size" :padding="padding">
                 <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#d4d4d8" />
                 <Scatter :points="points" :radius="[5, 5, 6]" :fill-color="['#2563eb', '#2563eb', '#dc2626']" />
-                <Axis direction="horizontal" :ticks="xTicks" stroke-color="#52525b" />
-                <Axis direction="vertical" :ticks="yTicks" stroke-color="#52525b" />
+                <Axis direction="horizontal" :ticks="xTicks" style="color: #52525b" />
+                <Axis direction="vertical" :ticks="yTicks" style="color: #52525b" />
             </TransformGroup>
             <svg class="plot-layer plot-layer--passive" :height="size.height" :width="size.width" :viewBox="`0 0 ${size.width} ${size.height}`" preserveAspectRatio="none">
                 <rect class="canvas-box" x="0" y="0" :width="size.width" :height="size.height" />
@@ -40,7 +40,6 @@ const yTicks = [0, 25, 50, 75, 100]
   overflow-x: auto;
   border: 1px solid #e4e4e7;
   padding: 16px;
-  background: #ffffff;
 }
 
 .plot {
@@ -66,7 +65,7 @@ const yTicks = [0, 25, 50, 75, 100]
 }
 
 .annotation-text {
-  fill: #18181b;
+  fill: currentColor;
   font-size: 13px;
 }
 </style>

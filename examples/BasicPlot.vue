@@ -1,20 +1,14 @@
 <template>
-    <div class="example-frame">
-        <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
-            <TransformGroup :domain="domain" :size="size">
-                <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
-                <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
-                <Scatter fill-color="#0f172a" :points="points" :radius="4" />
-                <Axis direction="horizontal" stroke-color="#334155" :ticks="xTicks" />
-                <Axis direction="vertical" stroke-color="#334155" :ticks="yTicks" />
-                <XLabel>
-                    X value
-                </XLabel>
-                <YLabel>
-                    Y value
-                </YLabel>
-            </TransformGroup>
-        </div>
+    <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
+        <TransformGroup :domain="domain" :size="size" :padding="{ top: 0, right: 0, left: 72, bottom: 60 }">
+            <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
+            <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
+            <Scatter fill-color="#0f172a" :points="points" :radius="4" />
+            <Axis direction="horizontal" :ticks="xTicks" />
+            <Axis direction="vertical" :ticks="yTicks" />
+            <XLabel>X value</XLabel>
+            <YLabel>Y value</YLabel>
+        </TransformGroup>
     </div>
 </template>
 
@@ -38,12 +32,7 @@ const yTicks = getNiceTicks(domain.yMin, domain.yMax)
 <style scoped>
 .example-frame {
   overflow-x: auto;
-  border: 1px solid #e2e8f0;
   padding: 16px;
-  background: #ffffff;
-}
-
-.plot {
   position: relative;
 }
 </style>
