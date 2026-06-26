@@ -2,12 +2,12 @@
     <div class="example-frame plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <TransformGroup :domain="domain" :size="size" :padding="padding">
             <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
-            <Axis direction="horizontal" :position="25" :ticks="xTicks" stroke-color="#334155">
+            <Axis direction="horizontal" :position="25" :ticks="xTicks" style="color: #334155">
                 <template #tick="{ tick }">
                     {{ months[tick] }}
                 </template>
             </Axis>
-            <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
+            <Axis direction="vertical" :ticks="yTicks" style="color: #334155" />
         </TransformGroup>
     </div>
 </template>

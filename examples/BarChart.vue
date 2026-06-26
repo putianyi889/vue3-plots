@@ -14,8 +14,8 @@
                 :values="profit"
                 fill="#16a34a"
             />
-            <Axis direction="horizontal" :ticks="barPositions" stroke-color="#334155" />
-            <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
+            <Axis direction="horizontal" :ticks="barPositions" style="color: #334155" />
+            <Axis direction="vertical" :ticks="yTicks" style="color: #334155" />
         </TransformGroup>
     </div>
 </template>

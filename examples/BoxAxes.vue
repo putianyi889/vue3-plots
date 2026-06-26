@@ -1,10 +1,10 @@
 <template>
     <div style="position: relative; width: 640px; height: 360px; background: white">
         <TransformGroup :domain="domain" :size="size" :padding="padding">
-            <Axis direction="horizontal" :ticks="xTicks" :offset="12" :tick-size="-4" :position="0" stroke-color="#334155" />
-            <Axis direction="horizontal" :ticks="xTicks" :offset="-12" :position="10" stroke-color="#334155" />
-            <Axis direction="vertical" :ticks="yTicks" :offset="-12" :tick-size="-4" :position="0" stroke-color="#334155" />
-            <Axis direction="vertical" :ticks="yTicks" :offset="12" :position="10" stroke-color="#334155" />
+            <Axis direction="horizontal" :ticks="xTicks" :offset="12" :tick-size="-4" :position="0" style="color: #334155" />
+            <Axis direction="horizontal" :ticks="xTicks" :offset="-12" :position="10" style="color: #334155" />
+            <Axis direction="vertical" :ticks="yTicks" :offset="-12" :tick-size="-4" :position="0" style="color: #334155" />
+            <Axis direction="vertical" :ticks="yTicks" :offset="12" :position="10" style="color: #334155" />
         </TransformGroup>
     </div>
 </template>

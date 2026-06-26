@@ -9,8 +9,8 @@
                     <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
                     <Line :points="points" stroke-color="#16a34a" :stroke-width="2" />
                     <Scatter fill-color="#14532d" :points="points" :radius="4" />
-                    <Axis direction="horizontal" stroke-color="#334155" :ticks="xTicks" />
-                    <Axis direction="vertical" stroke-color="#334155" :ticks="yTicks" />
+                    <Axis direction="horizontal" style="color: #334155" :ticks="xTicks" />
+                    <Axis direction="vertical" style="color: #334155" :ticks="yTicks" />
                 </TransformGroup>
             </div>
             <XLabel class="chart-x-label">

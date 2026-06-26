@@ -21,8 +21,8 @@
                         <circle cx="0" cy="0" r="4" fill="#0f172a" />
                     </template>
                 </Scatter>
-                <Axis direction="horizontal" :ticks="xTicks" stroke-color="#334155" />
-                <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
+                <Axis direction="horizontal" :ticks="xTicks" style="color: #334155" />
+                <Axis direction="vertical" :ticks="yTicks" style="color: #334155" />
             </TransformGroup>
         </div>
     </div>

@@ -5,8 +5,8 @@
                 <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
                 <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
                 <Scatter fill-color="#0f172a" :points="points" :radius="4" />
-                <Axis direction="horizontal" stroke-color="#334155" :ticks="xTicks" />
-                <Axis direction="vertical" stroke-color="#334155" :ticks="yTicks" />
+                <Axis direction="horizontal" style="color: #334155" :ticks="xTicks" />
+                <Axis direction="vertical" style="color: #334155" :ticks="yTicks" />
                 <XLabel>
                     X value
                 </XLabel>

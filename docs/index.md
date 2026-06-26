@@ -46,8 +46,8 @@ const size = { width: 640, height: 360 }
       <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
       <Line :points="points" stroke-color="#2563eb" :stroke-width="2" />
       <Scatter :points="points" :radius="4" fill-color="#0f172a" />
-      <Axis direction="horizontal" :ticks="xTicks" stroke-color="#334155" />
-      <Axis direction="vertical" :ticks="yTicks" stroke-color="#334155" />
+      <Axis direction="horizontal" :ticks="xTicks" style="color: #334155" />
+      <Axis direction="vertical" :ticks="yTicks" style="color: #334155" />
     </TransformGroup>
   </div>
 </template>
