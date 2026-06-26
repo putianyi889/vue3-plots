@@ -1,30 +1,28 @@
 <template>
-    <div class="example-frame">
-        <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
-            <TransformGroup ref="transformGroup" :domain="domain" :size="size" :padding="padding">
-                <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
-                <Scatter :points="points">
-                    <template #point="{ index, x, y, point }">
-                        <rect
-                            :x="-barWidth / 2" :y="0"
-                            :width="barWidth"
-                            :height="transformGroup?.scaleY(domain.yMin) - transformGroup?.scaleY(point.y)"
-                            fill="#2563eb" fill-opacity="0.78"
-                        />
-                        <line
-                            v-if="index > 0"
-                            :x1="transformGroup?.scaleX(points[index - 1].x) - x"
-                            :y1="transformGroup?.scaleY(points[index - 1].y) - y"
-                            x2="0" y2="0" stroke="#2563eb" stroke-width="2"
-                            vector-effect="non-scaling-stroke"
-                        />
-                        <circle cx="0" cy="0" r="4" fill="#0f172a" />
-                    </template>
-                </Scatter>
-                <Axis direction="horizontal" :ticks="xTicks" style="color: #334155" />
-                <Axis direction="vertical" :ticks="yTicks" style="color: #334155" />
-            </TransformGroup>
-        </div>
+    <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
+        <TransformGroup ref="transformGroup" :domain="domain" :size="size" :padding="padding">
+            <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
+            <Scatter :points="points">
+                <template #point="{ index, x, y, point }">
+                    <rect
+                        :x="-barWidth / 2" :y="0"
+                        :width="barWidth"
+                        :height="transformGroup?.scaleY(domain.yMin) - transformGroup?.scaleY(point.y)"
+                        fill="#2563eb" fill-opacity="0.78"
+                    />
+                    <line
+                        v-if="index > 0"
+                        :x1="transformGroup?.scaleX(points[index - 1].x) - x"
+                        :y1="transformGroup?.scaleY(points[index - 1].y) - y"
+                        x2="0" y2="0" stroke="#2563eb" stroke-width="2"
+                        vector-effect="non-scaling-stroke"
+                    />
+                    <circle cx="0" cy="0" r="4" fill="#0f172a" />
+                </template>
+            </Scatter>
+            <Axis direction="horizontal" :ticks="xTicks" />
+            <Axis direction="vertical" :ticks="yTicks" />
+        </TransformGroup>
     </div>
 </template>
 
@@ -54,12 +52,7 @@ const barWidth = computed(() => Math.abs(transformGroup.value?.scaleX(domain.xMi
 <style scoped>
 .example-frame {
   overflow-x: auto;
-  border: 1px solid #e2e8f0;
   padding: 16px;
-  background: #ffffff;
-}
-
-.plot {
   position: relative;
 }
 </style>

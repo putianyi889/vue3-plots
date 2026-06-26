@@ -1,13 +1,13 @@
 <template>
-    <div class="example-frame plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
+    <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <TransformGroup :domain="domain" :size="size" :padding="padding">
-            <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" />
-            <Axis direction="horizontal" :position="25" :ticks="xTicks" style="color: #334155">
+            <Grid :x-ticks="xTicks" :y-ticks="yTicks" stroke-color="#e2e8f0" :stroke-opacity="0.5" />
+            <Axis direction="horizontal" :position="25" :ticks="xTicks">
                 <template #tick="{ tick }">
                     {{ months[tick] }}
                 </template>
             </Axis>
-            <Axis direction="vertical" :ticks="yTicks" style="color: #334155" />
+            <Axis direction="vertical" :ticks="yTicks" />
         </TransformGroup>
     </div>
 </template>
@@ -27,11 +27,6 @@ const yTicks = [0, 25, 50, 75, 100]
 <style scoped>
 .example-frame {
   overflow-x: auto;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
-}
-
-.plot {
   position: relative;
 }
 </style>

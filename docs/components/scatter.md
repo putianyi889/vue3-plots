@@ -28,7 +28,7 @@ import { Scatter } from '@putianyi888/vue3-plots'
 
 <!-- @include: ../.generated/api/scatter.md -->
 
-This slot is useful for customizing marker shapes, but it can also render more complex SVG. The example below uses it to draw line segments between markers.
+This slot is useful for customizing marker shapes, but it can also render more complex SVG. The example below uses it to mimic line chart and bar chart.
 
 <ScatterSlot />
 

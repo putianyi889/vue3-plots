@@ -1,19 +1,15 @@
 <template>
-    <div>
-        <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
-            <Pie
-                :data="data"
-                :inner-radius="34"
-                :size="size"
-                interactive
-                @mouse-enter="hoveredIndex = $event.index"
-                @mouse-leave="hoveredIndex = undefined"
-            />
-        </div>
-        <p>
-            {{ hoveredLabel }}
-        </p>
+    <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
+        <Pie
+            :data="data"
+            :inner-radius="34"
+            :size="size"
+            interactive
+            @mouse-enter="hoveredIndex = $event.index"
+            @mouse-leave="hoveredIndex = undefined"
+        />
     </div>
+    <p>{{ hoveredLabel }}</p>
 </template>
 
 <script setup lang="ts">
