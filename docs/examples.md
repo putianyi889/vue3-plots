@@ -17,6 +17,8 @@ import ScatterTippy from '../examples/ScatterTippy.vue'
 
 ## Responsive Plot With ResizeObserver
 
+This example uses DOM layout for `XLabel` and `YLabel`, then observes the remaining plot area with `ResizeObserver` and passes that measured size to the SVG layers.
+
 <ResponsivePlot />
 
 <<< ../examples/ResponsivePlot.vue

@@ -1,24 +1,18 @@
 <template>
-    <svg
-        class="plot-layer plot-layer--passive plot-y-label"
-        :height="size.height"
-        :width="size.width"
-        :viewBox="`0 0 ${size.width} ${size.height}`"
-        preserveAspectRatio="none"
+    <div
+        class="plot-y-label"
+        :class="{ 'plot-layer': isPositioned, 'plot-layer--passive': isPositioned }"
+        :style="layerStyle"
     >
-        <text
-            :transform="`translate(16, ${size.height / 2}) rotate(-90)`"
-            text-anchor="middle"
-        >
-            <slot />
-        </text>
-    </svg>
+        <slot />
+    </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { PropType } from 'vue'
 
-import { usePlotSize } from './context'
+import { useOptionalPlotSize } from './context'
 import type { PlotSize } from './utils'
 
 const props = defineProps({
@@ -31,5 +25,21 @@ defineSlots<{
     default: () => unknown
 }>()
 
-const size = usePlotSize(props)
+const size = useOptionalPlotSize(props)
+const isPositioned = computed(() => size.value !== undefined)
+const layerStyle = computed(() => size.value === undefined
+    ? undefined
+    : { height: `${size.value.height}px`, width: `${size.value.width}px` })
 </script>
+
+<style scoped>
+.plot-y-label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-left: 16px;
+  text-align: center;
+  writing-mode: sideways-lr;
+}
+</style>
