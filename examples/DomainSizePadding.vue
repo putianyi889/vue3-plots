@@ -40,7 +40,6 @@ const yTicks = [0, 25, 50, 75, 100]
   overflow-x: auto;
   border: 1px solid #e4e4e7;
   padding: 16px;
-  background: #ffffff;
 }
 
 .plot {
@@ -66,7 +65,7 @@ const yTicks = [0, 25, 50, 75, 100]
 }
 
 .annotation-text {
-  fill: #18181b;
+  fill: currentColor;
   font-size: 13px;
 }
 </style>
