@@ -1,6 +1,6 @@
 # XLabel
 
-`XLabel` renders an x-axis title as a DOM layer. By default it uses the shared plot-layer classes, so it is absolutely positioned over the plot container like the SVG layers.
+`XLabel` renders an x-axis title as a DOM element. When it receives `size` directly, or gets one from `TransformGroup`, it uses the shared plot-layer classes and is absolutely positioned over the plot container like the SVG layers. Without a size, it renders as a normal DOM element and participates in the surrounding layout.
 
 ## Import
 
@@ -20,4 +20,4 @@ import { XLabel } from '@putianyi888/vue3-plots'
 
 ## Notes
 
-The default absolute positioning is only a starting point. Because `XLabel` is regular DOM, you can override its `position`, `width`, and `height` with a class or inline style and place it in an external CSS grid or flex layout. See the [responsive ResizeObserver example](/examples#responsive-plot-with-resizeobserver), where `XLabel` participates in DOM layout and the SVG plot measures the remaining area.
+The automatic absolute positioning is only a starting point. Because `XLabel` is regular DOM, you can omit `size` outside `TransformGroup` to place it in an external CSS grid or flex layout. See the [responsive ResizeObserver example](/examples#responsive-plot-with-resizeobserver), where `XLabel` participates in DOM layout and the SVG plot measures the remaining area.

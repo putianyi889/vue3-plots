@@ -1,16 +1,18 @@
 <template>
     <div
-        class="plot-layer plot-layer--passive plot-y-label"
-        :style="{ height: `${size.height}px`, width: `${size.width}px` }"
+        class="plot-y-label"
+        :class="{ 'plot-layer': isPositioned, 'plot-layer--passive': isPositioned }"
+        :style="layerStyle"
     >
         <slot />
     </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { PropType } from 'vue'
 
-import { usePlotSize } from './context'
+import { useOptionalPlotSize } from './context'
 import type { PlotSize } from './utils'
 
 const props = defineProps({
@@ -23,7 +25,11 @@ defineSlots<{
     default: () => unknown
 }>()
 
-const size = usePlotSize(props)
+const size = useOptionalPlotSize(props)
+const isPositioned = computed(() => size.value !== undefined)
+const layerStyle = computed(() => size.value === undefined
+    ? undefined
+    : { height: `${size.value.height}px`, width: `${size.value.width}px` })
 </script>
 
 <style scoped>

@@ -50,6 +50,12 @@ export function usePlotSize(props: { size?: PlotSize }) {
     return computed(() => props.size ?? context?.size.value ?? defaultPlotSize)
 }
 
+export function useOptionalPlotSize(props: { size?: PlotSize }) {
+    const context = inject(plotContextKey, undefined)
+
+    return computed(() => props.size ?? context?.size.value)
+}
+
 export function usePlotFrame(props: { padding?: PlotPadding, size?: PlotSize }) {
     const context = inject(plotContextKey, undefined)
     const size = computed(() => props.size ?? context?.size.value ?? defaultPlotSize)
