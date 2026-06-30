@@ -1,6 +1,6 @@
 # Components
 
-Vue3 Plots exposes small SVG layers that can be stacked inside the same relatively positioned container. Components that render data should receive the same `size`, `padding`, and `domain` values so their coordinates align. Use `TransformGroup` to provide those values once to the layers inside it.
+Vue3 Plots exposes small visual components for building charts. SVG plot layers can be stacked inside the same relatively positioned container; components that render data in that coordinate system should receive the same `size`, `padding`, and `domain` values so their coordinates align. Use `TransformGroup` to provide those values once to the layers inside it.
 
 Shared data types are exported from the package:
 
@@ -19,6 +19,7 @@ type AnyShape = Rect | Ellipse | Polygon
 - [Axis](components/axis.md)
 - [TransformGroup](components/transform-group.md)
 - [Grid](components/grid.md)
+- [ImageGrid](components/image-grid.md)
 - [Line](components/line.md)
 - [Bar](components/bar.md)
 - [Scatter](components/scatter.md)

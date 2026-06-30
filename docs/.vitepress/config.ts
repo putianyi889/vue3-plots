@@ -36,6 +36,7 @@ export default defineConfig({
                     { text: 'Axis', link: '/components/axis' },
                     { text: 'TransformGroup', link: '/components/transform-group' },
                     { text: 'Grid', link: '/components/grid' },
+                    { text: 'ImageGrid', link: '/components/image-grid' },
                     { text: 'Line', link: '/components/line' },
                     { text: 'Bar', link: '/components/bar' },
                     { text: 'Scatter', link: '/components/scatter' },
