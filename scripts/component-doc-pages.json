@@ -2,6 +2,7 @@
   ["src/components/Bar.vue", "bar"],
   ["src/components/Axis.vue", "axis"],
   ["src/components/Grid.vue", "grid"],
+  ["src/components/ImageGrid.vue", "image-grid"],
   ["src/components/Line.vue", "line"],
   ["src/components/MiniPie.vue", "mini-pie"],
   ["src/components/MouseDraw.vue", "mouse-draw"],

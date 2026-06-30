@@ -1,6 +1,7 @@
 export { default as Axis } from './Axis.vue'
 export { default as Bar } from './Bar.vue'
 export { default as Grid } from './Grid.vue'
+export { default as ImageGrid } from './ImageGrid.vue'
 export { default as Line } from './Line.vue'
 export { default as MiniPie } from './MiniPie.vue'
 export { default as MouseDraw } from './MouseDraw.vue'

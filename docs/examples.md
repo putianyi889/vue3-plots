@@ -1,6 +1,7 @@
 <script setup>
 import BasicPlot from '../examples/BasicPlot.vue'
 import BoxAxes from '../examples/BoxAxes.vue'
+import ImageGridExample from '../examples/ImageGrid.vue'
 import MultipleAxes from '../examples/MultipleAxes.vue'
 import ResponsivePlot from '../examples/ResponsivePlot.vue'
 import ScatterMiniPie from '../examples/ScatterMiniPie.vue'
@@ -48,3 +49,9 @@ Vue3 Plots intentionally leaves tooltips to your application, so you can use the
 <MultipleAxes />
 
 <<< ../examples/MultipleAxes.vue
+
+## ImageGrid Complex Example
+
+<ImageGridExample />
+
+<<< ../examples/ImageGrid.vue
