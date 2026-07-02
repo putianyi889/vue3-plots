@@ -1,6 +1,6 @@
 {
   "name": "@putianyi888/vue3-plots",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Composable Vue 3 SVG plot layers for building charts from small, focused components.",
   "type": "module",
   "license": "MIT",
