@@ -4,7 +4,6 @@ updates:
     directory: /
     schedule:
       interval: daily
-    open-pull-requests-limit: 5
     groups:
       dev-dependencies:
         dependency-type: development
@@ -15,4 +14,3 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
