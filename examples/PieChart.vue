@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <Pie
@@ -11,7 +12,9 @@
     </div>
     <p>{{ hoveredLabel }}</p>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { Pie } from '@putianyi888/vue3-plots'
@@ -32,9 +35,12 @@ const hoveredLabel = computed(() => {
     return `${item.label}: ${item.value}`
 })
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .plot {
   position: relative;
 }
 </style>
+<!-- #endregion style -->

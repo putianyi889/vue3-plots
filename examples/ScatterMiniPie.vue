@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <TransformGroup :domain="domain" :size="size" :padding="padding">
@@ -14,7 +15,9 @@
         </TransformGroup>
     </div>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { MiniPie, Scatter, TransformGroup, getDataDomain } from '@putianyi888/vue3-plots'
 import type { PlotPadding, PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
@@ -33,11 +36,12 @@ const padding: PlotPadding = { top: 24, right: 24, bottom: 40, left: 44 }
 const domain = getDataDomain(points, 0.14)
 const pieRadius = 12
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .example-frame {
-  overflow-x: auto;
-  padding: 16px;
   position: relative;
 }
 </style>
+<!-- #endregion style -->

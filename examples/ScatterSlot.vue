@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <TransformGroup ref="transformGroup" :domain="domain" :size="size" :padding="padding">
@@ -25,7 +26,9 @@
         </TransformGroup>
     </div>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue'
 import { Axis, Grid, Scatter, TransformGroup, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
@@ -48,11 +51,12 @@ const transformGroup = useTemplateRef('transformGroup')
 
 const barWidth = computed(() => Math.abs(transformGroup.value?.scaleX(domain.xMin + 0.64) - transformGroup.value?.scaleX(domain.xMin)))
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .example-frame {
-  overflow-x: auto;
-  padding: 16px;
   position: relative;
 }
 </style>
+<!-- #endregion style -->

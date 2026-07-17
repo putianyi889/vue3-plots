@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div class="example-frame">
         <div class="controls">
@@ -29,7 +30,9 @@
         </div>
     </div>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { computed, ref, useTemplateRef, watch } from 'vue'
 import { ImageGrid } from '@putianyi888/vue3-plots'
@@ -121,7 +124,9 @@ function createTile(background: string, foreground: string) {
     return `data:image/svg+xml,${encodeURIComponent(svg)}`
 }
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .example-frame {
   display: grid;
@@ -138,25 +143,14 @@ function createTile(background: string, foreground: string) {
 label {
   display: grid;
   gap: 4px;
-  color: #475569;
-  font-size: 12px;
 }
 
 input {
   width: 72px;
-  box-sizing: border-box;
-  border: 1px solid #cbd5e1;
-  padding: 4px 6px;
-}
-
-.status {
-  color: #334155;
-  font-size: 14px;
 }
 
 .viewport {
   overflow: auto;
-  max-width: 100%;
-  border: 1px solid #e2e8f0;
 }
 </style>
+<!-- #endregion style -->

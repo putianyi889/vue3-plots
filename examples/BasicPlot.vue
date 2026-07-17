@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <TransformGroup :domain="domain" :size="size" :padding="{ top: 0, right: 0, left: 72, bottom: 60 }">
@@ -11,7 +12,9 @@
         </TransformGroup>
     </div>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { Axis, Grid, Line, Scatter, TransformGroup, XLabel, YLabel, getDataDomain, getNiceTicks } from '@putianyi888/vue3-plots'
 import type { PlotPoint, PlotSize } from '@putianyi888/vue3-plots'
@@ -28,11 +31,12 @@ const domain = getDataDomain(points, 0.1)
 const xTicks = getNiceTicks(domain.xMin, domain.xMax)
 const yTicks = getNiceTicks(domain.yMin, domain.yMax)
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .example-frame {
-  overflow-x: auto;
-  padding: 16px;
   position: relative;
 }
 </style>
+<!-- #endregion style -->

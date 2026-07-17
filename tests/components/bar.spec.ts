@@ -51,6 +51,26 @@ describe('Bar', () => {
         expect(bars[1].attributes()).toMatchObject({ x: '40', y: '12', width: '24', height: '16' })
     })
 
+    it('renders vertical-flip bars from the maximum y domain value by default', () => {
+        const wrapper = mount(Bar, {
+            props: { values: [2, 6], direction: 'vertical-flip', domain, padding, size },
+        })
+        const bars = wrapper.findAll('rect')
+
+        expect(bars[0].attributes()).toMatchObject({ x: '42', y: '10', width: '16', height: '32' })
+        expect(bars[1].attributes()).toMatchObject({ x: '62', y: '10', width: '16', height: '16' })
+    })
+
+    it('renders horizontal-flip bars from the maximum x domain value by default', () => {
+        const wrapper = mount(Bar, {
+            props: { values: [2, 6], direction: 'horizontal-flip', domain, padding, size },
+        })
+        const bars = wrapper.findAll('rect')
+
+        expect(bars[0].attributes()).toMatchObject({ x: '48', y: '32', width: '32', height: '16' })
+        expect(bars[1].attributes()).toMatchObject({ x: '64', y: '12', width: '16', height: '16' })
+    })
+
     it('exposes data-space category centers and rendered rectangles', () => {
         const wrapper = mount(Bar, {
             props: { values: [2, 6], domain, padding, size },

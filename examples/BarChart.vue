@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <TransformGroup :domain="domain" :size="size">
@@ -19,7 +20,9 @@
         </TransformGroup>
     </div>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue'
 import { Axis, Bar, Grid, TransformGroup, getNiceTicks } from '@putianyi888/vue3-plots'
@@ -33,10 +36,12 @@ const yTicks = getNiceTicks(domain.yMin, domain.yMax)
 const firstSeries = useTemplateRef('firstSeries')
 const barPositions = computed(() => firstSeries.value?.positions ?? [])
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .example-frame {
-  overflow-x: auto;
   position: relative;
 }
 </style>
+<!-- #endregion style -->

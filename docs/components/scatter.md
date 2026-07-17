@@ -32,7 +32,15 @@ This slot is useful for customizing marker shapes, but it can also render more c
 
 <ScatterSlot />
 
-<<< ../../examples/ScatterSlot.vue
+::: code-group
+
+<<< ../../examples/ScatterSlot.vue#template{vue} [template]
+
+<<< ../../examples/ScatterSlot.vue#script{vue} [script]
+
+<<< ../../examples/ScatterSlot.vue#style{vue} [style]
+
+:::
 
 ## Notes
 

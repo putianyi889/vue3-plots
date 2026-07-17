@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <ImageGrid
         :cell-height="16"
@@ -6,7 +7,9 @@
         :images="images"
     />
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { ImageGrid } from '@putianyi888/vue3-plots'
 
@@ -26,3 +29,4 @@ function createTile(color: string) {
     return `data:image/svg+xml,${encodeURIComponent(svg)}`
 }
 </script>
+<!-- #endregion script -->

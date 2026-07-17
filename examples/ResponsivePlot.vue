@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div class="resize-frame">
         <YLabel class="chart-y-label">
@@ -17,7 +18,9 @@
         </XLabel>
     </div>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core'
 import { computed, ref, useTemplateRef } from 'vue'
@@ -47,21 +50,19 @@ useResizeObserver(plot, ([entry]) => {
     }
 })
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .resize-frame {
   overflow: auto;
   min-width: 320px;
-  max-width: 100%;
   min-height: 260px;
   height: 320px;
   resize: both;
-  border: 1px solid #e2e8f0;
   display: grid;
   grid-template-columns: auto minmax(220px, 1fr);
   grid-template-rows: minmax(180px, 1fr) auto;
-  height: 100%;
-  width: 100%;
 }
 
 .plot {
@@ -72,22 +73,14 @@ useResizeObserver(plot, ([entry]) => {
   position: relative;
 }
 
-.chart-x-label,
-.chart-y-label {
-  position: static;
-  height: auto !important;
-  width: auto !important;
-}
-
 .chart-x-label {
   grid-column: 2;
   grid-row: 2;
-  padding-top: 6px;
 }
 
 .chart-y-label {
   grid-column: 1;
   grid-row: 1;
-  padding-right: 6px;
 }
 </style>
+<!-- #endregion style -->

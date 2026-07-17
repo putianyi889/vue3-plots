@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <Tippy :duration="0" sticky follow-cursor :arrow="false">
         <div class="plot" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
@@ -19,7 +20,9 @@
         </template>
     </Tippy>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Tippy } from 'vue-tippy'
@@ -45,9 +48,12 @@ function hideTooltip() {
     hoveredPoint.value = undefined
 }
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .plot {
   position: relative;
 }
 </style>
+<!-- #endregion style -->

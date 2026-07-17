@@ -27,12 +27,13 @@ import { createLinearScale, getPlotArea } from './utils'
 import type { PlotDomain, PlotPadding, PlotSize } from './utils'
 
 type BarRect = { height: number, index: number, position: number, value: number, width: number, x: number, y: number }
+type BarDirection = 'vertical' | 'horizontal' | 'vertical-flip' | 'horizontal-flip'
 
 const props = defineProps({
     /** Bar values. Each index represents one automatically positioned category. */
     values: { type: Array as PropType<number[]>, required: true },
     /** Direction in which bars extend. */
-    direction: { type: String as PropType<'vertical' | 'horizontal'>, default: 'vertical' },
+    direction: { type: String as PropType<BarDirection>, default: 'vertical' },
     /** Data-space value from which bars extend. Defaults to the minimum value of the value axis domain. */
     baseline: { type: Number, default: undefined },
     /** Data-space bounds used to map bar values onto the plot area. */
@@ -56,34 +57,39 @@ defineOptions({
 })
 
 const { domain, padding, size } = usePlotContext(props)
-const baseline = computed(() => props.baseline ?? (props.direction === 'vertical' ? domain.value.yMin : domain.value.xMin))
+const isVertical = computed(() => props.direction === 'vertical' || props.direction === 'vertical-flip')
+const isFlipped = computed(() => props.direction === 'vertical-flip' || props.direction === 'horizontal-flip')
+const baseline = computed(() => {
+    if (props.baseline !== undefined) return props.baseline
+    if (isVertical.value) return isFlipped.value ? domain.value.yMax : domain.value.yMin
+
+    return isFlipped.value ? domain.value.xMax : domain.value.xMin
+})
 const area = computed(() => getPlotArea(size.value, padding.value))
-const axisScale = computed(() => props.direction === 'vertical'
+const axisScale = computed(() => isVertical.value
     ? createLinearScale(domain.value.xMin, domain.value.xMax, area.value.x, area.value.x + area.value.width)
     : createLinearScale(domain.value.yMin, domain.value.yMax, area.value.y + area.value.height, area.value.y))
-const valueScale = computed(() => props.direction === 'vertical'
+const valueScale = computed(() => isVertical.value
     ? createLinearScale(domain.value.yMin, domain.value.yMax, area.value.y + area.value.height, area.value.y)
     : createLinearScale(domain.value.xMin, domain.value.xMax, area.value.x, area.value.x + area.value.width))
 const seriesCount = computed(() => Math.max(1, Math.floor(props.seriesCount)))
 const seriesIndex = computed(() => Math.min(Math.max(0, Math.floor(props.seriesIndex)), seriesCount.value - 1))
 
-/** Data-space centers of the automatically positioned bars. Use these as aligned axis ticks or Scatter coordinates. */
 const positions = computed(() => {
     const count = props.values.length
     if (count === 0) return []
 
-    const min = props.direction === 'vertical' ? domain.value.xMin : domain.value.yMin
-    const max = props.direction === 'vertical' ? domain.value.xMax : domain.value.yMax
+    const min = isVertical.value ? domain.value.xMin : domain.value.yMin
+    const max = isVertical.value ? domain.value.xMax : domain.value.yMax
 
     return props.values.map((_, index) => min + (index + 0.5) / count * (max - min))
 })
 
-/** Rendered bar rectangles in SVG coordinates. */
 const bars = computed<BarRect[]>(() => {
     const count = props.values.length
     if (count === 0) return []
 
-    const categorySize = (props.direction === 'vertical' ? area.value.width : area.value.height) / count
+    const categorySize = (isVertical.value ? area.value.width : area.value.height) / count
     const groupSize = categorySize * Math.max(0, 1 - props.gap)
     const subGap = categorySize * Math.max(0, props.subGap)
     const barSize = Math.max(0, (groupSize - subGap * (seriesCount.value - 1)) / seriesCount.value)
@@ -99,7 +105,7 @@ const bars = computed<BarRect[]>(() => {
         const crossStart = center - categorySize / 2 + (categorySize - groupSize) / 2 + seriesIndex.value * (barSize + subGap)
         const valuePosition = valueScale.value(value)
 
-        result.push(props.direction === 'vertical'
+        result.push(isVertical.value
             ? {
                 index,
                 position,
