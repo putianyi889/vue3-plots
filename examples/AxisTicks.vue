@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div class="example-frame" :style="{ height: `${size.height}px`, width: `${size.width}px` }">
         <TransformGroup :domain="domain" :size="size" :padding="padding">
@@ -11,7 +12,9 @@
         </TransformGroup>
     </div>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { Axis, Grid, TransformGroup } from '@putianyi888/vue3-plots'
 import type { PlotDomain, PlotPadding, PlotSize } from '@putianyi888/vue3-plots'
@@ -23,10 +26,12 @@ const domain: PlotDomain = { xMin: -0.5, xMax: months.length - 0.5, yMin: 0, yMa
 const xTicks = months.map((_, index) => index)
 const yTicks = [0, 25, 50, 75, 100]
 </script>
+<!-- #endregion script -->
 
+<!-- #region style -->
 <style scoped>
 .example-frame {
-  overflow-x: auto;
   position: relative;
 }
 </style>
+<!-- #endregion style -->

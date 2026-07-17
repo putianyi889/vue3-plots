@@ -38,6 +38,8 @@ The detailed API pages are generated from JSDoc in `src/components/utils.ts`. Us
 | Export | Description |
 | --- | --- |
 | [`getDataDomain`](/api/utils/functions/getDataDomain) | Calculates a padded domain from finite point coordinates. |
+| [`flipX`](/api/utils/functions/flipX) | Returns a new domain with the x-axis bounds reversed. |
+| [`flipY`](/api/utils/functions/flipY) | Returns a new domain with the y-axis bounds reversed. |
 | [`getNiceTicks`](/api/utils/functions/getNiceTicks) | Generates readable tick values between two bounds. |
 | [`formatTick`](/api/utils/functions/formatTick) | Formats a tick label for display. |
 

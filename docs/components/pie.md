@@ -16,7 +16,15 @@ import { Pie } from '@putianyi888/vue3-plots'
 
 <PieChart />
 
-<<< ../../examples/PieChart.vue
+::: code-group
+
+<<< ../../examples/PieChart.vue#template{vue} [template]
+
+<<< ../../examples/PieChart.vue#script{vue} [script]
+
+<<< ../../examples/PieChart.vue#style{vue} [style]
+
+:::
 
 <!-- @include: ../.generated/api/pie.md -->
 

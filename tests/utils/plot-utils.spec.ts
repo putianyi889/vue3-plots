@@ -2,13 +2,15 @@ import { describe, expect, it } from 'vitest'
 
 import {
     createLinearScale,
+    flipX,
+    flipY,
     formatTick,
     getDataDomain,
+    getMaybeArray,
     getNiceTicks,
     getPlotArea,
     pointToSvg,
     pointsToSvg,
-    getMaybeArray,
     polarToCartesian,
 } from '../../src/components/utils'
 
@@ -49,6 +51,14 @@ describe('plot utilities', () => {
             yMax: 22,
         })
         expect(getDataDomain([])).toEqual({ xMin: 0, xMax: 1, yMin: 0, yMax: 1 })
+    })
+
+    it('flips one axis of a plot domain without mutating the input', () => {
+        const domain = { xMin: 0, xMax: 10, yMin: -5, yMax: 5 }
+
+        expect(flipX(domain)).toEqual({ xMin: 10, xMax: 0, yMin: -5, yMax: 5 })
+        expect(flipY(domain)).toEqual({ xMin: 0, xMax: 10, yMin: 5, yMax: -5 })
+        expect(domain).toEqual({ xMin: 0, xMax: 10, yMin: -5, yMax: 5 })
     })
 
     it('creates readable tick values and labels', () => {

@@ -16,7 +16,15 @@ import { Bar } from '@putianyi888/vue3-plots'
 
 <BarChart />
 
-<<< ../../examples/BarChart.vue
+::: code-group
+
+<<< ../../examples/BarChart.vue#template{vue} [template]
+
+<<< ../../examples/BarChart.vue#script{vue} [script]
+
+<<< ../../examples/BarChart.vue#style{vue} [style]
+
+:::
 
 <!-- @include: ../.generated/api/bar.md -->
 
@@ -24,7 +32,7 @@ import { Bar } from '@putianyi888/vue3-plots'
 
 `gap` controls the empty portion between adjacent categories, while `sub-gap` controls spacing between series in one category. Both values are proportions of a category band.
 
-The `baseline` defaults to `domain.yMin` for vertical bars and `domain.xMin` for horizontal bars. Pass `baseline` when bars should extend from another data-space value.
+The `baseline` defaults to `domain.yMin` for `vertical` bars and `domain.xMin` for `horizontal` bars. `vertical-flip` uses `domain.yMax`, and `horizontal-flip` uses `domain.xMax`, so bars extend back from the maximum value of the value axis. Pass `baseline` when bars should extend from another data-space value.
 
 The exposed `positions` array contains the data-space center coordinate of every bar. Pass it to a horizontal `Axis` for vertical bars or a vertical `Axis` for horizontal bars to align ticks with the categories. `bars` exposes the rendered SVG rectangles when their exact geometry is needed.
 

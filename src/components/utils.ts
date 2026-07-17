@@ -32,6 +32,40 @@ export interface PlotDomain {
 }
 
 /**
+ * Returns a new domain with the x-axis bounds reversed.
+ *
+ * This is useful when the same data domain should render with x increasing
+ * from right to left.
+ *
+ * @param domain Domain to flip.
+ * @returns A new domain with `xMin` and `xMax` swapped.
+ */
+export function flipX(domain: PlotDomain): PlotDomain {
+    return {
+        ...domain,
+        xMin: domain.xMax,
+        xMax: domain.xMin,
+    }
+}
+
+/**
+ * Returns a new domain with the y-axis bounds reversed.
+ *
+ * This is useful when the same data domain should render with y increasing
+ * from top to bottom.
+ *
+ * @param domain Domain to flip.
+ * @returns A new domain with `yMin` and `yMax` swapped.
+ */
+export function flipY(domain: PlotDomain): PlotDomain {
+    return {
+        ...domain,
+        yMin: domain.yMax,
+        yMax: domain.yMin,
+    }
+}
+
+/**
  * Outer SVG size in pixels.
  */
 export interface PlotSize {

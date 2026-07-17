@@ -18,7 +18,15 @@ import { Axis } from '@putianyi888/vue3-plots'
 
 <AxisTicks />
 
-<<< ../../examples/AxisTicks.vue
+::: code-group
+
+<<< ../../examples/AxisTicks.vue#template{vue} [template]
+
+<<< ../../examples/AxisTicks.vue#script{vue} [script]
+
+<<< ../../examples/AxisTicks.vue#style{vue} [style]
+
+:::
 
 <!-- @include: ../.generated/api/axis.md -->
 

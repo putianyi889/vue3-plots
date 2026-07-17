@@ -1,3 +1,4 @@
+<!-- #region template -->
 <template>
     <div style="position: relative; width: 640px; height: 360px;">
         <TransformGroup :domain="domain" :size="size" :padding="padding">
@@ -8,7 +9,9 @@
         </TransformGroup>
     </div>
 </template>
+<!-- #endregion template -->
 
+<!-- #region script -->
 <script setup lang="ts">
 import { Axis, TransformGroup } from '@putianyi888/vue3-plots'
 
@@ -18,3 +21,4 @@ const domain = { xMin: 0, xMax: 10, yMin: 0, yMax: 10 }
 const xTicks = [0, 2, 4, 6, 8, 10]
 const yTicks = [0, 5, 10]
 </script>
+<!-- #endregion script -->

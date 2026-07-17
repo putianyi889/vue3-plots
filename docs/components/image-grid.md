@@ -18,7 +18,13 @@ import { ImageGrid } from '@putianyi888/vue3-plots'
 
 <ImageGridMinimal />
 
-<<< ../../examples/ImageGridMinimal.vue
+::: code-group
+
+<<< ../../examples/ImageGridMinimal.vue#template{vue} [template]
+
+<<< ../../examples/ImageGridMinimal.vue#script{vue} [script]
+
+:::
 
 <!-- @include: ../.generated/api/image-grid.md -->
 
