@@ -1,10 +1,6 @@
 {
   "name": "@putianyi888/vue3-plots",
-<<<<<<< Updated upstream
-  "version": "0.6.4",
-=======
   "version": "0.7.0",
->>>>>>> Stashed changes
   "description": "Composable Vue 3 SVG plot layers for building charts from small, focused components.",
   "type": "module",
   "license": "MIT",
