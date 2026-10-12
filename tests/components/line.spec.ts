@@ -76,4 +76,26 @@ describe('Line', () => {
 
         expect(wrapper.find('path').exists()).toBe(false)
     })
+
+    it('resamples when the size, domain or sampling mode changes', async () => {
+        const points = Array.from({ length: 201 }, (_, index) => ({ x: index / 20, y: index % 3 }))
+        const wrapper = mount(Line, {
+            props: { points, domain, size, padding, sampling: 'min-max' },
+        })
+        const getPath = () => wrapper.get('path').attributes('d') ?? ''
+        const initialPath = getPath()
+        const initialCount = initialPath.split(' ').length / 3
+
+        expect(initialCount).toBeLessThan(points.length)
+        expect(wrapper.findAll('path')).toHaveLength(1)
+
+        await wrapper.setProps({ size: { ...size, width: 260 } })
+        expect(getPath().split(' ').length / 3).toBe(points.length)
+
+        await wrapper.setProps({ size, domain: { ...domain, xMax: 20 } })
+        expect(getPath().split(' ').length / 3).toBeLessThan(initialCount)
+
+        await wrapper.setProps({ sampling: 'none' })
+        expect(getPath().split(' ').length / 3).toBe(points.length)
+    })
 })
