@@ -205,10 +205,24 @@ export function pointsToSvg<T>(points: PlotPoint<T>[], scaleX: Scale, scaleY: Sc
  * @returns A padded plot domain.
  */
 export function getDataDomain<T>(points: PlotPoint<T>[], paddingRatio = 0.05): PlotDomain {
-    const xs = points.map((point) => point.x).filter(Number.isFinite)
-    const ys = points.map((point) => point.y).filter(Number.isFinite)
-    const xRange = padRange(Math.min(...xs), Math.max(...xs), paddingRatio, 0, 1)
-    const yRange = padRange(Math.min(...ys), Math.max(...ys), paddingRatio, 0, 1)
+    let xMin = Number.POSITIVE_INFINITY
+    let xMax = Number.NEGATIVE_INFINITY
+    let yMin = Number.POSITIVE_INFINITY
+    let yMax = Number.NEGATIVE_INFINITY
+
+    points.forEach(({ x, y }) => {
+        if (Number.isFinite(x)) {
+            xMin = Math.min(xMin, x)
+            xMax = Math.max(xMax, x)
+        }
+        if (Number.isFinite(y)) {
+            yMin = Math.min(yMin, y)
+            yMax = Math.max(yMax, y)
+        }
+    })
+
+    const xRange = padRange(xMin, xMax, paddingRatio, 0, 1)
+    const yRange = padRange(yMin, yMax, paddingRatio, 0, 1)
 
     return {
         xMin: xRange.min,

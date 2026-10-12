@@ -53,6 +53,41 @@ describe('plot utilities', () => {
         expect(getDataDomain([])).toEqual({ xMin: 0, xMax: 1, yMin: 0, yMax: 1 })
     })
 
+    it('derives padded domains from a million points without exceeding the argument limit', () => {
+        const points = Array.from({ length: 1_000_001 }, (_, index) => ({ x: index, y: -index }))
+
+        expect(getDataDomain(points, 0.1)).toEqual({
+            xMin: -100_000,
+            xMax: 1_100_000,
+            yMin: -1_100_000,
+            yMax: 100_000,
+        })
+    })
+
+    it('filters non-finite coordinates independently for each axis', () => {
+        expect(getDataDomain([
+            { x: -10, y: Number.NaN },
+            { x: 10, y: Number.POSITIVE_INFINITY },
+            { x: Number.NaN, y: -20 },
+            { x: Number.NEGATIVE_INFINITY, y: 20 },
+        ], 0.1)).toEqual({ xMin: -12, xMax: 12, yMin: -24, yMax: 24 })
+    })
+
+    it('uses fallback ranges only for axes with no finite coordinates', () => {
+        expect(getDataDomain([
+            { x: Number.NaN, y: -10 },
+            { x: Number.POSITIVE_INFINITY, y: 10 },
+        ], 0.1)).toEqual({ xMin: 0, xMax: 1, yMin: -12, yMax: 12 })
+        expect(getDataDomain([
+            { x: -10, y: Number.NaN },
+            { x: 10, y: Number.NEGATIVE_INFINITY },
+        ], 0.1)).toEqual({ xMin: -12, xMax: 12, yMin: 0, yMax: 1 })
+        expect(getDataDomain([
+            { x: Number.NaN, y: Number.POSITIVE_INFINITY },
+            { x: Number.NEGATIVE_INFINITY, y: Number.NaN },
+        ])).toEqual({ xMin: 0, xMax: 1, yMin: 0, yMax: 1 })
+    })
+
     it('flips one axis of a plot domain without mutating the input', () => {
         const domain = { xMin: 0, xMax: 10, yMin: -5, yMax: 5 }
 

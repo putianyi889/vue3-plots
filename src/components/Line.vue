@@ -25,7 +25,8 @@ import { computed } from 'vue'
 import type { PropType } from 'vue'
 
 import { usePlotContext } from './context'
-import { createLinearScale, getPlotArea, pointsToSvg } from './utils'
+import { createLinePath } from './line-path'
+import { createLinearScale, getPlotArea } from './utils'
 import type { PlotDomain, PlotPadding, PlotPoint, PlotSize } from './utils'
 
 const props = defineProps({
@@ -37,6 +38,8 @@ const props = defineProps({
     size: { type: Object as PropType<PlotSize>, default: undefined },
     /** Insets shared with other plot layers. */
     padding: { type: Object as PropType<PlotPadding>, default: undefined },
+    /** Optional peak-preserving sampling per SVG pixel column. X reversals retain the full path. */
+    sampling: { type: String as PropType<'none' | 'min-max'>, default: 'none' },
     /** Line color. */
     strokeColor: { type: String, default: 'none' },
     /** Line opacity. */
@@ -55,10 +58,6 @@ const pathData = computed(() => {
     const area = getPlotArea(size.value, padding.value)
     const scaleX = createLinearScale(domain.value.xMin, domain.value.xMax, area.x, area.x + area.width)
     const scaleY = createLinearScale(domain.value.yMin, domain.value.yMax, area.y + area.height, area.y)
-    const points = pointsToSvg(props.points, scaleX, scaleY)
-
-    if (points.length === 0) return ''
-
-    return points.map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`).join(' ')
+    return createLinePath(props.points, scaleX, scaleY, props.sampling)
 })
 </script>

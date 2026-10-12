@@ -3,6 +3,7 @@ import BasicPlot from '../examples/BasicPlot.vue'
 import AgePyramid from '../examples/AgePyramid.vue'
 import BoxAxes from '../examples/BoxAxes.vue'
 import ImageGridExample from '../examples/ImageGrid.vue'
+import LargeLine from '../examples/LargeLine.vue'
 import MultipleAxes from '../examples/MultipleAxes.vue'
 import ResponsivePlot from '../examples/ResponsivePlot.vue'
 import ScatterMiniPie from '../examples/ScatterMiniPie.vue'
@@ -38,6 +39,24 @@ This example uses DOM layout for `XLabel` and `YLabel`, then observes the remain
 <<< ../examples/ResponsivePlot.vue#script{vue} [script]
 
 <<< ../examples/ResponsivePlot.vue#style{vue} [style]
+
+:::
+
+## Large Line
+
+This example stores a million points in `shallowRef` and enables `Line`'s
+`sampling="min-max"` to retain endpoints and peaks in each SVG pixel column.
+Click the button to generate the data, including two spikes one sample apart.
+
+<LargeLine />
+
+::: code-group
+
+<<< ../examples/LargeLine.vue#template{vue} [template]
+
+<<< ../examples/LargeLine.vue#script{vue} [script]
+
+<<< ../examples/LargeLine.vue#style{vue} [style]
 
 :::
 
